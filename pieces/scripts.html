@@ -1,0 +1,28 @@
+<script>
+/* Shared runtime for Revision 2: scroll reveals, glass specular tracking. Pieces own their own scripts. */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Reveals: never below .35 at rest; add .in when 18% visible */
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function (e) { e.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+  }
+
+  /* Glass specular follows the pointer within each glass element */
+  if (!reduce && window.matchMedia('(hover: hover)').matches) {
+    document.addEventListener('pointermove', function (ev) {
+      var t = ev.target.closest ? ev.target.closest('.glass') : null;
+      if (!t) { return; }
+      var r = t.getBoundingClientRect();
+      t.style.setProperty('--mx', ((ev.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+      t.style.setProperty('--my', ((ev.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+    }, { passive: true });
+  }
+})();
+</script>

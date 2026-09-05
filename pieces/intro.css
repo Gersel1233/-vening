@@ -15,10 +15,10 @@
 /* ---- Intro split ---- */
 #intro{background:var(--stone);color:var(--ink)}
 #intro .split>.panel{background:var(--stone)}
-#intro .split>.photo{aspect-ratio:3/4}
+#intro .split>.photo{aspect-ratio:3/4;overflow:hidden}
 #intro .split>.photo img{border:0;border-radius:0}
 #intro .intro-copy{color:var(--slate)}
-#intro .intro-btn{margin-top:16px;color:var(--ink)}
+#intro .intro-btn{margin-top:16px;color:var(--ink);align-self:flex-start}
 #intro h2{margin:0}
 
 /* ---- Facts strip ---- */

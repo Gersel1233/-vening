@@ -78,6 +78,48 @@ button,input,select{font:inherit;color:inherit;letter-spacing:inherit}
 .on-gold{background:var(--gold);color:var(--gold-ink)}
 .on-vault{background:var(--vault);color:var(--stone)}
 
+/* ---- Revision 2: liquid glass primitives (shared by every piece) ---- */
+:root{--mx:50%;--my:50%;--glass-fill:rgba(226,225,219,.10);--glass-rim:rgba(255,255,255,.38);--glass-gold:rgba(185,149,82,.16);--glass-lift:0 14px 40px rgba(0,0,0,.28)}
+.on-light,.on-stone{--glass-fill:rgba(14,21,18,.05);--glass-rim:rgba(255,255,255,.55);--glass-lift:0 8px 24px rgba(14,21,18,.10)}
+.glass{
+  position:relative;isolation:isolate;
+  background:var(--glass-fill);
+  -webkit-backdrop-filter:blur(18px) saturate(1.35);backdrop-filter:blur(18px) saturate(1.35);
+  box-shadow:inset 0 1px 0 var(--glass-rim),inset 0 0 0 1px var(--glass-gold),var(--glass-lift);
+  border:0;color:inherit;
+}
+.glass::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:radial-gradient(120px 120px at var(--mx) var(--my),rgba(255,255,255,.25),rgba(255,255,255,0) 60%);
+  opacity:.9;transition:opacity var(--dur) var(--ease);
+}
+.glass-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 26px;border-radius:999px;cursor:pointer;
+  font-family:var(--font-text);font-weight:500;font-size:14px;line-height:1;letter-spacing:-.01em;text-transform:uppercase;
+  transition:transform 160ms var(--ease),box-shadow var(--dur) var(--ease),background var(--dur) var(--ease);
+}
+.glass-btn:hover{box-shadow:inset 0 1px 0 var(--glass-rim),inset 0 0 0 1px rgba(185,149,82,.32),var(--glass-lift)}
+.glass-btn:active{transform:scale(.97)}
+.glass-btn.gold{background:rgba(185,149,82,.22);color:var(--stone)}
+.glass-btn.gold:hover{background:rgba(185,149,82,.30)}
+.glass-pill{padding:10px 16px;border-radius:999px;font-size:13px;line-height:1;letter-spacing:-.011em;text-transform:uppercase;font-variant-numeric:tabular-nums;cursor:pointer;transition:transform 160ms var(--ease),background var(--dur) var(--ease),color var(--dur) var(--ease)}
+.glass-pill[aria-pressed="true"],.glass-pill[aria-selected="true"]{background:rgba(226,225,219,.92);color:var(--vault)}
+.on-light .glass-pill[aria-pressed="true"],.on-light .glass-pill[aria-selected="true"]{background:rgba(14,21,18,.88);color:var(--stone)}
+.glass-pill:disabled{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.glass-pill:active:not(:disabled){transform:scale(.97)}
+.glass-panel{border-radius:24px;padding:28px}
+
+/* ---- Revision 2: motion primitives ---- */
+.reveal{opacity:.35;transform:translateY(24px);transition:opacity 700ms var(--ease),transform 700ms var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:60ms}.reveal[data-d="2"]{transition-delay:120ms}.reveal[data-d="3"]{transition-delay:180ms}.reveal[data-d="4"]{transition-delay:240ms}.reveal[data-d="5"]{transition-delay:300ms}.reveal[data-d="6"]{transition-delay:360ms}
+@supports (animation-timeline: view()){
+  .drift{animation:drift linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+  @keyframes drift{from{transform:translateY(24px) scale(1.06)}to{transform:translateY(-24px) scale(1.06)}}
+}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.drift{animation:none}.glass::before{display:none}}
+
 @media (max-width:900px){
   :root{--pad-x:24px}
   .split,.split.flip{grid-template-columns:1fr;min-height:0}

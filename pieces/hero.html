@@ -1,6 +1,9 @@
 <section id="hero" class="on-dark">
   <div class="hero-media" aria-hidden="true">
-    <video class="hero-video" autoplay muted loop playsinline poster="__ASSET_HERO__">
+    <video class="hero-video hero-video-a is-front" muted playsinline preload="auto" poster="__ASSET_HERO__">
+      <source src="__ASSET_HEROVIDEO__" type="video/mp4">
+    </video>
+    <video class="hero-video hero-video-b" muted playsinline preload="auto" poster="__ASSET_HERO__">
       <source src="__ASSET_HEROVIDEO__" type="video/mp4">
     </video>
     <div class="hero-shade"></div>
@@ -10,12 +13,15 @@
   <nav class="hero-nav" aria-label="Primær">
     <a class="hero-wordmark" href="#hero">Bullion</a>
     <ul class="hero-links">
-      <li><a href="#menu">Menu</a></li>
+      <li><a href="#menu" data-open-menucard>Menu</a></li>
       <li><a href="#intro">Huset</a></li>
       <li><a href="#reservation">Boksen</a></li>
       <li><a href="#reservation">Kontakt</a></li>
     </ul>
-    <a class="btn on-dark hero-cta" href="#reservation">Reservér bord</a>
+    <div class="hero-nav-controls">
+      <button type="button" class="glass glass-btn hero-nav-menu" data-open-menucard>Menukort</button>
+      <a class="glass glass-btn gold hero-cta" href="#reservation">Reservér bord</a>
+    </div>
   </nav>
 
   <div class="hero-meta t-micro upper">
@@ -25,8 +31,12 @@
 
   <div class="hero-foot">
     <div class="hero-statement">
-      <h1 class="t-display hero-title">Bullion</h1>
+      <h1 class="t-display hero-title"><span class="hero-title-text">Bullion</span><span class="hero-title-sheen" aria-hidden="true">Bullion</span></h1>
       <p class="t-lede hero-lede">Fransk brasserie i den gamle bankbygning på Bredgade.</p>
+      <div class="hero-actions">
+        <button type="button" class="glass glass-btn" data-open-menucard>Åbn menukortet</button>
+        <a class="glass glass-btn gold" href="#reservation">Reservér bord</a>
+      </div>
       <p class="t-body hero-copy">Østers på is fra klokken sytten, entrecôte med béarnaise til midnat, og champagnen serveres i coupe. Vi har ikke lavet om på ret meget siden 1897 — vi har bare skiftet valutaen ud med mad.</p>
     </div>
 
@@ -42,4 +52,94 @@
       <p class="t-caption hero-card-caption">Fremragende · baseret på <span class="num">1 216</span> anmeldelser</p>
     </aside>
   </div>
+
+  <div id="vault" class="hero-vault" aria-hidden="true" hidden></div>
+
+  <script>
+  /* Hero runtime: double-buffered seamless video loop, once-per-session vault opening. */
+  (function () {
+    var hero = document.getElementById('hero');
+    if (!hero) { return; }
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- vault opening: once per session, never under reduced-motion ---- */
+    var vault = document.getElementById('vault');
+    if (vault) {
+      var seen = false;
+      try { seen = sessionStorage.getItem('bullion-vault') === '1'; } catch (e) { seen = false; }
+      var supportsClip = window.CSS && CSS.supports && CSS.supports('clip-path', 'circle(22% at 50% 50%)');
+      if (reduce || seen || !supportsClip) {
+        vault.parentNode.removeChild(vault);
+      } else {
+        try { sessionStorage.setItem('bullion-vault', '1'); } catch (e) {}
+        vault.hidden = false;
+        var done = false;
+        var finish = function () {
+          if (done) { return; }
+          done = true;
+          if (vault.parentNode) { vault.parentNode.removeChild(vault); }
+        };
+        vault.addEventListener('animationend', finish);
+        setTimeout(function () { vault.classList.add('is-open'); }, 150);
+        setTimeout(finish, 150 + 1600 + 400); /* safety net if animationend never fires */
+      }
+    }
+
+    /* ---- seamless loop: A plays, B starts 1.2s before A ends, cross-fade, swap ---- */
+    var a = hero.querySelector('.hero-video-a');
+    var b = hero.querySelector('.hero-video-b');
+    if (!a || !b) { return; }
+    var LEAD = 1.2;
+    var front = a, back = b, swapping = false, dead = false;
+
+    var safePlay = function (v) {
+      try {
+        var p = v.play();
+        if (p && typeof p.catch === 'function') { p.catch(function () {}); }
+      } catch (e) {}
+    };
+
+    var onTime = function () {
+      if (dead || swapping) { return; }
+      var v = this;
+      if (v !== front) { return; }
+      var d = v.duration;
+      if (!isFinite(d) || d <= 0) { return; }
+      if (v.currentTime > d - LEAD) {
+        swapping = true;
+        try { back.currentTime = 0; } catch (e) {}
+        safePlay(back);
+        back.classList.add('is-front');
+        front.classList.remove('is-front');
+        var old = front;
+        front = back; back = old;
+        setTimeout(function () {
+          try { old.pause(); old.currentTime = 0; } catch (e) {}
+          swapping = false;
+        }, LEAD * 1000 + 50);
+      }
+    };
+
+    var onError = function () {
+      /* No playable source: both stay on the poster, nothing else runs. */
+      dead = true;
+      try { a.pause(); b.pause(); } catch (e) {}
+      a.classList.add('is-front');
+    };
+
+    [a, b].forEach(function (v) {
+      v.addEventListener('timeupdate', onTime);
+      v.addEventListener('error', onError);
+      var src = v.querySelector('source');
+      if (src) { src.addEventListener('error', onError); }
+    });
+
+    var start = function () {
+      if (dead) { return; }
+      try { b.load(); } catch (e) {}
+      safePlay(a);
+    };
+    if (document.readyState === 'complete') { start(); } else { window.addEventListener('load', start); }
+  })();
+  </script>
 </section>

@@ -7,7 +7,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 const root = dirname(fileURLToPath(import.meta.url));
 const read = f => existsSync(join(root, f)) ? readFileSync(join(root, f), 'utf8') : '';
-const pieces = ['hero', 'intro', 'menu', 'reservation'];
+const pieces = ['hero', 'intro', 'menu', 'reservation', 'menucard'];
 
 const head = `<title>Bullion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">

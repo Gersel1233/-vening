@@ -182,6 +182,71 @@ in French, descriptions in Danish. Prices in `kr` without decimals, right-aligne
 Real details: Bredgade 33, 1260 København K · +45 33 12 40 08 · bord@bullion.dk ·
 åbent man–tor 17–24, fre–lør 12–01, søndag lukket · chambre séparée "Boksen", 12 pladser.
 
+## Revision 2 — user directives (override anything above that conflicts)
+
+### Liquid glass controls
+Every interactive control — buttons, chips, tabs, the menu-card panel, the booking
+panel, the nav pill — is **liquid glass** in the iOS 18 sense, tuned to Bullion rather
+than stock Apple: a frosted, slightly refractive surface that shows the photograph or
+canvas behind it, a bright specular rim on the top edge, a faint gold tint in the rim,
+and a soft deep shadow that lifts it off photography. Use the shared primitives in
+`pieces/base.css` (`.glass`, `.glass-btn`, `.glass-pill`, `.glass-panel`; add `.on-light`
+to a light-canvas ancestor so the fill and lift adapt); do not hand-roll glass per piece.
+
+- Fill: on dark/photo `rgba(226,225,219,.10)`; on light `rgba(14,21,18,.05)`.
+- Backdrop: `blur(18px) saturate(1.35)`; glass on glass never stacks more than twice.
+- Rim: `inset 0 1px 0 rgba(255,255,255,.38)`, `inset 0 0 0 1px rgba(185,149,82,.16)`.
+- Lift: `0 14px 40px rgba(0,0,0,.28)` on photo; `0 8px 24px rgba(14,21,18,.10)` on light.
+- Specular follows the cursor (radial highlight on `--mx/--my`, set by the shared script).
+- Press: scale .97 over 160ms; release over 420ms with the system easing.
+- **Radius**: pills (`999px`) for buttons and chips; 24px for glass panels and the menu
+  card. Radius stays **0** on sections, photographs and non-glass containers.
+- Primary CTA glass carries a gold tint (`.glass-btn.gold`).
+
+### Motion — raised ceiling
+The one-moment rule is replaced. Motion is now a signature, still restrained in taste:
+- **Vault opening** on first load: a circular aperture (the bank-vault door) irises open
+  from the centre over 1.6s, revealing the hero; the photo settles 1.06→1.0 behind it.
+  Runs once per session (`sessionStorage`), never under reduced-motion.
+- **Gold leaf sheen**: a slow diagonal light sweep across the wordmark every ~9s, 1.8s
+  long, `background-clip: text` — light passing over gold leaf, not a shimmer effect.
+- **Scroll reveals** (`.reveal`, `data-d` for stagger) on headings, paragraphs and menu
+  rows: rise 24px from opacity .35 to 1 — never from 0; the page must read at rest.
+- **Photo drift** (`.drift` on the img inside `.photo`): ±24px on scroll via
+  `animation-timeline: view()` where supported; nothing where not.
+- **Menu card**: opens with the glass panel scaling from .96 and blurring in, 480ms;
+  tabs cross-fade 320ms.
+- **Reservation**: step panels slide 24px between states, 420ms; confirmation stamps a
+  gold seal (scale 1.4→1 with a 2° rotation settle, 600ms).
+- Marquee stays. Hovers stay 400ms. Under `prefers-reduced-motion` everything above
+  collapses to instant state changes and the vault never runs.
+
+### Menu card (new component)
+A full-screen glass overlay `#menucard` (a `<dialog>` or `role="dialog"`), opened by any
+element carrying `data-open-menucard` (nav "Menu", a hero button, the intro button, the
+menu-section button). Centered `.glass.glass-panel`, max-width 880px, max-height 86vh,
+internal scroll. Header row: wordmark "Bullion" in Newsreader 300 (.t-heading-sm), a
+close `.glass-pill` "Luk" at right. Glass-pill tabs: Hors d'œuvre · Plats · Desserts ·
+Bar · Vin. Each tab lists `.menu-row`s on the glass (hairlines `--stone` at 18%,
+descriptions `--stone` at 66%). Escape closes; focus is trapped; body scroll locks; the
+backdrop is `rgba(14,21,18,.55)` with `backdrop-filter: blur(8px)`.
+
+### Reservation (redesigned)
+The widget becomes a `.glass.glass-panel` on the photograph, right column, three steps
+stacked inside with eyebrow labels: **Gæster** as a segmented glass control (1–8, one
+row), **Dato** as a horizontal strip of glass date tiles (weekday in .t-micro, day
+numeral in Newsreader 300 at 32px), **Tidspunkt** as a wrapped grid of `.glass-pill`s;
+unavailable pills are struck and 40%. A live summary line and a `.glass-btn.gold` CTA
+"Reservér" at the bottom. Confirmation replaces the panel body with a gold seal and
+"Forespørgsel sendt — vi bekræfter på mail inden for to timer." Left column keeps the
+heading, lede and the short paragraph; nothing else there.
+
+### What still holds
+Cool stone canvas; green-black vault; one gold; Newsreader 300 only; Manrope 500 body at
+12–15px; the type-scale hole; split sections with hard seams; page menu rows as
+hairlines; no photograph is ever boxed; no second accent; no emoji; no pure black or
+white; text on the photo sits where it is dark.
+
 ## Do
 
 - Set every heading in Newsreader 300, uppercase from 50px up, tracking tightening with size.

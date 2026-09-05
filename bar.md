@@ -99,6 +99,26 @@ sequence anywhere below the hero; any transition is under 400ms.
 
 ---
 
+## Revision 2 — raised by the client (overrides M4 and M7 where they conflict)
+
+After the first loop closed, the client asked for **liquid-glass controls in the iOS 18
+sense** and **signature animations**. Their words win. The mechanisms are amended:
+
+- **M4 (flatness)** now applies to sections, photographs and non-interactive containers
+  only. Interactive controls and the two glass panels (menu card, booking) are frosted
+  glass with a specular rim and a soft lift shadow, and carry radius (pills; 24px panels).
+  **Fail if:** glass appears on anything non-interactive; glass stacks more than twice;
+  a photograph or section gains radius; glass reads as a flat grey box (no refraction of
+  what is behind it).
+- **M7 (motion)** now permits: a once-per-session vault-door opening on the hero, a gold
+  sheen on the wordmark, scroll reveals from ≥.35 opacity, photo drift on scroll, panel
+  transitions in the menu card and booking, marquee, hovers. **Fail if:** anything is
+  invisible at rest; any reveal starts below .35 opacity; motion runs under reduced-motion;
+  two competing sequences run at once; anything bounces or overshoots more than 2%.
+- New check, **M8 — the menu card is findable**: within one glance at the hero a visitor
+  sees how to open the menu card; the card opens as a glass overlay with tabs and closes
+  with Escape or a visible control. **Fail if:** the only route to the menu is scrolling.
+
 ## Where the supplied DESIGN.md is wrong
 
 The doc states saffron `#d49653` is *"reserved exclusively for star ratings, active
