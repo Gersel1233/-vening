@@ -138,6 +138,15 @@ unselected = `--stone` at 60%; unavailable = struck through at 40%. Transitions 
 The submit stays a ghost button (the only button style). Never more than one row of
 tokens per question; the three rows together must read as a timetable, not a form.
 
+### Footer — a colophon, not a sitemap
+`--vault` band, 1px `--vault-line` at top, padding 56px var(--pad-x) 32px. The wordmark in
+Newsreader 300 at heading-sm size, alone on its line. Beneath it **one** hairline-ruled
+row — a single line of Manrope 500 12px uppercase in `--stone` at 70%, items separated by
+gold middle dots: address · phone · mail · hours. Then the legal line in `--stone` at 45%,
+same size, left and right. **Never** columns, stacks or link lists. The footer should read
+like the last line of a printed menu. On mobile the single row may wrap; it stays one
+paragraph.
+
 ## Motion
 
 - Easing everywhere: `cubic-bezier(0.25, 0.46, 0.45, 0.94)`. Duration ≥ 400ms.

@@ -38,9 +38,9 @@ td.piece{font-family:Newsreader,serif;font-weight:300;font-size:24px;text-transf
   <p class="sub">Fire stykker, tre kritikere hver, frisk kontekst. Binære domme. Et stykke er færdigt, når alle tre består. Ingen fast rundegrænse — bremsen er dig.</p>
 
   <div class="stats">
-    <div class="stat"><div class="k">Runde</div><div class="v">2</div></div>
-    <div class="stat"><div class="k">Stykker bestået</div><div class="v">2 / 4</div></div>
-    <div class="stat"><div class="k">Kritikerkørsler</div><div class="v">12</div></div>
+    <div class="stat"><div class="k">Runde</div><div class="v">3</div></div>
+    <div class="stat"><div class="k">Stykker bestået</div><div class="v">3 / 4</div></div>
+    <div class="stat"><div class="k">Kritikerkørsler</div><div class="v">16</div></div>
     <div class="stat"><div class="k">Sjinn-assets</div><div class="v">6 / 6 <span style="font-size:12px;color:var(--muted);font-weight:500">genereret · 1 hentet</span></div></div>
   </div>
 
@@ -48,9 +48,9 @@ td.piece{font-family:Newsreader,serif;font-weight:300;font-size:24px;text-transf
     <thead><tr><th>Stykke</th><th>Brief</th><th>System</th><th>Craft</th><th>Status</th><th>Seneste gap</th></tr></thead>
     <tbody>
       <tr><td class="piece">Hero</td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass · slår ref.</span></td><td class="state pass">Færdig · r1</td><td class="gap">—</td></tr>
-      <tr><td class="piece">Intro</td><td><span class="v fail">Fail</span></td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass · slår ref.</span></td><td class="state">Runde 2 hos builder</td><td class="gap">Kokke-feltet er et slogan, ikke et navn (kontraktfejl — rettes med et navn).</td></tr>
+      <tr><td class="piece">Intro</td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass · slår ref.</span></td><td class="state pass">Færdig · r2</td><td class="gap">r1: kokke-feltet var et slogan, ikke et navn (kontraktfejl). Rettet med "Louise Aagaard".</td></tr>
       <tr><td class="piece">Menu</td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass · slår ref.</span></td><td class="state pass">Færdig · r1</td><td class="gap">Craft-note: højre stenpanel er ~80 % fyldt (M6) — bestået, men holdes under opsyn.</td></tr>
-      <tr><td class="piece">Reservation</td><td><span class="v fail">Fail*</span></td><td><span class="v fail">Fail*</span></td><td><span class="v fail">Fail</span></td><td class="state">Runde 2 hos builder</td><td class="gap">Widget læses som påklistret formular: 27 kant-bokse. Rulebog ændret til typografiske tokens på hårstreg. *To fails skyldtes harness (footer manglede i capture) — rettet.</td></tr>
+      <tr><td class="piece">Reservation</td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass</span></td><td><span class="v fail">Fail</span></td><td class="state">Runde 3 hos builder</td><td class="gap">r2: widget består nu som "editorial". Nyt gap: footeren — tre svævende kolonner læses som skabelon, ikke kolofon. Rulebog fik en Footer-komponent. r1: 27 kant-bokse (rettet) + to harness-fejl.</td></tr>
     </tbody>
   </table>
 
@@ -62,6 +62,7 @@ td.piece{font-family:Newsreader,serif;font-weight:300;font-size:24px;text-transf
     <div class="entry"><div class="t">Teardown</div><div><code>bar.md</code>: 7 mekanismer. Fund: referencens DESIGN.md er forkert om accent-brug (fuldt saffron-panel på live-site). Bevægelsesloft hævet efter aftale: ét hero-øjeblik + én marquee.</div></div>
     <div class="entry"><div class="t">Skrift</div><div>Tre kandidater testet på 115 px/300: Cormorant (AI-default), Fraunces (for legende), <b>Newsreader valgt</b> — tættest på TT Ramillas' kontrast.</div></div>
     <div class="entry"><div class="t">Runde 1</div><div>4 buildere parallelt → 12 kritikere. Hero 3/3, Menu 3/3, Intro 2/3, Reservation 0/3 (2 harness-fejl). Craft-kritikerne foretrak vores hero, intro og menu frem for referencen i blind sammenligning.</div></div>
-    <div class="entry"><div class="t">Runde 2</div><div>Intro: navngiv kok. Reservation: widget → typografisk køreplan (design-system opdateret). Afventer buildere.</div></div>
+    <div class="entry"><div class="t">Runde 2</div><div>Intro: kok navngivet → 3/3. Reservation: widget → typografisk køreplan → brief + system består, craft fejler på footeren. 4 kritikere.</div></div>
+    <div class="entry"><div class="t">Runde 3</div><div>Reservation: footer → kolofon (én hårstreg-række, ingen kolonner) + 44 px tap-mål på mobil. Afventer builder.</div></div>
   </div>
 </div>
