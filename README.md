@@ -1,5 +1,23 @@
 # -vening — premium restaurant- og cafékoncepter
 
+## Bullion — bygget med `/design-loop`
+
+Fiktiv luksus-brasserie i en bankbygning fra 1897 på Bredgade. Hero, intro, menu og
+reservation, bygget mod **amritpalace.com** som bar og drevet af buildere + tre
+friske kritikere pr. stykke, indtil alle tre bestod. Fotografi og hero-video via Sjinn.
+
+- **Live:** https://claude.ai/code/artifact/29f30ff0-978a-4cae-b241-9cf70e2ebc6e
+- **Loop-status:** https://claude.ai/code/artifact/d518b236-8ad7-465c-8d12-a180c122e716
+- `bar.md` — syv målbare mekanismer udledt af referencens render
+- `design-system.md` — Bullions egne værdier (kølig sten, grøn-sort, ét guld, Newsreader 300 + Manrope 500)
+- `pieces/` — ét stykke pr. fil + `base.css`; `assemble.mjs` inliner assets fra `assets/bullion/*.txt`
+- `reference/` — screenshots af baren; `.claude/skills/design-loop/` — metoden
+
+Resultat: 7 runder, 33 kritikerkørsler, 4/4 stykker. Craft-kritikerne foretrak Bullion
+frem for referencen i blind sammenligning på hero, intro og menu.
+
+---
+
 Øverepo til at blive skarpere på at generere **premium** hjemmesider til restauranter
 og cafeer — og til at gøre resultatet gentageligt i stedet for tilfældigt.
 
