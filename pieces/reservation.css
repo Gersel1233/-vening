@@ -20,7 +20,7 @@
 /* booking widget — a frosted glass panel over the room; every control is glass on it */
 #reservation .res-lede{font-size:22px;line-height:1.2}
 #reservation .book{
-  display:flex;flex-direction:column;margin:0;padding:28px;border-radius:24px;
+  display:flex;flex-direction:column;min-width:0;margin:0;padding:28px;border-radius:24px;
   transition:min-height 420ms var(--ease);
 }
 #reservation .book-body{display:flex;flex-direction:column;gap:28px;transition:opacity 320ms var(--ease),transform 320ms var(--ease)}
@@ -66,7 +66,7 @@
 
 /* confirmation — gold seal stamps in */
 #reservation .book-done{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;flex:1;padding:24px 0;text-align:center}
-#reservation .book-done[hidden]{display:none}
+#reservation .book-done[hidden],#reservation .book-body[hidden]{display:none}
 #reservation .seal{width:96px;height:96px;transform:scale(1.4) rotate(-2deg);opacity:0;transition:transform 600ms var(--ease),opacity 320ms var(--ease)}
 #reservation .book-done.in .seal{transform:scale(1) rotate(0deg);opacity:1}
 #reservation .done-line{max-width:32ch;color:var(--stone);opacity:0;transform:translateY(12px);transition:opacity 420ms var(--ease) 240ms,transform 420ms var(--ease) 240ms}
