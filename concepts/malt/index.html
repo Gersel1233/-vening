@@ -1,0 +1,550 @@
+<title>MALT Bageri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  /* Direction: cold flour-white, graphite ink, one oven-ember signal */
+  --bg:#E9E8E2;
+  --surface:#F3F2ED;
+  --sunken:#DEDCD3;
+  --line:#C6C3B8;
+  --line-soft:#D8D5CB;
+  --fg:#191A18;
+  --muted:#6C6E67;
+  --accent:#B33F1B;
+  --accent-ink:#FFF6F2;
+  --shadow:0 1px 0 rgba(25,26,24,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141513;
+    --surface:#1C1E1B;
+    --sunken:#101210;
+    --line:#33362F;
+    --line-soft:#262924;
+    --fg:#E9E8E2;
+    --muted:#91948B;
+    --accent:#E0653D;
+    --accent-ink:#1A0D07;
+    --shadow:0 1px 0 rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141513;
+  --surface:#1C1E1B;
+  --sunken:#101210;
+  --line:#33362F;
+  --line-soft:#262924;
+  --fg:#E9E8E2;
+  --muted:#91948B;
+  --accent:#E0653D;
+  --accent-ink:#1A0D07;
+  --shadow:0 1px 0 rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+@media (max-width:640px){.wrap{padding:0 18px}}
+
+/* ---------- shared type ---------- */
+.stencil{
+  font-family:Anton,"Arial Narrow",Impact,sans-serif;
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:.01em;
+  line-height:.86;
+  text-wrap:balance;
+}
+.eyebrow{
+  font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.data{font-family:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+h2.sec{font-size:clamp(30px,5vw,52px);margin:0}
+p{margin:0}
+
+/* ---------- top bar ---------- */
+.bar{
+  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(8px);
+}
+.bar-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:56px}
+.mark{font-family:Anton,sans-serif;font-size:20px;letter-spacing:.22em;text-transform:uppercase}
+.bar nav{display:flex;gap:22px}
+.bar nav a{
+  font-size:13px;color:var(--muted);text-decoration:none;
+  padding-bottom:2px;border-bottom:1px solid transparent;
+}
+.bar nav a:hover,.bar nav a:focus-visible{color:var(--fg);border-bottom-color:var(--accent)}
+@media (max-width:760px){.bar nav{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:end}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:32px;align-items:start}}
+.wordmark{
+  font-size:clamp(84px,20vw,232px);
+  margin:14px 0 0;
+  display:block;
+}
+.wordmark .thin{-webkit-text-stroke:2px var(--fg);color:transparent}
+.tagline{
+  margin-top:22px;max-width:34ch;font-size:17px;color:var(--muted);
+}
+.addr{margin-top:10px;font-size:13px}
+
+/* live status card */
+.status{
+  border:1px solid var(--line);
+  background:var(--surface);
+  padding:18px 18px 16px;
+  box-shadow:var(--shadow);
+}
+.status .row{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.status .now{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  font-family:"DM Mono",monospace;color:var(--accent);
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+@media (prefers-reduced-motion:no-preference){
+  .dot{animation:glow 2.4s ease-in-out infinite}
+}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 0%,transparent)}}
+.status h3{font-family:Anton,sans-serif;text-transform:uppercase;font-size:26px;line-height:1;margin:12px 0 6px;letter-spacing:.01em}
+.status .sub{font-size:13px;color:var(--muted)}
+.status .clock{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-soft);font-size:12px;color:var(--muted)}
+
+/* ---------- bake schedule ---------- */
+section{padding:72px 0;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+.sec-head p{max-width:40ch;font-size:15px;color:var(--muted)}
+
+.plan{border-top:1px solid var(--line)}
+.slot{
+  display:grid;
+  grid-template-columns:92px 1fr 150px 84px;
+  gap:20px;align-items:center;
+  padding:15px 12px 15px 0;
+  border-bottom:1px solid var(--line-soft);
+  transition:background .15s ease;
+}
+.slot:hover{background:var(--surface)}
+@media (max-width:760px){
+  .slot{grid-template-columns:72px 1fr;gap:6px 16px;padding:14px 8px 14px 0}
+  .slot .oven,.slot .qty{grid-column:2;font-size:12px}
+}
+.slot .t{font-family:"DM Mono",monospace;font-size:15px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.slot .what{font-size:17px;font-weight:500}
+.slot .oven,.slot .qty{font-family:"DM Mono",monospace;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.slot .qty{text-align:right}
+@media (max-width:760px){.slot .qty{text-align:left}}
+
+.slot.is-now{background:var(--accent);color:var(--accent-ink);border-bottom-color:var(--accent);padding-left:12px}
+.slot.is-now .t,.slot.is-now .oven,.slot.is-now .qty{color:var(--accent-ink);opacity:.82}
+.slot.is-now .what{font-weight:700}
+.slot.is-now:hover{background:var(--accent)}
+.slot.is-past{opacity:.42}
+.tag{
+  display:inline-block;margin-left:10px;vertical-align:2px;
+  font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid currentColor;padding:1px 6px;
+}
+
+/* ---------- breads ---------- */
+.loaves{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+@media (max-width:900px){.loaves{grid-template-columns:1fr}}
+.loaf{padding:26px 26px 26px 0;border-bottom:1px solid var(--line-soft)}
+.loaf + .loaf{border-left:1px solid var(--line-soft);padding-left:26px}
+@media (max-width:900px){.loaf + .loaf{border-left:0;padding-left:0}}
+.loaf h3{font-family:Anton,sans-serif;text-transform:uppercase;font-size:27px;line-height:1.02;margin:0 0 10px;letter-spacing:.01em}
+.loaf .desc{font-size:14.5px;color:var(--muted);margin-bottom:18px;max-width:38ch}
+dl.spec{display:grid;grid-template-columns:auto 1fr;gap:5px 16px;margin:0;font-family:"DM Mono",monospace;font-size:12.5px}
+dl.spec dt{color:var(--muted);letter-spacing:.04em}
+dl.spec dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.price{margin-top:18px;font-family:Anton,sans-serif;font-size:22px;letter-spacing:.02em}
+
+/* ---------- coffee ---------- */
+.coffee{display:grid;grid-template-columns:1.15fr .85fr;gap:56px}
+@media (max-width:900px){.coffee{grid-template-columns:1fr;gap:36px}}
+.brew{border:1px solid var(--line);background:var(--surface);padding:24px}
+.brew h4{font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 16px;font-weight:400}
+.brew-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line-soft);font-family:"DM Mono",monospace;font-size:13px;font-variant-numeric:tabular-nums}
+.brew-row:last-child{border-bottom:0}
+.brew-row span:first-child{color:var(--muted)}
+.origin{border-top:1px solid var(--line)}
+.origin-item{display:grid;grid-template-columns:1fr auto;gap:6px 20px;padding:18px 0;border-bottom:1px solid var(--line-soft)}
+.origin-item h3{margin:0;font-size:19px;font-weight:700}
+.origin-item .notes{grid-column:1;font-size:14px;color:var(--muted)}
+.origin-item .meta{grid-row:1/3;align-self:center;text-align:right;font-family:"DM Mono",monospace;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ---------- craft steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{background:var(--bg);padding:24px 20px 26px}
+.step .n{font-family:Anton,sans-serif;font-size:44px;line-height:1;color:var(--line);display:block;margin-bottom:14px}
+.step h3{margin:0 0 8px;font-size:16px;font-weight:700}
+.step p{font-size:14px;color:var(--muted)}
+.step .dur{margin-top:14px;font-family:"DM Mono",monospace;font-size:12px;color:var(--accent);letter-spacing:.06em}
+
+/* ---------- visit ---------- */
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+@media (max-width:900px){.visit{grid-template-columns:1fr;gap:36px}}
+.hours{border-top:1px solid var(--line)}
+.hrow{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line-soft);font-size:15px}
+.hrow .d{color:var(--muted)}
+.hrow .h{font-family:"DM Mono",monospace;font-variant-numeric:tabular-nums;font-size:14px}
+.hrow.closed .h{color:var(--muted)}
+.hrow.today{font-weight:700}
+.hrow.today .d::before{content:"→ ";color:var(--accent)}
+
+.note{border:1px solid var(--line);border-left:3px solid var(--accent);padding:20px 22px;background:var(--surface)}
+.note h3{font-family:Anton,sans-serif;text-transform:uppercase;font-size:22px;margin:0 0 8px;letter-spacing:.01em}
+.note p{font-size:14.5px;color:var(--muted);max-width:42ch}
+
+/* ---------- footer ---------- */
+footer{padding:44px 0 56px}
+.foot{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:flex-end}
+.foot .big{font-family:Anton,sans-serif;font-size:clamp(44px,9vw,96px);line-height:.9;text-transform:uppercase;letter-spacing:.01em}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px}
+.foot a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
+.foot a:hover,.foot a:focus-visible{border-bottom-color:var(--accent);color:var(--accent)}
+.colophon{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-family:"DM Mono",monospace;font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <div class="mark">Malt</div>
+    <nav>
+      <a href="#bageplan">Bageplan</a>
+      <a href="#broed">Brødet</a>
+      <a href="#kaffe">Kaffen</a>
+      <a href="#besoeg">Besøg os</a>
+    </nav>
+    <div class="eyebrow data" id="barclock">Jægersborggade 41</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Surdejsbageri &amp; filterkaffe — Nørrebro, siden 2019</div>
+        <h1 class="stencil wordmark">Malt<span class="thin">.</span></h1>
+        <p class="tagline">Vi bager fire gange om dagen, i små hold, og sælger til det er væk. Ingen frost, ingen forbedringsmidler — kun mel fra Skærtoft, vand, salt og tid.</p>
+        <p class="addr data">Jægersborggade 41, 2200 København N · +45 35 24 08 11</p>
+      </div>
+
+      <aside class="status" aria-live="polite">
+        <div class="row">
+          <div class="now"><span class="dot" aria-hidden="true"></span><span id="status-label">Ude af ovnen nu</span></div>
+        </div>
+        <h3 id="status-item">Kanelsnurrer</h3>
+        <p class="sub" id="status-sub">Anden hævning, smør fra Thise. Ca. 40 stk.</p>
+        <p class="clock data" id="status-next">Næste bagning 09:00 — landbrød</p>
+      </aside>
+    </div>
+  </div>
+
+  <section id="bageplan">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="stencil sec">Dagens<br>bageplan</h2>
+        <p>Ovnen kører fra 04:40. Rækkefølgen er ikke tilfældig — den følger temperaturen ned gennem dagen, fra rugbrødets 240° til snurrernes 190°.</p>
+      </div>
+
+      <div class="plan" id="plan">
+        <div class="slot" data-start="360" data-end="420">
+          <div class="t">06:00</div>
+          <div class="what">Surdejsrugbrød<span class="tag">100 % rug</span></div>
+          <div class="oven">240° → 180°, 75 min</div>
+          <div class="qty">28 stk</div>
+        </div>
+        <div class="slot" data-start="420" data-end="450">
+          <div class="t">07:00</div>
+          <div class="what">Croissant &amp; pain au chocolat</div>
+          <div class="oven">195°, damp, 18 min</div>
+          <div class="qty">60 stk</div>
+        </div>
+        <div class="slot" data-start="450" data-end="540">
+          <div class="t">07:30</div>
+          <div class="what">Kanelsnurrer<span class="tag">Kardemomme</span></div>
+          <div class="oven">190°, 16 min</div>
+          <div class="qty">40 stk</div>
+        </div>
+        <div class="slot" data-start="540" data-end="660">
+          <div class="t">09:00</div>
+          <div class="what">Landbrød, hvede</div>
+          <div class="oven">250°, damp, 42 min</div>
+          <div class="qty">36 stk</div>
+        </div>
+        <div class="slot" data-start="660" data-end="780">
+          <div class="t">11:00</div>
+          <div class="what">Focaccia, rosmarin &amp; flagesalt</div>
+          <div class="oven">230°, 22 min</div>
+          <div class="qty">3 plader</div>
+        </div>
+        <div class="slot" data-start="780" data-end="900">
+          <div class="t">13:00</div>
+          <div class="what">Snurrer, anden bagning</div>
+          <div class="oven">190°, 16 min</div>
+          <div class="qty">24 stk</div>
+        </div>
+        <div class="slot" data-start="900" data-end="960">
+          <div class="t">15:00</div>
+          <div class="what">Restebrød<span class="tag">Halv pris</span></div>
+          <div class="oven">—</div>
+          <div class="qty">Så længe lager haves</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="broed">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="stencil sec">Brødet</h2>
+        <p>Tre brød året rundt. Alt andet skifter med årstiden og med hvad møllen har.</p>
+      </div>
+
+      <div class="loaves">
+        <article class="loaf">
+          <h3>Surdejs&shy;rugbrød</h3>
+          <p class="desc">Fem dages surdej, knækkede rugkerner og solsikke. Skal hvile et døgn før det skæres.</p>
+          <dl class="spec">
+            <dt>Mel</dt><dd>100 % rug</dd>
+            <dt>Hydrering</dt><dd>96 %</dd>
+            <dt>Koldhævning</dt><dd>18 t / 6 °C</dd>
+            <dt>Vægt</dt><dd>1200 g</dd>
+            <dt>Holdbarhed</dt><dd>9 dage</dd>
+          </dl>
+          <p class="price">58 kr</p>
+        </article>
+
+        <article class="loaf">
+          <h3>Landbrød</h3>
+          <p class="desc">Vores hverdagsbrød. Åben krumme, tyk skorpe, en syre der ligger lige under overfladen.</p>
+          <dl class="spec">
+            <dt>Mel</dt><dd>80 % hvede / 20 % fuldkorn</dd>
+            <dt>Hydrering</dt><dd>82 %</dd>
+            <dt>Koldhævning</dt><dd>16 t / 5 °C</dd>
+            <dt>Vægt</dt><dd>900 g</dd>
+            <dt>Holdbarhed</dt><dd>4 dage</dd>
+          </dl>
+          <p class="price">52 kr</p>
+        </article>
+
+        <article class="loaf">
+          <h3>Croissant</h3>
+          <p class="desc">Tre enkelte ture, 27 lag. Vi bruger dansk smør med 82 % fedt — derfor knækker den, når du bøjer den.</p>
+          <dl class="spec">
+            <dt>Smør</dt><dd>82 % fedt, Thise</dd>
+            <dt>Lag</dt><dd>27</dd>
+            <dt>Koldhævning</dt><dd>18 t / 4 °C</dd>
+            <dt>Vægt</dt><dd>78 g</dd>
+            <dt>Bedst</dt><dd>Inden kl. 11</dd>
+          </dl>
+          <p class="price">32 kr</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="kaffe">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="stencil sec">Kaffen</h2>
+        <p>To bønner ad gangen, ristet lyst hos Coffee Collective i Frederiksberg. Vi skifter når posen er tom, ikke når kalenderen siger det.</p>
+      </div>
+
+      <div class="coffee">
+        <div class="origin">
+          <article class="origin-item">
+            <h3>Etiopien — Guji, Wush Wush</h3>
+            <p class="notes">Fersken, jasmin, sort te. Vores filter lige nu.</p>
+            <p class="meta">Ristet 02.09<br>1400 moh<br>Vasket</p>
+          </article>
+          <article class="origin-item">
+            <h3>Colombia — Finca El Paraíso</h3>
+            <p class="notes">Mørk chokolade, moden blomme. Grundlag i espressoen.</p>
+            <p class="meta">Ristet 28.08<br>1750 moh<br>Honning</p>
+          </article>
+          <article class="origin-item">
+            <h3>Cortado</h3>
+            <p class="notes">Én ting vi ikke laver om på. Økologisk sødmælk fra Naturmælk.</p>
+            <p class="meta">38 kr</p>
+          </article>
+        </div>
+
+        <div class="brew">
+          <h4>Sådan brygger vi filteren</h4>
+          <div class="brew-row"><span>Bryggeenhed</span><span>V60 02</span></div>
+          <div class="brew-row"><span>Dosis</span><span>15,0 g</span></div>
+          <div class="brew-row"><span>Vand</span><span>250 g</span></div>
+          <div class="brew-row"><span>Temperatur</span><span>94 °C</span></div>
+          <div class="brew-row"><span>Bloom</span><span>45 g / 40 sek</span></div>
+          <div class="brew-row"><span>Samlet tid</span><span>2:45</span></div>
+          <div class="brew-row"><span>Malegrad</span><span>EK43 · 8,5</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="haandvaerk">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="stencil sec">Fra mel<br>til disk</h2>
+        <p>Et landbrød bruger 19 timer hos os. Under to af dem er der en bager, der rører ved det.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="n">01</span>
+          <h3>Autolyse</h3>
+          <p>Mel og vand alene. Melet trækker vand, og glutenet begynder at bygge sig selv, før vi overhovedet rører det.</p>
+          <p class="dur">45 min · 22 °C</p>
+        </div>
+        <div class="step">
+          <span class="n">02</span>
+          <h3>Bulk</h3>
+          <p>Surdej og salt i. Fire strækninger med 30 minutters mellemrum — nok til struktur, ikke nok til at slå luften ud.</p>
+          <p class="dur">4 t · 24 °C</p>
+        </div>
+        <div class="step">
+          <span class="n">03</span>
+          <h3>Koldhævning</h3>
+          <p>Formet, i kurv, ned i kølerummet natten over. Det er her smagen kommer fra — ikke fra gæren, men fra tiden.</p>
+          <p class="dur">16 t · 5 °C</p>
+        </div>
+        <div class="step">
+          <span class="n">04</span>
+          <h3>Bagning</h3>
+          <p>Direkte fra kulden på stenen. Damp i de første 12 minutter, så trukket ud, så skorpen kan sætte sig.</p>
+          <p class="dur">42 min · 250 °C</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="besoeg">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="stencil sec">Besøg os</h2>
+        <p>Vi tager ikke imod bestillinger på croissanter. Rugbrød og landbrød kan lægges til side — ring inden kl. 12.</p>
+      </div>
+
+      <div class="visit">
+        <div class="hours" id="hours">
+          <div class="hrow closed" data-day="1"><span class="d">Mandag</span><span class="h">Lukket</span></div>
+          <div class="hrow" data-day="2"><span class="d">Tirsdag</span><span class="h">07:00 – 16:00</span></div>
+          <div class="hrow" data-day="3"><span class="d">Onsdag</span><span class="h">07:00 – 16:00</span></div>
+          <div class="hrow" data-day="4"><span class="d">Torsdag</span><span class="h">07:00 – 16:00</span></div>
+          <div class="hrow" data-day="5"><span class="d">Fredag</span><span class="h">07:00 – 17:00</span></div>
+          <div class="hrow" data-day="6"><span class="d">Lørdag</span><span class="h">08:00 – 15:00</span></div>
+          <div class="hrow" data-day="0"><span class="d">Søndag</span><span class="h">08:00 – 15:00</span></div>
+        </div>
+
+        <div>
+          <div class="note">
+            <h3>Kom før ti</h3>
+            <p>Croissanterne er lagt op kl. 07:15 og er som regel væk inden kl. 10:30. Snurrerne kommer igen kl. 13, hvis du sover længe.</p>
+          </div>
+          <div class="note" style="margin-top:20px">
+            <h3>Restebrød kl. 15</h3>
+            <p>Alt brød fra dagen sælges til halv pris den sidste time. Tag en pose med — vi har ikke noget, vi kan bruge det til i morgen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="stencil big">Vi bager<br>igen i morgen</div>
+      <ul>
+        <li><a href="mailto:hej@malt.dk">hej@malt.dk</a></li>
+        <li><a href="tel:+4535240811">+45 35 24 08 11</a></li>
+        <li><a href="#bageplan">Jægersborggade 41, 2200 KBH N</a></li>
+      </ul>
+    </div>
+    <div class="colophon">
+      <span>MALT Bageri ApS · CVR 40 21 88 07</span>
+      <span>Mel fra Skærtoft Mølle · Smør fra Thise · Kaffe fra Coffee Collective</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var now = new Date();
+  var mins = now.getHours() * 60 + now.getMinutes();
+  var slots = Array.prototype.slice.call(document.querySelectorAll('#plan .slot'));
+
+  var current = null, next = null;
+  slots.forEach(function (el) {
+    var s = +el.dataset.start, e = +el.dataset.end;
+    if (mins >= s && mins < e) { el.classList.add('is-now'); current = el; }
+    else if (mins >= e) { el.classList.add('is-past'); }
+    else if (!next) { next = el; }
+  });
+
+  var label = document.getElementById('status-label');
+  var item = document.getElementById('status-item');
+  var sub = document.getElementById('status-sub');
+  var nextEl = document.getElementById('status-next');
+
+  function nameOf(el) {
+    var n = el.querySelector('.what').cloneNode(true);
+    var t = n.querySelector('.tag'); if (t) { t.remove(); }
+    return n.textContent.trim();
+  }
+
+  if (current) {
+    label.textContent = 'Ude af ovnen nu';
+    item.textContent = nameOf(current);
+    sub.textContent = current.querySelector('.oven').textContent + ' · ' + current.querySelector('.qty').textContent;
+  } else if (next) {
+    label.textContent = 'Ovnen er i gang';
+    item.textContent = nameOf(next);
+    sub.textContent = 'Kommer ud kl. ' + next.querySelector('.t').textContent + '.';
+  } else {
+    label.textContent = 'Lukket for i dag';
+    item.textContent = 'Vi tænder kl. 04:40';
+    sub.textContent = 'Første brød på disken kl. 06:00.';
+  }
+
+  if (next) {
+    nextEl.textContent = 'Næste bagning ' + next.querySelector('.t').textContent + ' — ' + nameOf(next).toLowerCase();
+  } else {
+    nextEl.textContent = 'Bageplanen starter forfra kl. 06:00.';
+  }
+
+  var today = document.querySelector('#hours .hrow[data-day="' + now.getDay() + '"]');
+  if (today) { today.classList.add('today'); }
+
+  var clock = document.getElementById('barclock');
+  if (clock) {
+    clock.textContent = String(now.getHours()).padStart(2, '0') + ':' +
+      String(now.getMinutes()).padStart(2, '0') + ' — Nørrebro';
+  }
+})();
+</script>

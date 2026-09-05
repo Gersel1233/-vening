@@ -1,0 +1,613 @@
+<title>Havsalt Skagen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Jost:wght@300;400;500&display=swap">
+
+<style>
+/* Committed single-theme direction: a dining room at dusk, north of Skagen.
+   Every colour is painted explicitly so the page holds on any host ground. */
+:root{
+  --deep:#06121A;
+  --brine:#0B1D26;
+  --swell:#123039;
+  --line:#1B3B45;
+  --line-soft:#132C35;
+  --foam:#E7EEEB;
+  --mist:#8CA3A5;
+  --glass:#7DB2AD;
+  --brass:#C2A268;
+  --brass-ink:#0C1720;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--deep);
+  color:var(--foam);
+  font-family:Jost,"Helvetica Neue",Arial,sans-serif;
+  font-weight:300;
+  font-size:16.5px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 30px}
+@media (max-width:640px){.wrap{padding:0 20px}}
+
+.serif{font-family:"Bodoni Moda","Didot","Times New Roman",serif;font-weight:400;text-wrap:balance}
+.label{
+  font-family:Jost,sans-serif;font-weight:400;
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--glass);
+}
+.num{font-variant-numeric:tabular-nums}
+p{margin:0}
+a{color:inherit}
+a:focus-visible,button:focus-visible,select:focus-visible{outline:1px solid var(--glass);outline-offset:4px}
+
+/* ---------------- hero ---------------- */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#sea{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.85}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(6,18,26,.35) 0%,rgba(6,18,26,.1) 45%,rgba(6,18,26,.94) 100%);
+  pointer-events:none;
+}
+.hero-in{position:relative;z-index:2;padding:96px 0 68px}
+.hero h1{
+  font-family:"Bodoni Moda",Didot,serif;font-weight:400;
+  font-size:clamp(58px,13vw,158px);
+  line-height:.92;letter-spacing:.03em;
+  margin:18px 0 0;
+}
+.hero h1 em{font-style:italic;font-weight:500}
+.hero .lede{
+  margin-top:26px;max-width:38ch;font-size:18px;color:var(--foam);opacity:.86;
+}
+.hero .where{
+  margin-top:34px;display:flex;gap:26px;flex-wrap:wrap;
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);
+}
+.hero .where span{display:flex;align-items:center;gap:9px}
+.hero .where span::before{content:"";width:4px;height:4px;background:var(--glass);flex:none}
+
+/* ---------------- sections ---------------- */
+section{padding:88px 0;border-bottom:1px solid var(--line-soft)}
+.head{margin-bottom:44px;max-width:60ch}
+.head h2{font-family:"Bodoni Moda",Didot,serif;font-weight:400;font-size:clamp(32px,5.4vw,58px);line-height:1.04;margin:14px 0 0;letter-spacing:.01em}
+.head p{margin-top:16px;color:var(--mist);max-width:52ch}
+
+/* ---------------- landing log ---------------- */
+.log{border-top:1px solid var(--line)}
+.entry{
+  display:grid;
+  grid-template-columns:118px 1fr 190px 96px;
+  gap:22px;align-items:baseline;
+  padding:20px 0;
+  border-bottom:1px solid var(--line-soft);
+}
+@media (max-width:820px){
+  .entry{grid-template-columns:1fr auto;gap:4px 18px;padding:18px 0}
+  .entry .boat{grid-column:1/-1;order:3}
+  .entry .kg{order:2;text-align:right}
+  .entry .catch{order:1}
+  .entry .time{grid-column:1/-1;order:4}
+}
+.entry .time{font-size:13px;letter-spacing:.16em;color:var(--glass);font-variant-numeric:tabular-nums}
+.entry .catch{font-family:"Bodoni Moda",Didot,serif;font-size:25px;font-weight:400}
+.entry .catch small{display:block;font-family:Jost,sans-serif;font-size:13px;letter-spacing:.02em;color:var(--mist);margin-top:3px;font-style:normal}
+.entry .boat{font-size:13.5px;color:var(--mist)}
+.entry .boat b{font-weight:400;color:var(--foam)}
+.entry .kg{text-align:right;font-size:14px;color:var(--mist);font-variant-numeric:tabular-nums}
+.entry.sold .catch{color:var(--mist)}
+.entry.sold .kg::after{content:" · udsolgt";color:var(--brass)}
+
+.logfoot{margin-top:22px;font-size:13px;color:var(--mist);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* ---------------- menu ---------------- */
+.menu-top{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap;margin-bottom:38px}
+.switch{display:inline-flex;border:1px solid var(--line);background:var(--brine)}
+.switch button{
+  appearance:none;background:none;border:0;cursor:pointer;
+  font-family:Jost,sans-serif;font-weight:400;color:var(--mist);
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  padding:13px 22px;transition:color .18s ease,background .18s ease;
+}
+.switch button + button{border-left:1px solid var(--line)}
+.switch button[aria-pressed="true"]{background:var(--glass);color:var(--brass-ink)}
+.switch button:hover:not([aria-pressed="true"]){color:var(--foam)}
+
+.courses{border-top:1px solid var(--line);max-width:74ch}
+.course{
+  display:grid;grid-template-columns:44px 1fr;gap:24px;
+  padding:22px 0;border-bottom:1px solid var(--line-soft);
+}
+.course .i{
+  font-family:"Bodoni Moda",Didot,serif;font-size:15px;color:var(--glass);
+  font-variant-numeric:tabular-nums;padding-top:5px;
+}
+.course h3{font-family:"Bodoni Moda",Didot,serif;font-weight:400;font-size:24px;margin:0;line-height:1.25}
+.course p{margin-top:7px;font-size:14.5px;color:var(--mist)}
+.course .sep{color:var(--glass);opacity:.6;padding:0 4px}
+
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);margin-top:44px}
+@media (max-width:760px){.pricing{grid-template-columns:1fr}}
+.price-cell{background:var(--deep);padding:24px 22px}
+.price-cell .k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mist)}
+.price-cell .v{font-family:"Bodoni Moda",Didot,serif;font-size:34px;margin-top:10px;font-variant-numeric:tabular-nums}
+.price-cell .n{font-size:13px;color:var(--mist);margin-top:6px}
+
+/* ---------------- house ---------------- */
+.house{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+@media (max-width:860px){.house{grid-template-columns:1fr;gap:36px}}
+.house p + p{margin-top:18px}
+.house p{color:var(--mist);max-width:46ch}
+.house p.first{color:var(--foam);font-size:19px;font-family:"Bodoni Moda",Didot,serif;line-height:1.5}
+.facts{border-top:1px solid var(--line);align-self:start}
+.fact{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
+.fact .k{color:var(--mist)}
+.fact .v{text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------------- booking ---------------- */
+.book{display:grid;grid-template-columns:1fr 400px;gap:60px;align-items:start}
+@media (max-width:940px){.book{grid-template-columns:1fr;gap:36px}}
+.panel{border:1px solid var(--line);background:var(--brine);padding:28px}
+.field{margin-bottom:20px}
+.field > .label{display:block;margin-bottom:11px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  appearance:none;cursor:pointer;
+  background:transparent;border:1px solid var(--line);color:var(--mist);
+  font-family:Jost,sans-serif;font-weight:300;font-size:14px;
+  padding:9px 15px;min-width:44px;
+  font-variant-numeric:tabular-nums;
+  transition:border-color .16s ease,color .16s ease,background .16s ease;
+}
+.chip:hover:not(:disabled):not([aria-pressed="true"]){border-color:var(--glass);color:var(--foam)}
+.chip[aria-pressed="true"]{background:var(--foam);border-color:var(--foam);color:var(--deep)}
+.chip:disabled{opacity:.28;cursor:not-allowed;text-decoration:line-through}
+.summary{
+  margin-top:24px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:14.5px;color:var(--mist);min-height:52px;
+}
+.summary b{color:var(--foam);font-weight:400}
+.cta{
+  display:block;width:100%;margin-top:18px;
+  appearance:none;cursor:pointer;border:0;
+  background:var(--brass);color:var(--brass-ink);
+  font-family:Jost,sans-serif;font-weight:500;
+  font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+  padding:17px 20px;
+  transition:filter .16s ease;
+}
+.cta:hover:not(:disabled){filter:brightness(1.09)}
+.cta:disabled{background:var(--swell);color:var(--mist);cursor:not-allowed}
+.callnote{margin-top:14px;font-size:12.5px;color:var(--mist);text-align:center}
+.callnote a{color:var(--glass);text-decoration:none;border-bottom:1px solid var(--line)}
+
+/* ---------------- footer ---------------- */
+footer{padding:64px 0 72px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+@media (max-width:760px){.fgrid{grid-template-columns:1fr;gap:28px}}
+.fgrid h3{font-family:"Bodoni Moda",Didot,serif;font-weight:400;font-size:clamp(38px,7vw,66px);margin:0;line-height:.95;letter-spacing:.03em}
+.fgrid ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px;color:var(--mist)}
+.fgrid a{text-decoration:none;border-bottom:1px solid var(--line)}
+.fgrid a:hover{color:var(--glass)}
+.legal{
+  margin-top:48px;padding-top:18px;border-top:1px solid var(--line-soft);
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);
+}
+</style>
+
+<header class="hero">
+  <canvas id="sea" aria-hidden="true"></canvas>
+  <div class="wrap hero-in">
+    <p class="label">Skagen Havn — kaj 4</p>
+    <h1>Hav<em>salt</em></h1>
+    <p class="lede">Ét menukort om dagen, skrevet klokken fjorten, når den sidste kutter har landet. Vi ved ikke i morges, hvad du spiser i aften.</p>
+    <div class="where">
+      <span>Åbner 17:30</span>
+      <span>To seatings</span>
+      <span>28 pladser</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="fangst">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">Landingslog — i dag</p>
+        <h2>Dagens fangst,<br>landet i formiddag</h2>
+        <p>Alt herunder er kommet ind over kajen inden for de sidste otte timer. Når en post er udsolgt, ryger retten af kortet — vi køber ikke ind udefra for at redde en menu.</p>
+      </div>
+
+      <div class="log">
+        <article class="entry">
+          <p class="time">05:40</p>
+          <p class="catch">Jomfruhummer<small>Skagerrak, 40 favne</small></p>
+          <p class="boat">Kutter <b>Ellen Marie</b> · S 264 · Skagen</p>
+          <p class="kg num">18,4 kg</p>
+        </article>
+        <article class="entry">
+          <p class="time">06:15</p>
+          <p class="catch">Pighvar<small>Fire fisk, 2,8–4,1 kg</small></p>
+          <p class="boat">Kutter <b>Nordlys</b> · S 118 · Skagen</p>
+          <p class="kg num">13,6 kg</p>
+        </article>
+        <article class="entry">
+          <p class="time">06:50</p>
+          <p class="catch">Kammusling<small>Dykket, Læsø Rende</small></p>
+          <p class="boat">Jolle <b>Vesterø</b> · L 42 · Læsø</p>
+          <p class="kg num">9,0 kg</p>
+        </article>
+        <article class="entry sold">
+          <p class="time">07:20</p>
+          <p class="catch">Rødspætte<small>Sandbanken vest for Grenen</small></p>
+          <p class="boat">Kutter <b>Ellen Marie</b> · S 264 · Skagen</p>
+          <p class="kg num">22,1 kg</p>
+        </article>
+        <article class="entry">
+          <p class="time">08:05</p>
+          <p class="catch">Havtaske<small>Én fisk, 6,3 kg, hel</small></p>
+          <p class="boat">Kutter <b>Ane Katrine</b> · HM 9 · Hirtshals</p>
+          <p class="kg num">6,3 kg</p>
+        </article>
+        <article class="entry">
+          <p class="time">11:30</p>
+          <p class="catch">Limfjordsøsters<small>Håndplukket, Nissum Bredning</small></p>
+          <p class="boat">Levering <b>Glyngøre</b> · 120 stk</p>
+          <p class="kg num">120 stk</p>
+        </article>
+      </div>
+
+      <div class="logfoot">
+        <span>Loggen opdateres to gange dagligt — 09:00 og 14:00.</span>
+        <span class="num">Vandtemperatur 14,2 °C · Vind SV 7 m/s</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="menu-top">
+        <div class="head" style="margin-bottom:0">
+          <p class="label">Aftenens menu — 5. september</p>
+          <h2>Sådan bliver<br>fangsten serveret</h2>
+        </div>
+        <div class="switch" role="group" aria-label="Vælg antal retter">
+          <button type="button" data-menu="5" aria-pressed="true">Fem retter</button>
+          <button type="button" data-menu="8" aria-pressed="false">Otte retter</button>
+        </div>
+      </div>
+
+      <div class="courses" id="courses"></div>
+
+      <div class="pricing">
+        <div class="price-cell">
+          <p class="k">Menu</p>
+          <p class="v num" id="p-menu">895 kr</p>
+          <p class="n" id="p-menu-n">Fem retter, pr. person</p>
+        </div>
+        <div class="price-cell">
+          <p class="k">Vinmenu</p>
+          <p class="v num" id="p-wine">695 kr</p>
+          <p class="n">Naturvin, primært Jura og Mosel</p>
+        </div>
+        <div class="price-cell">
+          <p class="k">Alkoholfri</p>
+          <p class="v num" id="p-nonalc">395 kr</p>
+          <p class="n">Fermenteret på egne råvarer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="huset">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">Huset</p>
+        <h2>Et pakhus fra 1904,<br>tolv meter fra vandet</h2>
+      </div>
+      <div class="house">
+        <div>
+          <p class="first">Vi lavede aldrig et fast kort, fordi Skagerrak aldrig har lavet en fast fangst.</p>
+          <p>Køkkenet åbner klokken seks om morgenen på kajen, ikke i huset. Det, der bliver landet inden klokken fjorten, er det, der står på kortet klokken sytten-tredive. Resten er tilbehør — og tilbehøret dyrker vi selv i klitgården bag huset.</p>
+          <p>Der er otteogtyve pladser og ét seating ad gangen, fordi retterne skal ud samtidig. Vi tager ikke imod walk-ins. Det er ikke snobberi — det er en køkkenlinje på fire mennesker.</p>
+        </div>
+        <div class="facts">
+          <div class="fact"><span class="k">Åbnet</span><span class="v num">2017</span></div>
+          <div class="fact"><span class="k">Pladser</span><span class="v num">28</span></div>
+          <div class="fact"><span class="k">Seatings</span><span class="v">17:30 og 20:45</span></div>
+          <div class="fact"><span class="k">Køkkenet</span><span class="v num">4 personer</span></div>
+          <div class="fact"><span class="k">Leverandører</span><span class="v num">6 både</span></div>
+          <div class="fact"><span class="k">Lukket</span><span class="v">Mandag &amp; tirsdag</span></div>
+          <div class="fact"><span class="k">Vinterlukket</span><span class="v">Jan — feb</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bord">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">Reservation</p>
+        <h2>Book et bord</h2>
+        <p>Vi åbner bordene 60 dage frem. Har du allergier eller kommer I flere end seks, så ring — vi skal planlægge indkøbet efter det.</p>
+      </div>
+
+      <div class="book">
+        <div class="facts" style="border-top:1px solid var(--line)">
+          <div class="fact"><span class="k">Afbud</span><span class="v">Senest 24 timer før</span></div>
+          <div class="fact"><span class="k">Depositum</span><span class="v num">300 kr pr. person</span></div>
+          <div class="fact"><span class="k">Allergier</span><span class="v">Oplys ved booking</span></div>
+          <div class="fact"><span class="k">Børn</span><span class="v">Fra 12 år</span></div>
+          <div class="fact"><span class="k">Varighed</span><span class="v">2½ – 3 timer</span></div>
+          <div class="fact"><span class="k">Selskaber</span><span class="v">Hele huset, 28 pers.</span></div>
+        </div>
+
+        <div class="panel">
+          <div class="field">
+            <span class="label">Antal gæster</span>
+            <div class="chips" id="guests" role="group" aria-label="Antal gæster"></div>
+          </div>
+          <div class="field">
+            <span class="label">Dato</span>
+            <div class="chips" id="days" role="group" aria-label="Dato"></div>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <span class="label">Ledige tider</span>
+            <div class="chips" id="times" role="group" aria-label="Tidspunkt"></div>
+          </div>
+
+          <p class="summary" id="summary"></p>
+          <button class="cta" id="confirm" type="button" disabled>Reservér bord</button>
+          <p class="callnote">Eller ring <a href="tel:+4598441204">+45 98 44 12 04</a> · hverdage 14–17</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <h3 class="serif">Havsalt</h3>
+      <ul>
+        <li>Havnevagtvej 9, kaj 4</li>
+        <li>9990 Skagen</li>
+        <li><a href="tel:+4598441204">+45 98 44 12 04</a></li>
+        <li><a href="mailto:bord@havsalt.dk">bord@havsalt.dk</a></li>
+      </ul>
+      <ul>
+        <li>Onsdag — søndag</li>
+        <li>17:30 og 20:45</li>
+        <li>Mandag &amp; tirsdag lukket</li>
+        <li>Januar — februar lukket</li>
+      </ul>
+    </div>
+    <div class="legal">
+      <span>Havsalt Skagen ApS · CVR 38 11 96 42</span>
+      <span>Fangstdata fra Skagen Fiskeauktion</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- hero: slow swell at dusk ---------- */
+(function () {
+  var c = document.getElementById('sea');
+  if (!c) { return; }
+  var ctx = c.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  function size() {
+    var r = c.parentElement.getBoundingClientRect();
+    w = Math.max(320, r.width); h = Math.max(360, r.height);
+    c.width = w * dpr; c.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  var bands = [
+    { y: .30, amp: 11, len: 520, sp: .00022, a: .16 },
+    { y: .44, amp: 16, len: 380, sp: .00031, a: .13 },
+    { y: .58, amp: 22, len: 300, sp: .00040, a: .10 },
+    { y: .72, amp: 28, len: 240, sp: .00052, a: .08 },
+    { y: .86, amp: 34, len: 200, sp: .00064, a: .06 }
+  ];
+
+  function draw(t) {
+    var g = ctx.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, '#0D2A35');
+    g.addColorStop(.45, '#0A2029');
+    g.addColorStop(1, '#06121A');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+
+    for (var i = 0; i < bands.length; i++) {
+      var b = bands[i];
+      ctx.beginPath();
+      ctx.moveTo(0, h);
+      for (var x = 0; x <= w; x += 6) {
+        var y = b.y * h + Math.sin((x / b.len) + t * b.sp * 1000) * b.amp
+                        + Math.sin((x / (b.len * .43)) + t * b.sp * 620) * (b.amp * .35);
+        if (x === 0) { ctx.lineTo(0, y); } else { ctx.lineTo(x, y); }
+      }
+      ctx.lineTo(w, h);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(125,178,173,' + b.a + ')';
+      ctx.fill();
+    }
+  }
+
+  function loop(ts) { draw(ts / 1000); requestAnimationFrame(loop); }
+
+  size();
+  if (reduce) { draw(0); } else { requestAnimationFrame(loop); }
+  window.addEventListener('resize', function () { size(); if (reduce) { draw(0); } });
+})();
+
+/* ---------- menu switcher ---------- */
+(function () {
+  var five = [
+    ['Limfjordsøsters', 'hyldeblomsteddike', 'dild fra klitgården'],
+    ['Kammusling, rå', 'brunet smør', 'granskud'],
+    ['Jomfruhummer fra Skagerrak', 'sauce kogt på hovederne', 'fennikel'],
+    ['Pighvar på benet', 'beurre blanc med havsalt', 'strandkål'],
+    ['Havtorn', 'mælkeis', 'brændt marengs']
+  ];
+  var eight = [
+    ['Limfjordsøsters', 'hyldeblomsteddike', 'dild fra klitgården'],
+    ['Røget brisling', 'rugbrødskrumme', 'syltet perleløg'],
+    ['Kammusling, rå', 'brunet smør', 'granskud'],
+    ['Jomfruhummer fra Skagerrak', 'sauce kogt på hovederne', 'fennikel'],
+    ['Havtaske, grillet over enebær', 'skysauce', 'ramsløg fra fryseren'],
+    ['Pighvar på benet', 'beurre blanc med havsalt', 'strandkål'],
+    ['Havtorn', 'mælkeis', 'brændt marengs'],
+    ['Solbær fra haven', 'brændt fløde', 'skovsyre']
+  ];
+
+  var el = document.getElementById('courses');
+  var btns = document.querySelectorAll('.switch button');
+  var pm = document.getElementById('p-menu');
+  var pmn = document.getElementById('p-menu-n');
+  var pw = document.getElementById('p-wine');
+  var pn = document.getElementById('p-nonalc');
+
+  function render(n) {
+    var list = n === 8 ? eight : five;
+    el.innerHTML = list.map(function (c, i) {
+      return '<article class="course">' +
+        '<p class="i">' + String(i + 1).padStart(2, '0') + '</p>' +
+        '<div><h3>' + c[0] + '</h3><p>' + c[1] +
+        '<span class="sep">/</span>' + c[2] + '</p></div></article>';
+    }).join('');
+
+    pm.textContent = n === 8 ? '1.250 kr' : '895 kr';
+    pmn.textContent = n === 8 ? 'Otte retter, pr. person' : 'Fem retter, pr. person';
+    pw.textContent = n === 8 ? '895 kr' : '695 kr';
+    pn.textContent = n === 8 ? '495 kr' : '395 kr';
+  }
+
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      btns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      render(+b.dataset.menu);
+    });
+  });
+
+  render(5);
+})();
+
+/* ---------- booking ---------- */
+(function () {
+  var DAYS = ['Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'];
+  var state = { guests: 2, day: null, time: null };
+
+  var gEl = document.getElementById('guests');
+  var dEl = document.getElementById('days');
+  var tEl = document.getElementById('times');
+  var sEl = document.getElementById('summary');
+  var cEl = document.getElementById('confirm');
+
+  /* Deterministic pseudo-availability so the page shows a real working state. */
+  function seatsFor(dateKey, slot) {
+    var s = 0;
+    for (var i = 0; i < dateKey.length; i++) { s = (s * 31 + dateKey.charCodeAt(i)) % 9973; }
+    return (s + slot * 7) % 11;
+  }
+
+  var dates = [];
+  (function build() {
+    var d = new Date();
+    while (dates.length < 6) {
+      d = new Date(d.getTime() + 86400000);
+      if (d.getDay() === 1 || d.getDay() === 2) { continue; } /* lukket man/tir */
+      dates.push(new Date(d));
+    }
+  })();
+
+  function key(d) { return d.toISOString().slice(0, 10); }
+
+  function chip(text, on, disabled) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.textContent = text;
+    b.setAttribute('aria-pressed', String(!!on));
+    if (disabled) { b.disabled = true; }
+    return b;
+  }
+
+  [1, 2, 3, 4, 5, 6].forEach(function (n) {
+    var b = chip(String(n), n === state.guests, false);
+    b.addEventListener('click', function () {
+      state.guests = n; state.time = null;
+      paint();
+    });
+    gEl.appendChild(b);
+  });
+
+  dates.forEach(function (d, i) {
+    var b = chip(DAYS[d.getDay()] + ' ' + d.getDate() + '.', false, false);
+    b.addEventListener('click', function () {
+      state.day = i; state.time = null;
+      paint();
+    });
+    dEl.appendChild(b);
+  });
+
+  function paint() {
+    Array.prototype.forEach.call(gEl.children, function (b, i) {
+      b.setAttribute('aria-pressed', String(i + 1 === state.guests));
+    });
+    Array.prototype.forEach.call(dEl.children, function (b, i) {
+      b.setAttribute('aria-pressed', String(i === state.day));
+    });
+
+    tEl.innerHTML = '';
+    if (state.day === null) {
+      var hint = document.createElement('p');
+      hint.style.cssText = 'font-size:13.5px;color:var(--mist);margin:0';
+      hint.textContent = 'Vælg en dato for at se ledige tider.';
+      tEl.appendChild(hint);
+    } else {
+      var d = dates[state.day];
+      ['17:30', '20:45'].forEach(function (t, slot) {
+        var free = seatsFor(key(d), slot);
+        var b = chip(t, state.time === t, free < state.guests);
+        b.addEventListener('click', function () {
+          if (b.disabled) { return; }
+          state.time = t; paint();
+        });
+        tEl.appendChild(b);
+      });
+    }
+
+    if (state.day === null) {
+      sEl.innerHTML = '<b>' + state.guests + ' gæster.</b> Vælg dato og tid.';
+      cEl.disabled = true;
+    } else if (!state.time) {
+      var dd = dates[state.day];
+      sEl.innerHTML = '<b>' + state.guests + ' gæster</b> · ' + DAYS[dd.getDay()] + ' den ' +
+        dd.getDate() + '. ' + ['januar','februar','marts','april','maj','juni','juli','august','september','oktober','november','december'][dd.getMonth()] +
+        '. Vælg et tidspunkt.';
+      cEl.disabled = true;
+    } else {
+      var d2 = dates[state.day];
+      sEl.innerHTML = '<b>' + state.guests + ' gæster</b> · ' + DAYS[d2.getDay()] + ' den ' + d2.getDate() + '. kl. ' +
+        state.time + ' · depositum ' + (state.guests * 300).toLocaleString('da-DK') + ' kr.';
+      cEl.disabled = false;
+    }
+  }
+
+  cEl.addEventListener('click', function () {
+    var d = dates[state.day];
+    sEl.innerHTML = '<b>Anmodning sendt.</b> Vi bekræfter på mail inden for to timer — ' +
+      DAYS[d.getDay()] + ' den ' + d.getDate() + '. kl. ' + state.time + ' for ' + state.guests + '.';
+    cEl.disabled = true;
+    cEl.textContent = 'Sendt';
+  });
+
+  paint();
+})();
+</script>

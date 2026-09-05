@@ -1,0 +1,449 @@
+<title>BLOK Aarhus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+
+<style>
+:root{
+  /* Swiss poster palette: printed flats, no photography required */
+  --paper:#E2E4DE;
+  --card:#EDEEE9;
+  --sunk:#D3D6CE;
+  --ink:#15161A;
+  --ink-soft:#5C6066;
+  --rule:#B9BDB4;
+  --blue:#2138C4;
+  --blue-ink:#F2F3FF;
+  --butter:#EFC133;
+  --butter-ink:#1A1503;
+  --brick:#C0402A;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#121317;
+    --card:#191B20;
+    --sunk:#0C0D10;
+    --ink:#E5E7E1;
+    --ink-soft:#93989F;
+    --rule:#2C2F36;
+    --blue:#5A74FF;
+    --blue-ink:#05060F;
+    --butter:#E9BE38;
+    --butter-ink:#17120A;
+    --brick:#E05B41;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121317;
+  --card:#191B20;
+  --sunk:#0C0D10;
+  --ink:#E5E7E1;
+  --ink-soft:#93989F;
+  --rule:#2C2F36;
+  --blue:#5A74FF;
+  --blue-ink:#05060F;
+  --butter:#E9BE38;
+  --butter-ink:#17120A;
+  --brick:#E05B41;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1240px;margin:0 auto;padding:0 26px}
+@media (max-width:640px){.wrap{padding:0 16px}}
+
+.wide{font-variation-settings:"wdth" 118,"wght" 800;letter-spacing:-.018em;line-height:.88;text-transform:uppercase;text-wrap:balance}
+.narrow{font-variation-settings:"wdth" 74,"wght" 600;letter-spacing:.01em;text-transform:uppercase}
+.tag{
+  font-variation-settings:"wdth" 100,"wght" 600;
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+}
+.num{font-variant-numeric:tabular-nums}
+p{margin:0}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+/* ---------------- masthead ---------------- */
+.mast{border-bottom:3px solid var(--ink)}
+.mast-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:52px}
+.mast .n{font-variation-settings:"wdth" 118,"wght" 900;font-size:19px;letter-spacing:.02em;text-transform:uppercase}
+.mast .r{display:flex;gap:20px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+@media (max-width:700px){.mast .r span:nth-child(2){display:none}}
+
+/* ---------------- poster hero ---------------- */
+.poster{display:grid;grid-template-columns:1fr 340px;border-bottom:3px solid var(--ink)}
+@media (max-width:900px){.poster{grid-template-columns:1fr}}
+.poster-main{padding:40px 0 34px;padding-right:34px}
+@media (max-width:900px){.poster-main{padding-right:0}}
+.poster h1{
+  font-variation-settings:"wdth" 122,"wght" 900;
+  font-size:clamp(76px,17.5vw,214px);
+  line-height:.82;letter-spacing:-.028em;text-transform:uppercase;
+  margin:0;
+}
+.poster h1 .o{color:var(--blue)}
+.poster .sub{
+  margin-top:24px;max-width:44ch;font-size:19px;line-height:1.42;
+  font-variation-settings:"wdth" 100,"wght" 400;
+}
+.poster .meta{
+  margin-top:26px;display:flex;gap:8px;flex-wrap:wrap;
+}
+.pill{
+  border:2px solid var(--ink);padding:6px 12px;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  font-variation-settings:"wdth" 100,"wght" 600;
+}
+.pill.fill{background:var(--ink);color:var(--paper)}
+
+/* live now block */
+.poster-side{
+  border-left:3px solid var(--ink);
+  background:var(--blue);color:var(--blue-ink);
+  padding:28px 26px 26px;
+  display:flex;flex-direction:column;justify-content:space-between;gap:22px;
+}
+@media (max-width:900px){.poster-side{border-left:0;border-top:3px solid var(--ink)}}
+.poster-side .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+.poster-side .big{
+  font-variation-settings:"wdth" 112,"wght" 800;
+  font-size:clamp(38px,7vw,60px);line-height:.9;text-transform:uppercase;letter-spacing:-.02em;
+  margin-top:10px;
+}
+.poster-side .until{margin-top:12px;font-size:14.5px;opacity:.85}
+.poster-side .serving{
+  border-top:2px solid currentColor;padding-top:14px;font-size:14px;line-height:1.45;
+}
+
+/* ---------------- blocks ---------------- */
+section{border-bottom:3px solid var(--ink)}
+.sec-pad{padding:56px 0 60px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;flex-wrap:wrap;margin-bottom:34px}
+.sec-head h2{font-size:clamp(34px,6vw,72px);margin:0}
+.sec-head p{max-width:38ch;font-size:15px;color:var(--ink-soft)}
+
+.blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--ink);border:3px solid var(--ink)}
+@media (max-width:860px){.blocks{grid-template-columns:1fr}}
+.block{background:var(--card);padding:26px 22px 28px;display:flex;flex-direction:column;min-height:340px}
+.block .hrs{
+  font-variation-settings:"wdth" 74,"wght" 700;
+  font-size:15px;letter-spacing:.06em;color:var(--ink-soft);
+  font-variant-numeric:tabular-nums;
+}
+.block h3{
+  font-variation-settings:"wdth" 118,"wght" 800;
+  font-size:clamp(32px,4.6vw,46px);line-height:.9;text-transform:uppercase;letter-spacing:-.02em;
+  margin:8px 0 16px;
+}
+.block .desc{font-size:14.5px;color:var(--ink-soft);margin-bottom:20px;max-width:34ch}
+.block ul{list-style:none;margin:0 0 0;padding:0;display:grid;gap:0;margin-top:auto}
+.block li{
+  display:flex;justify-content:space-between;gap:14px;
+  padding:9px 0;border-top:1px solid var(--rule);font-size:14.5px;
+}
+.block li span:last-child{font-variant-numeric:tabular-nums;color:var(--ink-soft);flex:none}
+
+.block.on{background:var(--butter);color:var(--butter-ink)}
+.block.on .hrs,.block.on .desc,.block.on li span:last-child{color:var(--butter-ink);opacity:.72}
+.block.on li{border-top-color:rgba(0,0,0,.22)}
+.block.on .now{
+  display:inline-block;background:var(--butter-ink);color:var(--butter);
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  padding:4px 9px;margin-bottom:12px;
+  font-variation-settings:"wdth" 100,"wght" 700;
+}
+.block .now{display:none}
+.block.done{opacity:.5}
+
+/* ---------------- kitchen ---------------- */
+.kitchen{display:grid;grid-template-columns:1.35fr 1fr;gap:0}
+@media (max-width:900px){.kitchen{grid-template-columns:1fr}}
+.kitchen-l{padding:56px 40px 60px 0}
+@media (max-width:900px){.kitchen-l{padding:48px 0 40px}}
+.kitchen-r{border-left:3px solid var(--ink);padding:56px 0 60px 40px}
+@media (max-width:900px){.kitchen-r{border-left:0;border-top:3px solid var(--ink);padding:40px 0 48px}}
+.kitchen h2{font-size:clamp(32px,5.2vw,60px);margin:0 0 22px}
+.kitchen p{font-size:16.5px;max-width:46ch}
+.kitchen p + p{margin-top:16px;color:var(--ink-soft)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--ink);border:3px solid var(--ink);margin-top:32px}
+.stat{background:var(--card);padding:18px 16px}
+.stat .v{font-variation-settings:"wdth" 112,"wght" 800;font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
+.stat .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:8px}
+
+.supplier{border-top:2px solid var(--ink)}
+.srow{display:grid;grid-template-columns:1fr auto;gap:6px 18px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.srow .who{font-variation-settings:"wdth" 100,"wght" 700;font-size:15.5px}
+.srow .what{grid-column:1;font-size:13.5px;color:var(--ink-soft)}
+.srow .dist{grid-row:1/3;align-self:center;font-size:13px;color:var(--ink-soft);font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------------- practical ---------------- */
+.prac{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--ink);border-top:3px solid var(--ink)}
+@media (max-width:860px){.prac{grid-template-columns:1fr}}
+.pcol{background:var(--paper);padding:44px 26px 48px}
+.pcol h3{font-variation-settings:"wdth" 74,"wght" 700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 20px}
+.hrow{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.hrow .h{font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+.hrow.today{font-variation-settings:"wdth" 100,"wght" 700}
+.hrow.today .h{color:var(--ink)}
+.hrow.today .d::after{content:" ←";color:var(--brick)}
+.pcol address{font-style:normal;font-size:16.5px;line-height:1.6}
+.pcol .lead{font-size:16.5px;max-width:32ch}
+.pcol .lead + .lead{margin-top:14px;color:var(--ink-soft);font-size:14.5px}
+.linkline{display:inline-block;margin-top:16px;font-variation-settings:"wdth" 100,"wght" 700;font-size:15px;text-decoration:none;border-bottom:3px solid var(--blue);padding-bottom:1px}
+.linkline:hover{color:var(--blue)}
+
+/* ---------------- footer poster ---------------- */
+footer{background:var(--ink);color:var(--paper);padding:56px 0 40px}
+footer .huge{
+  font-variation-settings:"wdth" 122,"wght" 900;
+  font-size:clamp(56px,15vw,190px);line-height:.82;letter-spacing:-.03em;text-transform:uppercase;
+}
+footer .huge span{color:var(--butter)}
+.fmeta{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;margin-top:38px;padding-top:20px;border-top:2px solid rgba(255,255,255,.22);font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.72}
+</style>
+
+<header class="mast">
+  <div class="wrap mast-in">
+    <div class="n">Blok</div>
+    <div class="r">
+      <span id="clock" class="num">Aarhus Ø</span>
+      <span>Sydhavnsgade 12</span>
+      <span id="openstate">Åbent</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="poster">
+    <div class="poster-main">
+      <h1>Bl<span class="o">o</span>k</h1>
+      <p class="sub">Kaffe og køkken i tre blokke. Vi laver én ting ad gangen og laver den færdig, før den næste begynder.</p>
+      <div class="meta">
+        <span class="pill fill">Aarhus Ø</span>
+        <span class="pill">Åbnet 2021</span>
+        <span class="pill">42 pladser</span>
+        <span class="pill">Ingen bordreservation</span>
+      </div>
+    </div>
+    <aside class="poster-side" aria-live="polite">
+      <div>
+        <p class="k" id="side-k">Lige nu</p>
+        <p class="big" id="side-block">Frokost</p>
+        <p class="until" id="side-until">Kører til 16:00</p>
+      </div>
+      <p class="serving" id="side-serving">Smørrebrød, dagens suppe og en enkelt varm ret. Køkkenet tager sidste bestilling 15:40.</p>
+    </aside>
+  </div>
+</div>
+
+<main>
+  <section>
+    <div class="wrap sec-pad">
+      <div class="sec-head">
+        <h2 class="wide">Tre blokke,<br>én dag</h2>
+        <p>Køkkenet skifter helt om tre gange. Det er ikke et kort med kategorier — det er tre forskellige køkkener i det samme rum.</p>
+      </div>
+
+      <div class="blocks" id="blocks">
+        <article class="block" data-from="420" data-to="660">
+          <span class="now">Serverer nu</span>
+          <p class="hrs num">07:00 — 11:00</p>
+          <h3>Morgen</h3>
+          <p class="desc">Filterkaffe på abonnement, havregrød på fuldkorn, og brød vi henter kl. 06:30 hos Lupinen tre gader væk.</p>
+          <ul>
+            <li><span>Havregrød, æblekompot</span><span>62</span></li>
+            <li><span>Rugbrød, avocado, chili</span><span>78</span></li>
+            <li><span>Skyr, ristede kerner, honning</span><span>68</span></li>
+            <li><span>Filterkaffe, fri påfyldning</span><span>45</span></li>
+            <li><span>Cortado</span><span>38</span></li>
+          </ul>
+        </article>
+
+        <article class="block" data-from="660" data-to="960">
+          <span class="now">Serverer nu</span>
+          <p class="hrs num">11:00 — 16:00</p>
+          <h3>Frokost</h3>
+          <p class="desc">Smørrebrød skåret på bestilling, én suppe og én varm ret. Når retten er væk, er den væk — vi laver ikke mere.</p>
+          <ul>
+            <li><span>Stjerneskud, moderne</span><span>145</span></li>
+            <li><span>Kartoffel, ristet løg, urter</span><span>95</span></li>
+            <li><span>Dagens suppe, surdejsbrød</span><span>110</span></li>
+            <li><span>Varm ret — se tavlen</span><span>165</span></li>
+            <li><span>Tre stykker, kokkens valg</span><span>285</span></li>
+          </ul>
+        </article>
+
+        <article class="block" data-from="1020" data-to="1320">
+          <span class="now">Serverer nu</span>
+          <p class="hrs num">17:00 — 22:00</p>
+          <h3>Aften</h3>
+          <p class="desc">Små retter til deling, naturvin på glas og en grill der kører fra klokken fem. Ingen reservation — kom og sæt jer.</p>
+          <ul>
+            <li><span>Grillet spidskål, hasselnød</span><span>95</span></li>
+            <li><span>Muslinger, cider, fennikel</span><span>135</span></li>
+            <li><span>Fisk fra Hirtshals, hel</span><span>245</span></li>
+            <li><span>Kalv, syltet peberrod</span><span>195</span></li>
+            <li><span>Naturvin, glas</span><span>85</span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap kitchen">
+      <div class="kitchen-l">
+        <h2 class="wide">Vi laver<br>alt selv,<br>og kun lidt</h2>
+        <p>Der er ét køkken på tolv kvadratmeter og fem mennesker i det. Derfor er kortet kort. Vi kan lave femten retter rigtig godt, eller fyrre stykker middelmådigt, og vi valgte det første.</p>
+        <p>Rummet er en tidligere containerkontrol på havnen. Vi rev ikke betonen ned, vi malede den. Det er derfor der er lidt for meget rumklang, når der er fyldt — det beklager vi ikke.</p>
+        <div class="stats">
+          <div class="stat"><p class="v">15</p><p class="k">Retter i alt</p></div>
+          <div class="stat"><p class="v">5</p><p class="k">I køkkenet</p></div>
+          <div class="stat"><p class="v">12</p><p class="k">m² køkken</p></div>
+          <div class="stat"><p class="v">42</p><p class="k">Pladser</p></div>
+        </div>
+      </div>
+
+      <div class="kitchen-r">
+        <h2 class="wide" style="font-size:clamp(26px,3.6vw,38px)">Hvor det<br>kommer fra</h2>
+        <div class="supplier" style="margin-top:24px">
+          <div class="srow">
+            <p class="who">Bageriet Lupinen</p>
+            <p class="what">Surdejsbrød og rugbrød, dagligt kl. 06:30</p>
+            <p class="dist">400 m</p>
+          </div>
+          <div class="srow">
+            <p class="who">Havnens Fisk</p>
+            <p class="what">Hel fisk fra Hirtshals, tirsdag og fredag</p>
+            <p class="dist">1,2 km</p>
+          </div>
+          <div class="srow">
+            <p class="who">Barritskov</p>
+            <p class="what">Grøntsager, biodynamisk, ugentligt</p>
+            <p class="dist">62 km</p>
+          </div>
+          <div class="srow">
+            <p class="who">La Cabra</p>
+            <p class="what">Kaffe, ristet i Aarhus C</p>
+            <p class="dist">3,1 km</p>
+          </div>
+          <div class="srow">
+            <p class="who">Grambogård</p>
+            <p class="what">Kalv og gris, frilandsopdræt</p>
+            <p class="dist">78 km</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="prac">
+    <div class="pcol">
+      <h3>Åbningstider</h3>
+      <div id="hours">
+        <div class="hrow" data-day="1"><span class="d">Mandag</span><span class="h">07:00 – 16:00</span></div>
+        <div class="hrow" data-day="2"><span class="d">Tirsdag</span><span class="h">07:00 – 22:00</span></div>
+        <div class="hrow" data-day="3"><span class="d">Onsdag</span><span class="h">07:00 – 22:00</span></div>
+        <div class="hrow" data-day="4"><span class="d">Torsdag</span><span class="h">07:00 – 22:00</span></div>
+        <div class="hrow" data-day="5"><span class="d">Fredag</span><span class="h">07:00 – 23:00</span></div>
+        <div class="hrow" data-day="6"><span class="d">Lørdag</span><span class="h">09:00 – 23:00</span></div>
+        <div class="hrow" data-day="0"><span class="d">Søndag</span><span class="h">09:00 – 16:00</span></div>
+      </div>
+    </div>
+
+    <div class="pcol">
+      <h3>Find os</h3>
+      <address>
+        Sydhavnsgade 12<br>
+        8000 Aarhus C<br>
+        <br>
+        <a href="tel:+4586123344" class="linkline">+45 86 12 33 44</a>
+      </address>
+      <p class="lead" style="margin-top:22px">Letbanen til Nørreport, otte minutter til fods langs vandet. Der er cykelstativer på nordsiden.</p>
+    </div>
+
+    <div class="pcol">
+      <h3>Det praktiske</h3>
+      <p class="lead">Vi tager ikke bordreservationer. Til gengæld er der altid en plads inden længe — og en øl imens.</p>
+      <p class="lead">Selskaber over ti personer: skriv til os mindst to uger før, så lukker vi et hjørne af.</p>
+      <a href="mailto:hej@blok.dk" class="linkline">hej@blok.dk</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="huge">Kom ind<br>og sæt <span>jer</span></p>
+    <div class="fmeta">
+      <span>BLOK Aarhus ApS · CVR 41 55 07 92</span>
+      <span>Sydhavnsgade 12 · 8000 Aarhus C</span>
+      <span>Ingen reservation · 42 pladser</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var now = new Date();
+  var mins = now.getHours() * 60 + now.getMinutes();
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('#blocks .block'));
+
+  var active = null, upcoming = null;
+  blocks.forEach(function (b) {
+    var f = +b.dataset.from, t = +b.dataset.to;
+    if (mins >= f && mins < t) { b.classList.add('on'); active = b; }
+    else if (mins >= t) { b.classList.add('done'); }
+    else if (!upcoming) { upcoming = b; }
+  });
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function hhmm(m) { return pad(Math.floor(m / 60)) + ':' + pad(m % 60); }
+
+  var k = document.getElementById('side-k');
+  var name = document.getElementById('side-block');
+  var until = document.getElementById('side-until');
+  var serving = document.getElementById('side-serving');
+  var openstate = document.getElementById('openstate');
+
+  var COPY = {
+    'Morgen': 'Filterkaffe med fri påfyldning, havregrød og brød fra Lupinen. Grøden koger vi ny kl. 09:00.',
+    'Frokost': 'Smørrebrød, dagens suppe og en enkelt varm ret. Køkkenet tager sidste bestilling 15:40.',
+    'Aften': 'Små retter til deling og naturvin på glas. Grillen kører til 21:30, køkkenet lukker 22:00.'
+  };
+
+  if (active) {
+    var title = active.querySelector('h3').textContent;
+    k.textContent = 'Lige nu';
+    name.textContent = title;
+    until.textContent = 'Kører til ' + hhmm(+active.dataset.to);
+    serving.textContent = COPY[title];
+    openstate.textContent = 'Åbent nu';
+  } else if (upcoming) {
+    var t2 = upcoming.querySelector('h3').textContent;
+    k.textContent = 'Næste blok';
+    name.textContent = t2;
+    until.textContent = 'Åbner ' + hhmm(+upcoming.dataset.from);
+    serving.textContent = COPY[t2];
+    openstate.textContent = 'Åbner ' + hhmm(+upcoming.dataset.from);
+  } else {
+    k.textContent = 'Lukket';
+    name.textContent = 'Morgen';
+    until.textContent = 'Vi åbner igen 07:00';
+    serving.textContent = COPY['Morgen'];
+    openstate.textContent = 'Lukket';
+  }
+
+  var today = document.querySelector('#hours .hrow[data-day="' + now.getDay() + '"]');
+  if (today) { today.classList.add('today'); }
+
+  var clock = document.getElementById('clock');
+  if (clock) { clock.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ' Aarhus Ø'; }
+})();
+</script>
