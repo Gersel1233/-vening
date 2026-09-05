@@ -135,8 +135,13 @@ Manrope 500 13px uppercase, tabular numerals, padding 10px 0, spaced 22px apart,
 a single 1px hairline (`--stone` at 25% on dark) that runs under the whole row like a
 printed timetable. Selected = a 1px `--gold` rule beneath the token and full-opacity text;
 unselected = `--stone` at 60%; unavailable = struck through at 40%. Transitions 400ms.
-The submit stays a ghost button (the only button style). Never more than one row of
-tokens per question; the three rows together must read as a timetable, not a form.
+The submit is a **text-link button**, not a ghost button: bare Manrope 500 14px uppercase
+in `--stone`, no border, no fill, sitting on its own 1px hairline (`--stone` at 25%);
+active = the hairline turns `--gold` and the text goes full opacity; disabled = text at
+40%, hairline unchanged. Hover on active: hairline `--gold`, 400ms. It is the last row of
+the timetable, so it reads as one more line of type. (Ghost buttons remain the style for
+nav and section CTAs.) Never more than one row of tokens per question; the rows together
+must read as a timetable, not a form.
 
 ### Footer — a colophon, not a sitemap
 `--vault` band, 1px `--vault-line` at top, padding 56px var(--pad-x) 32px. The wordmark in
