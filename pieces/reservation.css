@@ -12,13 +12,10 @@
 #reservation h2{margin:0}
 #reservation .res-lede{max-width:44ch;color:rgba(226,225,219,.88)}
 
-/* facts list — hairline rows, label at 70% */
-#reservation .facts{margin:24px 0 0;width:100%;max-width:52ch;border-top:1px solid var(--vault-line)}
-#reservation .facts>div{display:grid;grid-template-columns:96px 1fr;column-gap:24px;padding:12px 0;border-bottom:1px solid var(--vault-line)}
-#reservation .facts dt{color:rgba(226,225,219,.7);text-transform:uppercase;font-size:12px;line-height:1.4;letter-spacing:-.012em;padding-top:2px}
-#reservation .facts dd{margin:0;color:var(--stone);font-variant-numeric:tabular-nums}
-#reservation .facts a{border-bottom:1px solid rgba(226,225,219,.4);transition:border-color var(--dur) var(--ease)}
-#reservation .facts a:hover{border-bottom-color:var(--gold)}
+/* note — one short paragraph, no rules, no labels */
+#reservation .res-note{margin-top:8px;max-width:44ch;color:rgba(226,225,219,.8);font-variant-numeric:tabular-nums}
+#reservation .res-note a{border-bottom:1px solid rgba(226,225,219,.4);transition:border-color var(--dur) var(--ease)}
+#reservation .res-note a:hover{border-bottom-color:var(--gold)}
 
 /* booking widget — typographic tokens on a hairline, like a printed timetable */
 #reservation .res-lede{font-size:22px;line-height:1.2}
@@ -72,12 +69,10 @@
   #reservation .res-photo{object-position:12% 50%}
   #reservation .res-overlay{background:linear-gradient(180deg,rgba(14,21,18,.78) 0%,rgba(14,21,18,.80) 45%,rgba(14,21,18,.92) 70%,rgba(14,21,18,.94) 100%)}
   #reservation .res-grid{grid-template-columns:1fr;gap:56px}
-  #reservation .facts{max-width:none}
   #reservation .chips{column-gap:8px}
   #reservation .chips.time{column-gap:8px}
   #reservation .tok{margin:0;padding:10px 6px;min-width:44px;text-align:center}
   #reservation .tok::after{left:6px;right:6px}
 }
 @media (max-width:480px){
-  #reservation .facts>div{grid-template-columns:80px 1fr;column-gap:16px}
 }
