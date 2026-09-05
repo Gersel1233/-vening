@@ -6,7 +6,7 @@
   background:var(--vault);color:var(--stone);
 }
 #reservation .res-photo{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;border-radius:0}
-#reservation .res-overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,21,18,.66) 0%,rgba(14,21,18,.80) 45%,rgba(14,21,18,.92) 70%,rgba(14,21,18,.94) 100%)}
+#reservation .res-overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,21,18,.62) 0%,rgba(14,21,18,.74) 45%,rgba(14,21,18,.86) 70%,rgba(14,21,18,.90) 100%)}
 #reservation .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
 #reservation .res-copy{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 #reservation h2{margin:0}
@@ -46,13 +46,14 @@
 }
 #reservation .summary.sent{color:var(--gold);border-bottom-color:var(--gold)}
 #reservation .submit{
-  align-self:stretch;width:100%;margin:0;padding:14px 0;border:0;border-bottom:1px solid rgba(226,225,219,.25);border-radius:0;background:transparent;
-  color:var(--stone);font-family:var(--font-text);font-weight:500;font-size:14px;line-height:1;letter-spacing:-.01em;text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;gap:24px;
+  align-self:stretch;width:100%;margin:0;padding:14px 0;border:0;border-bottom:1px solid var(--gold);border-radius:0;background:transparent;
+  color:var(--gold);font-family:var(--font-text);font-weight:500;font-size:15px;line-height:1;letter-spacing:-.01em;text-transform:uppercase;
   text-align:left;cursor:pointer;transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease);
 }
-#reservation .submit:not(:disabled){border-bottom-color:var(--gold)}
-#reservation .submit:not(:disabled):hover{border-bottom-color:var(--gold);color:var(--stone)}
-#reservation .submit:disabled{color:rgba(226,225,219,.4);border-bottom-color:rgba(226,225,219,.25);cursor:not-allowed}
+#reservation .submit .arrow{display:inline-block;transition:transform var(--dur) var(--ease)}
+#reservation .submit:not(:disabled):hover .arrow{transform:translateX(6px)}
+#reservation .submit:disabled{color:rgba(226,225,219,.45);border-bottom-color:rgba(226,225,219,.25);cursor:not-allowed}
 
 /* ---- Footer: a colophon, not a sitemap ---- */
 #footer{padding:56px var(--pad-x) 32px;border-top:1px solid var(--vault-line);background:var(--vault);color:var(--stone)}
