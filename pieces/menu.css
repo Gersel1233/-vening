@@ -17,7 +17,8 @@
 #menu .split>.photo{min-height:720px;aspect-ratio:3/4}
 #menu .menu-foot{padding:40px var(--pad-x) 92px;display:flex;flex-direction:column;align-items:flex-start;gap:32px}
 #menu .menu-foot .t-lede{color:var(--ink);max-width:52ch}
-#menu .menu-foot .btn{color:var(--ink)}
+#menu .menu-foot .glass-btn{color:var(--ink)}
+#menu .menu-head .glass-btn{margin-top:8px;color:var(--ink)}
 #menu .t-heading,#menu .t-heading-sm{margin:0}
 @media (max-width:900px){
   #menu .split>.photo{min-height:320px;aspect-ratio:auto}
