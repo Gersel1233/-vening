@@ -142,10 +142,17 @@ tokens per question; the three rows together must read as a timetable, not a for
 `--vault` band, 1px `--vault-line` at top, padding 56px var(--pad-x) 32px. The wordmark in
 Newsreader 300 at heading-sm size, alone on its line. Beneath it **one** hairline-ruled
 row — a single line of Manrope 500 12px uppercase in `--stone` at 70%, items separated by
-gold middle dots: address · phone · mail · hours. Then the legal line in `--stone` at 45%,
-same size, left and right. **Never** columns, stacks or link lists. The footer should read
+gold middle dots: address · phone · mail · hours · company and CVR · "siden 2019". The legal
+items are part of that same single line, at 45% opacity. **Two tiers only: wordmark, one
+line.** Never columns, stacks, link lists or a separate legal bar. The footer should read
 like the last line of a printed menu. On mobile the single row may wrap; it stays one
 paragraph.
+
+### Text over photography — placement rule
+Copy and controls sit where the darkened photograph is darkest. Never lay a row of small
+type across a bright fixture, a lit ceiling or a white tablecloth; move the block, don't
+add a box. The top third of a dark section may be left to the photograph and the heading
+alone.
 
 ## Motion
 

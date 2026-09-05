@@ -1,11 +1,12 @@
 /* ---- Reservation: one darkened photograph carrying the booking form ---- */
 #reservation{
   position:relative;isolation:isolate;overflow:hidden;
-  min-height:860px;padding:120px var(--pad-x);
+  min-height:1080px;padding:120px var(--pad-x);
+  display:grid;align-content:end;
   background:var(--vault);color:var(--stone);
 }
 #reservation .res-photo{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;border-radius:0}
-#reservation .res-overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,21,18,.55) 0%,rgba(14,21,18,.88) 100%)}
+#reservation .res-overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,21,18,.68) 0%,rgba(14,21,18,.88) 100%)}
 #reservation .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
 #reservation .res-copy{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 #reservation h2{margin:0}
@@ -21,7 +22,7 @@
 
 /* booking widget — typographic tokens on a hairline, like a printed timetable */
 #reservation .res-lede{font-size:22px;line-height:1.2}
-#reservation .book{display:flex;flex-direction:column;gap:36px;padding-top:6px}
+#reservation .book{display:flex;flex-direction:column;gap:48px;padding-top:6px}
 #reservation .field{display:flex;flex-direction:column;gap:6px}
 #reservation .field .eyebrow{color:rgba(226,225,219,.7)}
 #reservation .chips{display:flex;flex-wrap:wrap;align-items:flex-end;column-gap:22px;row-gap:0;margin:0;padding:0;list-style:none;border-bottom:1px solid rgba(226,225,219,.25)}
@@ -58,14 +59,10 @@
 #footer .colophon .dot{color:var(--gold);padding:0 10px}
 #footer .colophon a{border-bottom:1px solid transparent;transition:border-color var(--dur) var(--ease)}
 #footer .colophon a:hover{border-bottom-color:var(--gold)}
-#footer .foot-bottom{
-  display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
-  margin-top:20px;color:rgba(226,225,219,.45);font-variant-numeric:tabular-nums;
-}
-#footer .foot-bottom p{margin:0}
+#footer .colophon .legal{color:rgba(226,225,219,.45)}
 
 @media (max-width:900px){
-  #reservation{min-height:0;padding:96px var(--pad-x)}
+  #reservation{min-height:0;padding:96px var(--pad-x);display:block}
   #reservation .res-grid{grid-template-columns:1fr;gap:56px}
   #reservation .facts{max-width:none}
   #reservation .chips{column-gap:8px}
@@ -75,5 +72,4 @@
 }
 @media (max-width:480px){
   #reservation .facts>div{grid-template-columns:80px 1fr;column-gap:16px}
-  #footer .foot-bottom{flex-direction:column;gap:8px}
 }
