@@ -17,40 +17,63 @@
 #reservation .res-note a{white-space:nowrap;border-bottom:1px solid rgba(226,225,219,.4);transition:border-color var(--dur) var(--ease)}
 #reservation .res-note a:hover{border-bottom-color:var(--gold)}
 
-/* booking widget — typographic tokens on a hairline, like a printed timetable */
+/* booking widget — a frosted glass panel over the room; every control is glass on it */
 #reservation .res-lede{font-size:22px;line-height:1.2}
-#reservation .book{display:flex;flex-direction:column;gap:48px;padding-top:6px}
-#reservation .field{display:flex;flex-direction:column;gap:6px}
+#reservation .book{
+  display:flex;flex-direction:column;margin:0;padding:28px;border-radius:24px;
+  transition:min-height 420ms var(--ease);
+}
+#reservation .book-body{display:flex;flex-direction:column;gap:28px;transition:opacity 320ms var(--ease),transform 320ms var(--ease)}
+#reservation .book-body.fade{opacity:0;transform:translateY(-12px)}
+#reservation .field{display:flex;flex-direction:column;gap:12px;min-width:0}
 #reservation .field .eyebrow{color:rgba(226,225,219,.7)}
-#reservation .chips{display:flex;flex-wrap:wrap;align-items:flex-end;column-gap:22px;row-gap:0;margin:0;padding:0;list-style:none;border-bottom:1px solid rgba(226,225,219,.25)}
-#reservation .chips.time{column-gap:clamp(12px,.9vw,22px)}
-#reservation .tok{
-  position:relative;margin:0 -11px;padding:10px 11px;border:0;border-radius:0;background:transparent;
-  color:rgba(226,225,219,.6);font-family:var(--font-text);font-weight:500;font-size:13px;line-height:1;letter-spacing:-.011em;
-  text-transform:uppercase;font-variant-numeric:tabular-nums;cursor:pointer;white-space:nowrap;
-  transition:color var(--dur) var(--ease);
-}
-#reservation .tok::after{content:"";position:absolute;left:11px;right:11px;bottom:-1px;height:1px;background:var(--gold);opacity:0;transition:opacity var(--dur) var(--ease)}
-#reservation .tok:hover{color:var(--stone)}
-#reservation .tok[aria-pressed="true"]{color:var(--stone)}
-#reservation .tok[aria-pressed="true"]::after{opacity:1}
-#reservation .tok:disabled{color:rgba(226,225,219,.4);text-decoration:line-through;cursor:not-allowed}
-#reservation .tok:disabled:hover{color:rgba(226,225,219,.4)}
 
-#reservation .summary{
-  margin:0;padding:14px 0;border-top:1px solid rgba(226,225,219,.4);border-bottom:1px solid rgba(226,225,219,.4);
-  font-variant-numeric:tabular-nums;color:var(--stone);min-height:48px;transition:color var(--dur) var(--ease);
+/* guests — segmented control: one glass track, plain options, sliding stone thumb */
+#reservation .seg{position:relative;display:grid;grid-template-columns:repeat(8,1fr);padding:4px;border-radius:999px;align-self:flex-start;width:100%;max-width:420px}
+#reservation .seg-thumb{position:absolute;top:4px;left:0;height:calc(100% - 8px);width:0;border-radius:999px;background:rgba(226,225,219,.92);transition:transform 420ms var(--ease),width 420ms var(--ease);pointer-events:none}
+#reservation .seg-opt{
+  position:relative;z-index:1;margin:0;padding:11px 0;border:0;border-radius:999px;background:transparent;
+  color:rgba(226,225,219,.72);font-size:13px;line-height:1;letter-spacing:-.011em;cursor:pointer;
+  transition:color var(--dur) var(--ease),transform 160ms var(--ease);
 }
-#reservation .summary.sent{color:var(--gold);border-bottom-color:var(--gold)}
-#reservation .submit{
-  display:flex;justify-content:space-between;align-items:center;gap:24px;
-  align-self:stretch;width:100%;margin:0;padding:14px 0;border:0;border-bottom:1px solid var(--gold);border-radius:0;background:transparent;
-  color:var(--gold);font-family:var(--font-text);font-weight:500;font-size:15px;line-height:1;letter-spacing:-.01em;text-transform:uppercase;
-  text-align:left;cursor:pointer;transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease);
+#reservation .seg-opt:hover{color:var(--stone)}
+#reservation .seg-opt[aria-checked="true"]{color:var(--vault)}
+#reservation .seg-opt:active{transform:scale(.97)}
+
+/* dates — horizontal strip of tiles, scrollbar hidden */
+#reservation .dates{display:flex;gap:10px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-ms-overflow-style:none;padding:2px;margin:-2px;scroll-snap-type:x proximity}
+#reservation .dates::-webkit-scrollbar{display:none}
+#reservation .tile{
+  flex:none;width:72px;height:84px;padding:12px 0 10px;border-radius:16px;
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  scroll-snap-align:start;text-transform:none;
 }
-#reservation .submit .arrow{display:inline-block;transition:transform var(--dur) var(--ease)}
-#reservation .submit:not(:disabled):hover .arrow{transform:translateX(6px)}
-#reservation .submit:disabled{color:rgba(226,225,219,.45);border-bottom-color:rgba(226,225,219,.25);cursor:not-allowed}
+#reservation .tile .wd{text-transform:uppercase;color:rgba(226,225,219,.7);transition:color var(--dur) var(--ease)}
+#reservation .tile .dn{font-family:var(--font-display);font-weight:300;font-size:32px;line-height:1;letter-spacing:-.03em}
+#reservation .tile[aria-pressed="true"] .wd{color:rgba(14,21,18,.7)}
+
+/* times — wrapped grid of pills; slides 24px and fades between dates */
+#reservation .times{display:flex;flex-wrap:wrap;gap:8px;transition:opacity 420ms var(--ease),transform 420ms var(--ease)}
+#reservation .times.out{opacity:0;transform:translateX(-24px)}
+#reservation .times.enter{opacity:0;transform:translateX(24px);transition:none}
+#reservation .times .glass-pill{color:rgba(226,225,219,.9)}
+#reservation .times .glass-pill:disabled{color:var(--stone)}
+
+#reservation .summary{margin:0;min-height:20px;color:rgba(226,225,219,.8)}
+#reservation .submit{width:100%;align-self:stretch;padding:18px 26px}
+#reservation .submit:disabled{opacity:.45;cursor:not-allowed}
+#reservation .submit:disabled:active{transform:none}
+
+/* confirmation — gold seal stamps in */
+#reservation .book-done{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;flex:1;padding:24px 0;text-align:center}
+#reservation .book-done[hidden]{display:none}
+#reservation .seal{width:96px;height:96px;transform:scale(1.4) rotate(-2deg);opacity:0;transition:transform 600ms var(--ease),opacity 320ms var(--ease)}
+#reservation .book-done.in .seal{transform:scale(1) rotate(0deg);opacity:1}
+#reservation .done-line{max-width:32ch;color:var(--stone);opacity:0;transform:translateY(12px);transition:opacity 420ms var(--ease) 240ms,transform 420ms var(--ease) 240ms}
+#reservation .book-done.in .done-line{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  #reservation .seal,#reservation .done-line,#reservation .times,#reservation .book-body,#reservation .seg-thumb{transition:none}
+}
 
 /* ---- Footer: a colophon, not a sitemap ---- */
 #footer{padding:56px var(--pad-x) 32px;border-top:1px solid var(--vault-line);background:var(--vault);color:var(--stone)}
@@ -69,10 +92,10 @@
   #reservation .res-photo{object-position:12% 50%}
   #reservation .res-overlay{background:linear-gradient(180deg,rgba(14,21,18,.78) 0%,rgba(14,21,18,.80) 45%,rgba(14,21,18,.92) 70%,rgba(14,21,18,.94) 100%)}
   #reservation .res-grid{grid-template-columns:1fr;gap:56px}
-  #reservation .chips{column-gap:8px}
-  #reservation .chips.time{column-gap:8px}
-  #reservation .tok{margin:0;padding:10px 6px;min-width:44px;text-align:center}
-  #reservation .tok::after{left:6px;right:6px}
+  #reservation .book{padding:20px}
+  #reservation .book-body{gap:24px}
+  #reservation .seg{max-width:none}
+  #reservation .dates{margin:-2px calc(-20px + 2px);padding:2px 20px}
 }
 @media (max-width:480px){
 }

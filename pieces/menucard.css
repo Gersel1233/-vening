@@ -1,0 +1,44 @@
+/* Menu card — full-screen glass overlay. Opened by any [data-open-menucard]; script at the end of menucard.html. */
+#menucard{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:32px;color:var(--stone)}
+#menucard[hidden]{display:none}
+#menucard .mc-backdrop{position:absolute;inset:0;background:rgba(14,21,18,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;transition:opacity 480ms var(--ease)}
+#menucard.open .mc-backdrop{opacity:1}
+#menucard .mc-panel{
+  position:relative;width:100%;max-width:880px;max-height:86vh;display:flex;flex-direction:column;gap:24px;
+  padding:28px 32px 8px;overflow:hidden;
+  opacity:0;transform:scale(.96);filter:blur(10px);
+  transition:opacity 480ms var(--ease),transform 480ms var(--ease),filter 480ms var(--ease);
+}
+#menucard.open .mc-panel{opacity:1;transform:none;filter:none}
+/* Glass never stacks more than twice: backdrop + panel. Pills inside keep fill and rim, not a third blur. */
+#menucard .mc-panel .glass-pill{-webkit-backdrop-filter:none;backdrop-filter:none}
+
+#menucard .mc-head{display:flex;align-items:center;justify-content:space-between;gap:24px}
+#menucard .mc-head h2{margin:0;color:var(--stone)}
+#menucard .mc-tabs{display:flex;flex-wrap:wrap;gap:8px}
+#menucard .mc-tabs .glass-pill{white-space:nowrap}
+
+#menucard .mc-body{display:grid;flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 0 24px;scrollbar-width:thin;scrollbar-color:rgba(226,225,219,.3) transparent}
+#menucard .mc-pane{grid-area:1/1;opacity:0;transition:opacity 320ms var(--ease)}
+#menucard .mc-pane.is-active{opacity:1}
+#menucard .mc-pane.is-leaving{opacity:0;pointer-events:none}
+#menucard .mc-pane[hidden]{display:none}
+#menucard .mc-pane .eyebrow{color:rgba(226,225,219,.7);margin-bottom:8px}
+
+#menucard .menu-row{border-bottom-color:rgba(226,225,219,.18)}
+#menucard .menu-row .name,#menucard .menu-row .price{color:var(--stone)}
+#menucard .menu-row .price{text-align:right}
+#menucard .menu-row .desc{color:rgba(226,225,219,.66)}
+
+@media (prefers-reduced-motion:reduce){
+  #menucard .mc-backdrop,#menucard .mc-panel,#menucard .mc-pane{transition:none}
+  #menucard .mc-panel{opacity:1;transform:none;filter:none}
+  #menucard .mc-backdrop{opacity:1}
+}
+@media (max-width:900px){
+  #menucard{padding:16px;align-items:stretch}
+  #menucard .mc-panel{max-width:none;max-height:none;padding:24px 20px 8px;gap:20px}
+  #menucard .mc-tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -20px;padding:4px 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  #menucard .mc-tabs::-webkit-scrollbar{display:none}
+  #menucard .menu-row .desc{max-width:100%}
+}

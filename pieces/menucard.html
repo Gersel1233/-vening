@@ -1,0 +1,157 @@
+<div id="menucard" role="dialog" aria-modal="true" aria-labelledby="menucard-title" hidden>
+  <div class="mc-backdrop" data-close-menucard></div>
+  <div class="glass glass-panel mc-panel">
+    <div class="mc-head">
+      <h2 id="menucard-title" class="t-heading-sm">Bullion</h2>
+      <button class="glass glass-pill mc-close" type="button" data-close-menucard>Luk</button>
+    </div>
+    <div class="mc-tabs" role="tablist" aria-label="Menukort">
+      <button class="glass glass-pill" type="button" role="tab" id="mc-tab-hors" aria-controls="mc-hors" aria-selected="true" tabindex="0">Hors d'œuvre</button>
+      <button class="glass glass-pill" type="button" role="tab" id="mc-tab-plats" aria-controls="mc-plats" aria-selected="false" tabindex="-1">Plats</button>
+      <button class="glass glass-pill" type="button" role="tab" id="mc-tab-desserts" aria-controls="mc-desserts" aria-selected="false" tabindex="-1">Desserts</button>
+      <button class="glass glass-pill" type="button" role="tab" id="mc-tab-bar" aria-controls="mc-bar" aria-selected="false" tabindex="-1">Bar</button>
+      <button class="glass glass-pill" type="button" role="tab" id="mc-tab-vin" aria-controls="mc-vin" aria-selected="false" tabindex="-1">Vin</button>
+    </div>
+    <div class="mc-body">
+      <div class="mc-pane is-active" id="mc-hors" role="tabpanel" aria-labelledby="mc-tab-hors">
+        <p class="eyebrow">Forretter</p>
+        <div class="menu-row"><span class="name">Huîtres Gillardeau nº2</span><span class="price">195</span><p class="desc">Seks stykker, mignonette, citron.</p></div>
+        <div class="menu-row"><span class="name">Soupe à l'oignon</span><span class="price">145</span><p class="desc">Gratineret med comté, dagsgammelt brød.</p></div>
+        <div class="menu-row"><span class="name">Tartare de bœuf</span><span class="price">185</span><p class="desc">Skåret med kniv, pommes gaufrettes, æggeblomme.</p></div>
+        <div class="menu-row"><span class="name">Œuf mayonnaise</span><span class="price">95</span><p class="desc">Blødkogt æg, hjemmerørt mayonnaise, purløg.</p></div>
+      </div>
+      <div class="mc-pane" id="mc-plats" role="tabpanel" aria-labelledby="mc-tab-plats" hidden>
+        <p class="eyebrow">Hovedretter</p>
+        <div class="menu-row"><span class="name">Sole meunière</span><span class="price">445</span><p class="desc">Hel søtunge, brunet smør, kapers, citron. Udbenes ved bordet.</p></div>
+        <div class="menu-row"><span class="name">Entrecôte, sauce béarnaise</span><span class="price">395</span><p class="desc">300 g dansk kødkvæg, pommes frites, salat med sennepsvinaigrette.</p></div>
+        <div class="menu-row"><span class="name">Steak au poivre</span><span class="price">415</span><p class="desc">Mørbrad, grøn peber, cognac, fløde. Serveres rosa.</p></div>
+        <div class="menu-row"><span class="name">Poulet rôti pour deux</span><span class="price">690</span><p class="desc">Hel kylling fra Hopballe, timian, hvidløg, pommes purée. Til to.</p></div>
+        <div class="menu-row"><span class="name">Bouillabaisse</span><span class="price">425</span><p class="desc">Fisk og skaldyr fra Skagen, safran, rouille, ristet brød.</p></div>
+        <div class="menu-row"><span class="name">Ris de veau</span><span class="price">385</span><p class="desc">Kalvebrissel, morkler, madeira, spinat.</p></div>
+      </div>
+      <div class="mc-pane" id="mc-desserts" role="tabpanel" aria-labelledby="mc-tab-desserts" hidden>
+        <p class="eyebrow">Til sidst</p>
+        <div class="menu-row"><span class="name">Tarte Tatin</span><span class="price">125</span><p class="desc">Karamelliserede æbler, crème fraîche.</p></div>
+        <div class="menu-row"><span class="name">Île flottante</span><span class="price">115</span><p class="desc">Marengs på crème anglaise, praliné.</p></div>
+        <div class="menu-row"><span class="name">Crème brûlée</span><span class="price">110</span><p class="desc">Vanilje fra Madagaskar. Knækker.</p></div>
+      </div>
+      <div class="mc-pane" id="mc-bar" role="tabpanel" aria-labelledby="mc-tab-bar" hidden>
+        <p class="eyebrow">Baren</p>
+        <div class="menu-row"><span class="name">Champagne Bollinger Special Cuvée</span><span class="price">165</span><p class="desc">Glas, serveret i coupe</p></div>
+        <div class="menu-row"><span class="name">Kir Royal</span><span class="price">135</span><p class="desc">Crème de cassis, Bollinger</p></div>
+        <div class="menu-row"><span class="name">Negroni</span><span class="price">125</span><p class="desc">Gin, Campari, Carpano Antica</p></div>
+        <div class="menu-row"><span class="name">Martini, Bullion</span><span class="price">145</span><p class="desc">Tanqueray Ten, Noilly Prat, citronskal</p></div>
+        <div class="menu-row"><span class="name">Old Fashioned</span><span class="price">135</span><p class="desc">Rye, Angostura, Demerara</p></div>
+      </div>
+      <div class="mc-pane" id="mc-vin" role="tabpanel" aria-labelledby="mc-tab-vin" hidden>
+        <p class="eyebrow">Vin</p>
+        <div class="menu-row"><span class="name">Sancerre, Vacheron 2023</span><span class="price">115</span><p class="desc">Glas · Loire, sauvignon blanc</p></div>
+        <div class="menu-row"><span class="name">Chablis 1er Cru, Moreau 2022</span><span class="price">145</span><p class="desc">Glas · Bourgogne, chardonnay</p></div>
+        <div class="menu-row"><span class="name">Bourgogne Rouge, Lafarge 2021</span><span class="price">135</span><p class="desc">Glas · pinot noir</p></div>
+        <div class="menu-row"><span class="name">Saint-Émilion, Château Fombrauge 2019</span><span class="price">895</span><p class="desc">Flaske · Bordeaux</p></div>
+        <div class="menu-row"><span class="name">Châteauneuf-du-Pape, Beaucastel 2020</span><span class="price">1.250</span><p class="desc">Flaske · Rhône</p></div>
+        <div class="menu-row"><span class="name">Sauternes, Doisy-Daëne 2019</span><span class="price">95</span><p class="desc">Glas · til desserten</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+/* Menu card: open/close, focus trap, tabs. Reveal logic lives in the shared script. */
+(function () {
+  var card = document.getElementById('menucard');
+  if (!card) { return; }
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var closeBtn = card.querySelector('.mc-close');
+  var tabs = Array.prototype.slice.call(card.querySelectorAll('[role="tab"]'));
+  var panes = Array.prototype.slice.call(card.querySelectorAll('.mc-pane'));
+  var opener = null, closing = null, switching = null;
+  var FOCUS = 'button:not([disabled]),[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+
+  function isOpen() { return !card.hidden; }
+
+  function open(from) {
+    if (isOpen()) { return; }
+    if (closing) { clearTimeout(closing); closing = null; }
+    opener = from || document.activeElement;
+    card.hidden = false;
+    document.body.style.overflow = 'hidden';
+    if (reduce) { card.classList.add('open'); }
+    else { requestAnimationFrame(function () { requestAnimationFrame(function () { card.classList.add('open'); }); }); }
+    closeBtn.focus({ preventScroll: true });
+  }
+
+  function close() {
+    if (!isOpen() || closing) { return; }
+    card.classList.remove('open');
+    var finish = function () {
+      card.hidden = true;
+      document.body.style.overflow = '';
+      closing = null;
+      if (opener && typeof opener.focus === 'function') { opener.focus({ preventScroll: true }); }
+      opener = null;
+    };
+    if (reduce) { finish(); } else { closing = setTimeout(finish, 480); }
+  }
+
+  function select(tab) {
+    var idx = tabs.indexOf(tab);
+    if (idx < 0 || tab.getAttribute('aria-selected') === 'true') { return; }
+    tabs.forEach(function (t, i) {
+      t.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+      t.tabIndex = i === idx ? 0 : -1;
+    });
+    var next = panes[idx];
+    var body = card.querySelector('.mc-body');
+    if (switching) { clearTimeout(switching); switching = null; }
+    var leaving = panes.filter(function (p) { return p !== next && !p.hidden; });
+    body.scrollTop = 0;
+    if (reduce) {
+      leaving.forEach(function (p) { p.hidden = true; p.classList.remove('is-active', 'is-leaving'); });
+      next.hidden = false; next.classList.add('is-active');
+      return;
+    }
+    /* Cross-fade: both panes share one grid cell for 320ms, then the old one is hidden */
+    leaving.forEach(function (p) { p.classList.remove('is-active'); p.classList.add('is-leaving'); });
+    next.hidden = false; next.classList.remove('is-leaving');
+    requestAnimationFrame(function () { next.classList.add('is-active'); });
+    switching = setTimeout(function () {
+      switching = null;
+      panes.forEach(function (p) { if (p !== next) { p.hidden = true; p.classList.remove('is-active', 'is-leaving'); } });
+    }, 320);
+  }
+
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest ? ev.target.closest('[data-open-menucard]') : null;
+    if (t) { ev.preventDefault(); open(t); return; }
+    if (!isOpen()) { return; }
+    if (ev.target.closest('[data-close-menucard]')) { close(); return; }
+    var tab = ev.target.closest('[role="tab"]');
+    if (tab && card.contains(tab)) { select(tab); }
+  });
+
+  card.addEventListener('keydown', function (ev) {
+    var tab = ev.target.closest && ev.target.closest('[role="tab"]');
+    if (tab && (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft' || ev.key === 'Home' || ev.key === 'End')) {
+      ev.preventDefault();
+      var i = tabs.indexOf(tab);
+      if (ev.key === 'ArrowRight') { i = (i + 1) % tabs.length; }
+      else if (ev.key === 'ArrowLeft') { i = (i - 1 + tabs.length) % tabs.length; }
+      else if (ev.key === 'Home') { i = 0; } else { i = tabs.length - 1; }
+      tabs[i].focus(); select(tabs[i]);
+      return;
+    }
+    if (ev.key !== 'Tab') { return; }
+    var f = Array.prototype.filter.call(card.querySelectorAll(FOCUS), function (el) {
+      return !el.closest('[hidden]') && el.offsetParent !== null;
+    });
+    if (!f.length) { ev.preventDefault(); return; }
+    var first = f[0], last = f[f.length - 1];
+    if (ev.shiftKey && (document.activeElement === first || !card.contains(document.activeElement))) { ev.preventDefault(); last.focus(); }
+    else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+  });
+
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && isOpen()) { close(); }
+  });
+})();
+</script>

@@ -4,32 +4,45 @@
 
   <div class="res-grid">
     <div class="res-copy">
-      <p class="eyebrow">Reservation</p>
-      <h2 id="res-title" class="t-heading-lg">Reservér et bord</h2>
-      <p class="t-lede res-lede">Boksen — vores chambre séparée i den gamle bankboks — har tolv pladser og bookes ved at ringe.</p>
+      <p class="eyebrow reveal" data-d="0">Reservation</p>
+      <h2 id="res-title" class="t-heading-lg reveal" data-d="1">Reservér et bord</h2>
+      <p class="t-lede res-lede reveal" data-d="2">Boksen — vores chambre séparée i den gamle bankboks — har tolv pladser og bookes ved at ringe.</p>
 
-      <p class="t-body res-note">Afbud senest kl. 12 samme dag. Selskaber op til 12 i Boksen, hele huset fra 60 — ring <a href="tel:+4533124008">+45 33 12 40 08</a>.</p>
+      <p class="t-body res-note reveal" data-d="3">Afbud senest kl. 12 samme dag. Selskaber op til 12 i Boksen, hele huset fra 60 — ring <a href="tel:+4533124008">+45 33 12 40 08</a>.</p>
     </div>
 
-    <form class="book" id="book" novalidate>
-      <div class="field">
-        <p class="eyebrow" id="lbl-guests">Gæster</p>
-        <div class="chips" role="group" aria-labelledby="lbl-guests" data-chips="guests"></div>
+    <form class="book glass glass-panel" id="book" novalidate aria-label="Bordreservation">
+      <div class="book-body" id="book-body">
+        <div class="field">
+          <p class="eyebrow" id="lbl-guests">Gæster</p>
+          <div class="seg glass" role="radiogroup" aria-labelledby="lbl-guests" data-ctl="guests">
+            <span class="seg-thumb" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <p class="eyebrow" id="lbl-date">Dato</p>
+          <div class="dates" role="group" aria-labelledby="lbl-date" data-ctl="date"></div>
+        </div>
+
+        <div class="field">
+          <p class="eyebrow" id="lbl-time">Tidspunkt</p>
+          <div class="times" role="group" aria-labelledby="lbl-time" data-ctl="time"></div>
+        </div>
+
+        <p class="summary t-body-sm num" id="summary" aria-live="polite"></p>
+
+        <button type="submit" class="glass glass-btn gold submit" id="submit" disabled>Reservér</button>
       </div>
 
-      <div class="field">
-        <p class="eyebrow" id="lbl-date">Dato</p>
-        <div class="chips" role="group" aria-labelledby="lbl-date" data-chips="date"></div>
+      <div class="book-done" id="book-done" hidden>
+        <svg class="seal" viewBox="0 0 96 96" width="96" height="96" aria-hidden="true">
+          <circle cx="48" cy="48" r="46" fill="rgba(185,149,82,.12)" stroke="#B99552" stroke-width="1"/>
+          <circle cx="48" cy="48" r="40" fill="none" stroke="#B99552" stroke-width=".5" opacity=".6"/>
+          <text x="48" y="49" text-anchor="middle" dominant-baseline="central" font-family="Newsreader, 'Times New Roman', Times, serif" font-weight="300" font-size="46" fill="#B99552">B</text>
+        </svg>
+        <p class="t-body done-line" role="status">Forespørgsel sendt — vi bekræfter på mail inden for to timer.</p>
       </div>
-
-      <div class="field">
-        <p class="eyebrow" id="lbl-time">Tidspunkt</p>
-        <div class="chips time" role="group" aria-labelledby="lbl-time" data-chips="time"></div>
-      </div>
-
-      <p class="summary t-body-sm" id="summary" aria-live="polite"></p>
-
-      <button type="submit" class="submit" id="submit" disabled><span>Send forespørgsel</span><span class="arrow" aria-hidden="true">→</span></button>
     </form>
   </div>
 </section>
@@ -50,13 +63,15 @@
 (function(){
   var form = document.getElementById('book');
   if(!form) return;
-  var groups = {
-    guests: form.querySelector('[data-chips="guests"]'),
-    date:   form.querySelector('[data-chips="date"]'),
-    time:   form.querySelector('[data-chips="time"]')
-  };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seg   = form.querySelector('[data-ctl="guests"]');
+  var thumb = seg.querySelector('.seg-thumb');
+  var dateEl= form.querySelector('[data-ctl="date"]');
+  var timeEl= form.querySelector('[data-ctl="time"]');
   var summary = document.getElementById('summary');
   var submit  = document.getElementById('submit');
+  var body = document.getElementById('book-body');
+  var done = document.getElementById('book-done');
 
   var DAYS = ['Søn','Man','Tir','Ons','Tor','Fre','Lør'];
   var EVENING = ['17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30'];
@@ -72,7 +87,7 @@
   for(var i=0;i<7;i++){
     var d = new Date(today); d.setDate(today.getDate()+i);
     if(d.getDay()===0) continue;
-    dates.push({ key: iso(d), label: DAYS[d.getDay()]+' '+d.getDate()+'.', dow: d.getDay() });
+    dates.push({ key: iso(d), wd: DAYS[d.getDay()], num: d.getDate(), label: DAYS[d.getDay()]+' '+d.getDate()+'.', dow: d.getDay() });
   }
 
   function slotsFor(date){
@@ -84,42 +99,81 @@
 
   var state = { guests: 2, date: null, time: null, sent: false };
 
-  function chip(item, group){
-    var b = document.createElement('button');
-    b.type = 'button'; b.className = 'tok';
-    b.textContent = item.label; b.dataset.value = item.key;
-    b.setAttribute('aria-pressed', 'false');
-    if(item.closed){ b.disabled = true; b.setAttribute('aria-label', item.label+' – optaget'); }
-    b.addEventListener('click', function(){ select(group, item.key); });
-    return b;
+  /* ---- guests: segmented radio control ---- */
+  for(var g=1; g<=8; g++){
+    (function(n){
+      var b = document.createElement('button');
+      b.type='button'; b.className='seg-opt num'; b.textContent=String(n);
+      b.setAttribute('role','radio'); b.setAttribute('aria-checked','false'); b.dataset.value=String(n);
+      b.setAttribute('aria-label', n + (n===1?' gæst':' gæster'));
+      b.addEventListener('click', function(){ select('guests', n); });
+      b.addEventListener('keydown', function(e){
+        var k = e.key; if(k!=='ArrowLeft'&&k!=='ArrowRight'&&k!=='ArrowUp'&&k!=='ArrowDown') return;
+        e.preventDefault(); var nx = (k==='ArrowRight'||k==='ArrowDown') ? Math.min(8,n+1) : Math.max(1,n-1);
+        select('guests', nx); seg.querySelector('[data-value="'+nx+'"]').focus();
+      });
+      seg.appendChild(b);
+    })(g);
   }
-
-  function fill(group, items){
-    var el = groups[group]; el.textContent = '';
-    items.forEach(function(it){ el.appendChild(chip(it, group)); });
-  }
-
-  function paint(group){
-    var v = state[group];
-    Array.prototype.forEach.call(groups[group].children, function(b){
-      b.setAttribute('aria-pressed', String(v!==null && String(v)===b.dataset.value));
+  function paintGuests(){
+    var opts = seg.querySelectorAll('.seg-opt');
+    Array.prototype.forEach.call(opts, function(b){
+      var on = Number(b.dataset.value)===state.guests;
+      b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1;
+      if(on){ thumb.style.transform = 'translateX(' + b.offsetLeft + 'px)'; thumb.style.width = b.offsetWidth + 'px'; }
     });
   }
+  window.addEventListener('resize', paintGuests);
 
+  /* ---- dates: tiles ---- */
+  dates.forEach(function(dt){
+    var b = document.createElement('button');
+    b.type='button'; b.className='glass glass-pill tile'; b.dataset.value=dt.key;
+    b.setAttribute('aria-pressed','false'); b.setAttribute('aria-label', dt.label);
+    b.innerHTML = '<span class="t-micro upper wd">'+dt.wd+'</span><span class="dn num">'+dt.num+'</span>';
+    b.addEventListener('click', function(){ select('date', dt.key); });
+    dateEl.appendChild(b);
+  });
+
+  /* ---- times: pills ---- */
+  function fillTimes(slots){
+    timeEl.textContent = '';
+    slots.forEach(function(s){
+      var b = document.createElement('button');
+      b.type='button'; b.className='glass glass-pill num'; b.textContent=s.label; b.dataset.value=s.key;
+      b.setAttribute('aria-pressed','false');
+      if(s.closed){ b.disabled = true; b.setAttribute('aria-label', s.label+' – optaget'); }
+      b.addEventListener('click', function(){ select('time', s.key); });
+      timeEl.appendChild(b);
+    });
+  }
+  function paintPressed(el, v){
+    Array.prototype.forEach.call(el.children, function(b){ b.setAttribute('aria-pressed', String(v!==null && String(v)===b.dataset.value)); });
+  }
   function dateObj(){ for(var i=0;i<dates.length;i++) if(dates[i].key===state.date) return dates[i]; return null; }
 
+  var stepTimer = null;
   function select(group, value){
     if(state.sent) return;
     if(group==='guests') state.guests = Number(value);
-    if(group==='date'){
+    if(group==='date' && value!==state.date){
       state.date = value;
       var slots = slotsFor(dateObj());
-      fill('time', slots);
       var still = slots.some(function(s){ return s.key===state.time && !s.closed; });
       if(!still) state.time = null;
+      if(reduce || !timeEl.children.length){ fillTimes(slots); paintPressed(timeEl, state.time); }
+      else {
+        clearTimeout(stepTimer);
+        timeEl.classList.add('out');
+        stepTimer = setTimeout(function(){
+          fillTimes(slots); paintPressed(timeEl, state.time);
+          timeEl.classList.remove('out'); timeEl.classList.add('enter');
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ timeEl.classList.remove('enter'); }); });
+        }, 420);
+      }
     }
     if(group==='time') state.time = value;
-    paint('guests'); paint('date'); paint('time');
+    paintGuests(); paintPressed(dateEl, state.date); paintPressed(timeEl, state.time);
     render();
   }
 
@@ -134,17 +188,21 @@
   form.addEventListener('submit', function(e){
     e.preventDefault();
     if(!state.date || !state.time || state.sent) return;
-    state.sent = true;
-    summary.textContent = 'Forespørgsel sendt — vi bekræfter på mail inden for to timer.';
-    summary.classList.add('sent');
-    submit.disabled = true;
+    state.sent = true; submit.disabled = true;
+    var h = body.offsetHeight; form.style.minHeight = h + 'px';
+    function swap(){
+      body.hidden = true; done.hidden = false;
+      form.classList.add('is-done');
+      if(!reduce){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ done.classList.add('in'); }); }); }
+      else { done.classList.add('in'); }
+    }
+    if(reduce){ swap(); }
+    else { body.classList.add('fade'); setTimeout(swap, 320); }
   });
 
-  // initial state: 2 guests, first available date, time chips visible
-  var guests = []; for(var g=1; g<=8; g++) guests.push({ key:String(g), label:String(g) });
-  fill('guests', guests);
-  fill('date', dates);
-  paint('guests');
-  if(dates.length) select('date', dates[0].key); else render();
+  // initial state: 2 guests, first available date, times visible
+  if(dates.length) select('date', dates[0].key); else { paintGuests(); render(); }
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(paintGuests); }
+  window.addEventListener('load', paintGuests);
 })();
 </script>
