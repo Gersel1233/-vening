@@ -27,12 +27,12 @@
 #reservation .chips{display:flex;flex-wrap:wrap;align-items:flex-end;column-gap:22px;row-gap:0;margin:0;padding:0;list-style:none;border-bottom:1px solid rgba(226,225,219,.25)}
 #reservation .chips.time{column-gap:clamp(12px,.9vw,22px)}
 #reservation .tok{
-  position:relative;margin:0;padding:10px 0;border:0;border-radius:0;background:transparent;
+  position:relative;margin:0 -11px;padding:10px 11px;border:0;border-radius:0;background:transparent;
   color:rgba(226,225,219,.6);font-family:var(--font-text);font-weight:500;font-size:13px;line-height:1;letter-spacing:-.011em;
   text-transform:uppercase;font-variant-numeric:tabular-nums;cursor:pointer;white-space:nowrap;
   transition:color var(--dur) var(--ease);
 }
-#reservation .tok::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--gold);opacity:0;transition:opacity var(--dur) var(--ease)}
+#reservation .tok::after{content:"";position:absolute;left:11px;right:11px;bottom:-1px;height:1px;background:var(--gold);opacity:0;transition:opacity var(--dur) var(--ease)}
 #reservation .tok:hover{color:var(--stone)}
 #reservation .tok[aria-pressed="true"]{color:var(--stone)}
 #reservation .tok[aria-pressed="true"]::after{opacity:1}
@@ -48,18 +48,19 @@
 #reservation .submit:disabled{opacity:.4;cursor:not-allowed}
 #reservation .submit:disabled:hover{background:transparent;color:var(--stone);border-color:currentColor}
 
-/* ---- Footer ---- */
-#footer{padding:64px var(--pad-x) 40px;border-top:1px solid var(--vault-line);background:var(--vault);color:var(--stone)}
-#footer .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;align-items:start}
-#footer .wordmark{margin:0;color:var(--stone)}
-#footer .col{margin:0;color:rgba(226,225,219,.8);font-variant-numeric:tabular-nums}
-#footer .col span{display:block}
-#footer .col a{border-bottom:1px solid transparent;transition:border-color var(--dur) var(--ease)}
-#footer .col a:hover{border-bottom-color:var(--gold)}
+/* ---- Footer: a colophon, not a sitemap ---- */
+#footer{padding:56px var(--pad-x) 32px;border-top:1px solid var(--vault-line);background:var(--vault);color:var(--stone)}
+#footer .wordmark{margin:0 0 32px;color:var(--stone)}
+#footer .colophon{
+  margin:0;padding:16px 0;border-top:1px solid var(--vault-line);border-bottom:1px solid var(--vault-line);
+  color:rgba(226,225,219,.7);font-variant-numeric:tabular-nums;line-height:1.6;
+}
+#footer .colophon .dot{color:var(--gold);padding:0 10px}
+#footer .colophon a{border-bottom:1px solid transparent;transition:border-color var(--dur) var(--ease)}
+#footer .colophon a:hover{border-bottom-color:var(--gold)}
 #footer .foot-bottom{
   display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
-  margin-top:64px;padding-top:24px;border-top:1px solid var(--vault-line);
-  color:rgba(226,225,219,.55);font-variant-numeric:tabular-nums;
+  margin-top:20px;color:rgba(226,225,219,.45);font-variant-numeric:tabular-nums;
 }
 #footer .foot-bottom p{margin:0}
 
@@ -67,11 +68,12 @@
   #reservation{min-height:0;padding:96px var(--pad-x)}
   #reservation .res-grid{grid-template-columns:1fr;gap:56px}
   #reservation .facts{max-width:none}
-  #footer .foot-grid{grid-template-columns:1fr 1fr;gap:32px}
-  #footer .wordmark{grid-column:1/-1}
+  #reservation .chips{column-gap:8px}
+  #reservation .chips.time{column-gap:8px}
+  #reservation .tok{margin:0;padding:10px 6px;min-width:44px;text-align:center}
+  #reservation .tok::after{left:6px;right:6px}
 }
 @media (max-width:480px){
   #reservation .facts>div{grid-template-columns:80px 1fr;column-gap:16px}
-  #footer .foot-grid{grid-template-columns:1fr}
   #footer .foot-bottom{flex-direction:column;gap:8px}
 }
