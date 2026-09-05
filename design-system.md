@@ -135,11 +135,14 @@ Manrope 500 13px uppercase, tabular numerals, padding 10px 0, spaced 22px apart,
 a single 1px hairline (`--stone` at 25% on dark) that runs under the whole row like a
 printed timetable. Selected = a 1px `--gold` rule beneath the token and full-opacity text;
 unselected = `--stone` at 60%; unavailable = struck through at 40%. Transitions 400ms.
-The submit is a **text-link button**, not a ghost button: bare Manrope 500 14px uppercase
-in `--stone`, no border, no fill, sitting on its own 1px hairline (`--stone` at 25%);
-active = the hairline turns `--gold` and the text goes full opacity; disabled = text at
-40%, hairline unchanged. Hover on active: hairline `--gold`, 400ms. It is the last row of
-the timetable, so it reads as one more line of type. (Ghost buttons remain the style for
+The submit is a **text-link button**, not a ghost button — and it must not be mistakable
+for an eyebrow label: Manrope 500 **15px** uppercase (labels are 12px and carry a gold
+rule *before* them; the submit carries none), full row width, text at the left and a
+long arrow "→" at the right end of the same row, sitting on its own 1px hairline. Active
+= text and arrow in `--gold`, hairline `--gold`, full opacity. Disabled = text and arrow in
+`--stone` at 45%, hairline at 25%. Hover on active: arrow shifts 6px right, 400ms. It is
+the last row of the timetable, so it reads as one more line of type — but a line that
+points somewhere. (Ghost buttons remain the style for
 nav and section CTAs.) Never more than one row of tokens per question; the rows together
 must read as a timetable, not a form.
 
