@@ -1,0 +1,157 @@
+<section id="reservation" class="on-dark" aria-labelledby="res-title">
+  <img class="res-photo" src="__ASSET_ROOM__" alt="" width="1920" height="823">
+  <div class="res-overlay" aria-hidden="true"></div>
+
+  <div class="res-grid">
+    <div class="res-copy">
+      <p class="eyebrow">Reservation</p>
+      <h2 id="res-title" class="t-heading-lg">Reservér et bord</h2>
+      <p class="t-lede res-lede">Boksen — vores chambre séparée i den gamle bankboks — har tolv pladser og bookes ved at ringe.</p>
+
+      <dl class="facts t-body-sm">
+        <div><dt>Åbent</dt><dd>man–tor 17–24 · fre–lør 12–01 · søn lukket</dd></div>
+        <div><dt>Afbud</dt><dd>senest kl. 12 samme dag</dd></div>
+        <div><dt>Selskaber</dt><dd>op til 12 i Boksen, hele huset fra 60</dd></div>
+        <div><dt>Telefon</dt><dd><a href="tel:+4533124008">+45 33 12 40 08</a></dd></div>
+        <div><dt>Mail</dt><dd><a href="mailto:bord@bullion.dk">bord@bullion.dk</a></dd></div>
+      </dl>
+    </div>
+
+    <form class="book" id="book" novalidate>
+      <div class="field">
+        <p class="eyebrow" id="lbl-guests">Gæster</p>
+        <div class="chips" role="group" aria-labelledby="lbl-guests" data-chips="guests"></div>
+      </div>
+
+      <div class="field">
+        <p class="eyebrow" id="lbl-date">Dato</p>
+        <div class="chips" role="group" aria-labelledby="lbl-date" data-chips="date"></div>
+      </div>
+
+      <div class="field">
+        <p class="eyebrow" id="lbl-time">Tidspunkt</p>
+        <div class="chips time" role="group" aria-labelledby="lbl-time" data-chips="time"></div>
+      </div>
+
+      <p class="summary t-body-sm" id="summary" aria-live="polite"></p>
+
+      <button type="submit" class="btn submit" id="submit" disabled>Send forespørgsel</button>
+    </form>
+  </div>
+</section>
+
+<footer id="footer" class="on-vault">
+  <div class="foot-grid">
+    <p class="t-heading-sm wordmark">Bullion</p>
+    <p class="col t-body-sm"><span>Bredgade 33</span><span>1260 København K</span></p>
+    <p class="col t-body-sm"><span><a href="tel:+4533124008">+45 33 12 40 08</a></span><span><a href="mailto:bord@bullion.dk">bord@bullion.dk</a></span></p>
+    <p class="col t-body-sm"><span>Man–tor 17–24</span><span>Fre–lør 12–01</span><span>Søndag lukket</span></p>
+  </div>
+  <div class="foot-bottom t-micro upper">
+    <p>Bullion Brasserie ApS · CVR 41 90 22 17</p>
+    <p>Bredgade 33 · siden 2019</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('book');
+  if(!form) return;
+  var groups = {
+    guests: form.querySelector('[data-chips="guests"]'),
+    date:   form.querySelector('[data-chips="date"]'),
+    time:   form.querySelector('[data-chips="time"]')
+  };
+  var summary = document.getElementById('summary');
+  var submit  = document.getElementById('submit');
+
+  var DAYS = ['Søn','Man','Tir','Ons','Tor','Fre','Lør'];
+  var EVENING = ['17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30'];
+  var LUNCH   = ['12:00','12:30','13:00','13:30'];
+
+  function pad(n){ return (n<10?'0':'')+n; }
+  function iso(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function hash(s){ var h=2166136261; for(var i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619)>>>0; } return h; }
+
+  // next 7 days, Sundays removed (closed)
+  var dates = [];
+  var today = new Date(); today.setHours(0,0,0,0);
+  for(var i=0;i<7;i++){
+    var d = new Date(today); d.setDate(today.getDate()+i);
+    if(d.getDay()===0) continue;
+    dates.push({ key: iso(d), label: DAYS[d.getDay()]+' '+d.getDate()+'.', dow: d.getDay() });
+  }
+
+  function slotsFor(date){
+    var list = (date.dow===5 || date.dow===6) ? LUNCH.concat(EVENING) : EVENING.slice();
+    var blocked = {}; var n = 2 + (hash(date.key) % 2); var k = 0, guard = 0;
+    while(k<n && guard<40){ var idx = hash(date.key+':'+guard) % list.length; guard++; if(!blocked[list[idx]]){ blocked[list[idx]] = true; k++; } }
+    return list.map(function(t){ return { key:t, label:t, closed: !!blocked[t] }; });
+  }
+
+  var state = { guests: 2, date: null, time: null, sent: false };
+
+  function chip(item, group){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'tok';
+    b.textContent = item.label; b.dataset.value = item.key;
+    b.setAttribute('aria-pressed', 'false');
+    if(item.closed){ b.disabled = true; b.setAttribute('aria-label', item.label+' – optaget'); }
+    b.addEventListener('click', function(){ select(group, item.key); });
+    return b;
+  }
+
+  function fill(group, items){
+    var el = groups[group]; el.textContent = '';
+    items.forEach(function(it){ el.appendChild(chip(it, group)); });
+  }
+
+  function paint(group){
+    var v = state[group];
+    Array.prototype.forEach.call(groups[group].children, function(b){
+      b.setAttribute('aria-pressed', String(v!==null && String(v)===b.dataset.value));
+    });
+  }
+
+  function dateObj(){ for(var i=0;i<dates.length;i++) if(dates[i].key===state.date) return dates[i]; return null; }
+
+  function select(group, value){
+    if(state.sent) return;
+    if(group==='guests') state.guests = Number(value);
+    if(group==='date'){
+      state.date = value;
+      var slots = slotsFor(dateObj());
+      fill('time', slots);
+      var still = slots.some(function(s){ return s.key===state.time && !s.closed; });
+      if(!still) state.time = null;
+    }
+    if(group==='time') state.time = value;
+    paint('guests'); paint('date'); paint('time');
+    render();
+  }
+
+  function render(){
+    if(state.sent) return;
+    var d = dateObj();
+    var parts = [ state.guests + (state.guests===1 ? ' gæst' : ' gæster'), d ? d.label : 'vælg dato', state.time || 'vælg tidspunkt' ];
+    summary.textContent = parts.join(' · ');
+    submit.disabled = !(state.date && state.time);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!state.date || !state.time || state.sent) return;
+    state.sent = true;
+    summary.textContent = 'Forespørgsel sendt — vi bekræfter på mail inden for to timer.';
+    summary.classList.add('sent');
+    submit.disabled = true;
+  });
+
+  // initial state: 2 guests, first available date, time chips visible
+  var guests = []; for(var g=1; g<=8; g++) guests.push({ key:String(g), label:String(g) });
+  fill('guests', guests);
+  fill('date', dates);
+  paint('guests');
+  if(dates.length) select('date', dates[0].key); else render();
+})();
+</script>

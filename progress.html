@@ -1,0 +1,67 @@
+<title>Bullion Design Loop</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300&family=Manrope:wght@500;700&display=swap">
+<style>
+:root{--bg:#E2E1DB;--card:#D2D1CA;--line:#B9B8AF;--muted:#8A8981;--fg:#1C1E1B;--dark:#0E1512;--gold:#B99552;--pass:#3E6B4A;--fail:#9A3B2E;--wait:#8A8981}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1512;--card:#162019;--line:#243029;--muted:#8CA095;--fg:#E2E1DB;--pass:#8FC59E;--fail:#E08A78}}
+:root[data-theme="dark"]{--bg:#0E1512;--card:#162019;--line:#243029;--muted:#8CA095;--fg:#E2E1DB;--pass:#8FC59E;--fail:#E08A78}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,"Helvetica Neue",Arial,sans-serif;font-weight:500;font-size:14px;line-height:1.45;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:48px 28px 72px}
+h1{font-family:Newsreader,serif;font-weight:300;font-size:clamp(40px,6vw,64px);line-height:.9;letter-spacing:-.03em;text-transform:uppercase;margin:0 0 8px}
+.sub{color:var(--muted);max-width:60ch}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;text-transform:uppercase;color:var(--muted)}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--gold)}
+.stats{display:flex;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:32px 0 40px}
+.stat{padding:18px 24px 16px;border-right:1px solid var(--line);min-width:150px}
+.stat:last-child{border-right:0}
+.stat .k{font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.04em}
+.stat .v{font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-size:11px;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;padding:0 12px 10px 0;border-bottom:1px solid var(--line);letter-spacing:.04em}
+td{padding:14px 12px 14px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td.piece{font-family:Newsreader,serif;font-weight:300;font-size:24px;text-transform:uppercase;letter-spacing:-.02em;line-height:1;white-space:nowrap}
+.v{display:inline-block;padding:3px 8px;border-radius:3px;border:1px solid currentColor;font-size:11px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.pass{color:var(--pass)}.fail{color:var(--fail)}.wait{color:var(--wait);border-style:dashed}
+.state{font-weight:700}
+.gap{color:var(--muted);max-width:44ch}
+.log{margin-top:48px}
+.log h2{font-family:Newsreader,serif;font-weight:300;font-size:30px;text-transform:uppercase;letter-spacing:-.02em;margin:0 0 6px}
+.entry{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}
+.entry .t{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.note{margin-top:36px;padding:18px 22px;background:var(--card);border-left:2px solid var(--gold)}
+.note b{font-weight:700}
+@media (max-width:720px){.stats{flex-wrap:wrap}.stat{min-width:50%;border-right:0;border-bottom:1px solid var(--line)}td.piece{font-size:20px}.entry{grid-template-columns:1fr;gap:4px}}
+</style>
+<div class="wrap">
+  <span class="eyebrow">design-loop · Bullion vs. Amrit Palace</span>
+  <h1>Bullion<br>design loop</h1>
+  <p class="sub">Fire stykker, tre kritikere hver, frisk kontekst. Binære domme. Et stykke er færdigt, når alle tre består. Ingen fast rundegrænse — bremsen er dig.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Runde</div><div class="v">2</div></div>
+    <div class="stat"><div class="k">Stykker bestået</div><div class="v">2 / 4</div></div>
+    <div class="stat"><div class="k">Kritikerkørsler</div><div class="v">12</div></div>
+    <div class="stat"><div class="k">Sjinn-assets</div><div class="v">6 / 6 <span style="font-size:12px;color:var(--muted);font-weight:500">genereret · 1 hentet</span></div></div>
+  </div>
+
+  <table>
+    <thead><tr><th>Stykke</th><th>Brief</th><th>System</th><th>Craft</th><th>Status</th><th>Seneste gap</th></tr></thead>
+    <tbody>
+      <tr><td class="piece">Hero</td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass · slår ref.</span></td><td class="state pass">Færdig · r1</td><td class="gap">—</td></tr>
+      <tr><td class="piece">Intro</td><td><span class="v fail">Fail</span></td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass · slår ref.</span></td><td class="state">Runde 2 hos builder</td><td class="gap">Kokke-feltet er et slogan, ikke et navn (kontraktfejl — rettes med et navn).</td></tr>
+      <tr><td class="piece">Menu</td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass</span></td><td><span class="v pass">Pass · slår ref.</span></td><td class="state pass">Færdig · r1</td><td class="gap">Craft-note: højre stenpanel er ~80 % fyldt (M6) — bestået, men holdes under opsyn.</td></tr>
+      <tr><td class="piece">Reservation</td><td><span class="v fail">Fail*</span></td><td><span class="v fail">Fail*</span></td><td><span class="v fail">Fail</span></td><td class="state">Runde 2 hos builder</td><td class="gap">Widget læses som påklistret formular: 27 kant-bokse. Rulebog ændret til typografiske tokens på hårstreg. *To fails skyldtes harness (footer manglede i capture) — rettet.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note"><b>Blokering lige nu:</b> <code>edit.comfyonline.app</code> er lukket i netværkspolitikken igen. Fem færdige Sjinn-assets (bar, sole, tarte, room, hero-video) kan ikke hentes, så tre stykker renderer med pladsholdere. Kritikerne har fået besked om at dømme geometri, ikke det manglende foto.</div>
+
+  <div class="log">
+    <h2>Log</h2>
+    <div class="entry"><div class="t">Preflight</div><div>Push OK · Chromium renderer via curl-backed proxy-route · Sjinn Pro verificeret (billede + video) · reference spejlet og screenshottet (Webflow, SRI strippet).</div></div>
+    <div class="entry"><div class="t">Teardown</div><div><code>bar.md</code>: 7 mekanismer. Fund: referencens DESIGN.md er forkert om accent-brug (fuldt saffron-panel på live-site). Bevægelsesloft hævet efter aftale: ét hero-øjeblik + én marquee.</div></div>
+    <div class="entry"><div class="t">Skrift</div><div>Tre kandidater testet på 115 px/300: Cormorant (AI-default), Fraunces (for legende), <b>Newsreader valgt</b> — tættest på TT Ramillas' kontrast.</div></div>
+    <div class="entry"><div class="t">Runde 1</div><div>4 buildere parallelt → 12 kritikere. Hero 3/3, Menu 3/3, Intro 2/3, Reservation 0/3 (2 harness-fejl). Craft-kritikerne foretrak vores hero, intro og menu frem for referencen i blind sammenligning.</div></div>
+    <div class="entry"><div class="t">Runde 2</div><div>Intro: navngiv kok. Reservation: widget → typografisk køreplan (design-system opdateret). Afventer buildere.</div></div>
+  </div>
+</div>

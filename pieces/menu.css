@@ -1,0 +1,24 @@
+/* Menu — the page's single gold flood lives here */
+#menu{background:var(--stone);color:var(--ink)}
+#menu .menu-head{padding:92px var(--pad-x) 48px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+#menu .menu-head .t-caption{color:var(--ash)}
+#menu .split>.panel{align-items:stretch;gap:0}
+#menu .group{display:flex;flex-direction:column;gap:0}
+#menu .group .eyebrow{margin-bottom:16px}
+#menu .group .t-heading-sm{margin:0 0 24px}
+#menu .group .menu-row .name{color:inherit}
+#menu .group .menu-row .price{color:inherit;text-align:right}
+#menu .split>.panel.on-gold .eyebrow{color:rgba(14,21,18,.7)}
+#menu .split>.panel.on-gold .eyebrow::before{background:var(--gold-ink)}
+#menu .split>.panel.on-gold .menu-row .name,
+#menu .split>.panel.on-gold .menu-row .price{color:var(--gold-ink)}
+#menu .split>.panel.on-stone{background:var(--stone);color:var(--ink);justify-content:flex-start}
+#menu .split>.panel.on-stone .groups{display:flex;flex-direction:column;gap:48px}
+#menu .split>.photo{min-height:720px;aspect-ratio:3/4}
+#menu .menu-foot{padding:40px var(--pad-x) 92px;display:flex;flex-direction:column;align-items:flex-start;gap:32px}
+#menu .menu-foot .t-lede{color:var(--ink);max-width:52ch}
+#menu .menu-foot .btn{color:var(--ink)}
+#menu .t-heading,#menu .t-heading-sm{margin:0}
+@media (max-width:900px){
+  #menu .split>.photo{min-height:320px;aspect-ratio:auto}
+}
