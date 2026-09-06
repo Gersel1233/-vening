@@ -1,3 +1,8 @@
-assets/**/*.mp4
+# build output only — not assets/bullion/
+/bullion/
 dist/
-bullion/
+node_modules/
+
+# source renders from Sjinn stay out; the base64 .txt the build inlines is tracked
+assets/**/*.mp4
+assets/bullion/*.jpg
