@@ -386,3 +386,32 @@ Its own rules:
 - **Don't** use `<video>` for ambience. Don't rely on autoplay for anything the design needs.
 - **Don't** use an `IntersectionObserver` threshold above 0 for entrance animations.
 - **Don't** start a scroll-driven behaviour before the overture has announced `bullion:open`.
+
+## Revision 3b — what the critics caught, kept as rules
+
+Three fresh-context critics failed the Chronicle's first cut. Four of their findings are
+general and belong here, not in one section's CSS:
+
+- **A rule is positioned from the top of its column, never from the copy beneath it.**
+  `margin-top:auto` on a hairline makes its height a function of how many lines sit below,
+  so seven columns rule at seven heights. Pin the block under the rule to a fixed height
+  and let the copy rag inside it. A ledger is ruled once.
+- **A clamp() floor is a real rendered size.** `clamp(38px, 4.5vw, 65px)` renders 38px on
+  every viewport under 933px — inside the scale's 26–42px hole. Every floor on the display
+  scale is 44px for that reason. Check floors, not just the values you designed at 1440.
+- **Nothing rests at zero.** A reveal that starts at `opacity:.001` or fully clipped is
+  invisible until script runs, which is a motion-ceiling failure and a robustness failure
+  at once. Rest at `.35` and a third clipped, and gate every reveal on an `html.js` class
+  so a page with scripting off is simply complete.
+- **A glass control needs something to refract.** On a flat surface `backdrop-filter` has
+  no backdrop, and the pill renders as a solid coloured lozenge — the one radius, gloss and
+  shadow in a section otherwise made of hairlines. Glass belongs on the panels that sit on
+  photography. Everywhere else, the control is drawn in the section's own vocabulary.
+
+And two mechanics worth keeping for any scroll-driven pan:
+
+- **Snap the transform to whole pixels.** A half-pixel translate splits every 1px hairline
+  across two rows at half intensity; `Math.round` restores them for free.
+- **Give the end a dwell.** Make the section one half-screen taller than the travel and
+  clamp progress against the shorter run, so the last frame sits composed instead of
+  arriving on the final scroll pixel.
