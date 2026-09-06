@@ -90,6 +90,9 @@
 #footer .colophon .legal{color:rgba(226,225,219,.45)}
 
 @media (max-width:900px){
+  /* narrower tiles so the fifth day peeks past the panel edge as the scroll hint */
+  #reservation .tile{width:60px;height:78px;padding:10px 0 8px}
+  #reservation .dates{gap:8px}
   #reservation{min-height:0;padding:96px var(--pad-x);display:block}
   #reservation .res-photo{object-position:12% 50%}
   #reservation .res-overlay{background:linear-gradient(180deg,rgba(14,21,18,.78) 0%,rgba(14,21,18,.80) 45%,rgba(14,21,18,.92) 70%,rgba(14,21,18,.94) 100%)}

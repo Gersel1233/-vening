@@ -23,3 +23,6 @@
 @media (max-width:900px){
   #menu .split>.photo{min-height:320px;aspect-ratio:auto}
 }
+/* Desserts moved out of the stone panel (M6) into the closing row: one narrow column, then the wine line */
+#menu .menu-foot .foot-group{max-width:52ch;margin:0 0 48px}
+#menu .menu-foot .foot-group h3{margin:6px 0 4px}
