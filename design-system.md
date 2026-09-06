@@ -247,7 +247,11 @@ candles and glass stems read through it. The material story is two-layered: the 
 **controls are printed on the card** — opaque ink pills (`#161e19`, never translucent — a control must look identical wherever it sits on the card) with a
 lit top edge, gold when selected — so nothing behind the panel can ever make an unselected
 control look selected. The panel sits where the room is richest (candles, glass stems, the
-table edge run behind it), never over blank wall. Horizontal strips fade at their right edge as
+table edge run behind it), never over blank wall. **The panel is lit by the room, never
+self-luminous**: the lamp remains the brightest point in the frame (the overlay spares it);
+the panel's rim is brightest directly under the lamp and fades toward the far corner; the
+body shades from lit top-left to dim bottom-right; ink controls are flat — no rims, no
+inset highlights — and the gold selected state is flat too. Horizontal strips fade at their right edge as
 the scroll affordance. A live summary line and a `.glass-btn.gold` CTA
 "Reservér" at the bottom. Confirmation replaces the panel body with a gold seal and
 "Forespørgsel sendt — vi bekræfter på mail inden for to timer." Left column keeps the
