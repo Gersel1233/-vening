@@ -1,7 +1,8 @@
 /* Menu card — full-screen glass overlay. Opened by any [data-open-menucard]; script at the end of menucard.html. */
 #menucard{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:32px;color:var(--stone)}
 #menucard[hidden]{display:none}
-#menucard .mc-backdrop{position:absolute;inset:0;background:rgba(14,21,18,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;transition:opacity 480ms var(--ease)}
+/* the room stays sharp and merely dims; only the card blurs what sits behind it */
+#menucard .mc-backdrop{position:absolute;inset:0;background:rgba(14,21,18,.62);opacity:0;transition:opacity 480ms var(--ease)}
 #menucard.open .mc-backdrop{opacity:1}
 #menucard .mc-panel{
   position:relative;width:100%;max-width:880px;max-height:86vh;display:flex;flex-direction:column;gap:24px;
@@ -37,8 +38,8 @@
 }
 @media (max-width:900px){
   #menucard{padding:16px;align-items:stretch}
-  #menucard .mc-panel{max-width:none;max-height:none;padding:24px 20px 8px;gap:20px}
-  #menucard .mc-tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -20px;padding:4px 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  #menucard .mc-panel{max-width:none;max-height:86vh;padding:24px 20px 8px;gap:20px}
+  #menucard .mc-tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -20px;padding:4px 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 48px),transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 48px),transparent 100%)}
   #menucard .mc-tabs::-webkit-scrollbar{display:none}
   #menucard .menu-row .desc{max-width:100%}
 }

@@ -30,26 +30,28 @@
 
 /* guests — segmented control: one glass track, plain options, sliding stone thumb */
 #reservation .seg{position:relative;display:grid;grid-template-columns:repeat(8,1fr);padding:4px;border-radius:999px;align-self:flex-start;width:100%;max-width:420px}
-#reservation .seg-thumb{position:absolute;top:4px;left:0;height:calc(100% - 8px);width:0;border-radius:999px;background:rgba(226,225,219,.92);transition:transform 420ms var(--ease),width 420ms var(--ease);pointer-events:none}
+#reservation .seg-thumb{position:absolute;top:4px;left:0;height:calc(100% - 8px);width:0;border-radius:999px;background:rgba(185,149,82,.42);box-shadow:inset 0 1px 0 rgba(255,236,190,.8),inset 0 0 0 1px rgba(185,149,82,.55);transition:transform 420ms var(--ease),width 420ms var(--ease);pointer-events:none}
 #reservation .seg-opt{
   position:relative;z-index:1;margin:0;padding:11px 0;border:0;border-radius:999px;background:transparent;
   color:rgba(226,225,219,.72);font-size:13px;line-height:1;letter-spacing:-.011em;cursor:pointer;
   transition:color var(--dur) var(--ease),transform 160ms var(--ease);
 }
 #reservation .seg-opt:hover{color:var(--stone)}
-#reservation .seg-opt[aria-checked="true"]{color:var(--vault)}
+#reservation .seg-opt[aria-checked="true"]{color:var(--stone)}
 #reservation .seg-opt:active{transform:scale(.97)}
 
 /* dates — horizontal strip of tiles, scrollbar hidden */
 #reservation .dates{display:flex;gap:10px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-ms-overflow-style:none;padding:2px;margin:-2px;scroll-snap-type:x proximity}
 #reservation .dates::-webkit-scrollbar{display:none}
+/* scroll affordance: the strip fades at its right edge so a peeking tile reads as "more" */
+#reservation .dates{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 56px),transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 56px),transparent 100%)}
 #reservation .tile{
   flex:none;width:72px;height:84px;padding:12px 0 10px;border-radius:16px;
   display:flex;flex-direction:column;align-items:center;justify-content:space-between;
   scroll-snap-align:start;text-transform:none;
 }
 #reservation .tile .wd{text-transform:uppercase;color:rgba(226,225,219,.7);transition:color var(--dur) var(--ease)}
-#reservation .tile .dn{font-family:var(--font-display);font-weight:300;font-size:32px;line-height:1;letter-spacing:-.03em}
+#reservation .tile .dn{font-family:var(--font-display);font-weight:300;font-size:24px;line-height:1;letter-spacing:-.03em}
 #reservation .tile[aria-pressed="true"] .wd{color:rgba(14,21,18,.7)}
 
 /* times — wrapped grid of pills; slides 24px and fades between dates */

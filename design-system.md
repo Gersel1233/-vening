@@ -229,14 +229,21 @@ internal scroll. Header row: wordmark "Bullion" in Newsreader 300 (.t-heading-sm
 close `.glass-pill` "Luk" at right. Glass-pill tabs: Hors d'œuvre · Plats · Desserts ·
 Bar · Vin. Each tab lists `.menu-row`s on the glass (hairlines `--stone` at 18%,
 descriptions `--stone` at 66%). Escape closes; focus is trapped; body scroll locks; the
-backdrop is `rgba(14,21,18,.55)` with `backdrop-filter: blur(8px)`.
+backdrop is `rgba(14,21,18,.62)` **with no blur** — the room stays sharp and merely dims,
+so the card is the only thing blurring what sits behind it. On mobile the panel keeps
+the 86vh cap and the tab strip fades at its right edge.
 
 ### Reservation (redesigned)
 The widget becomes a `.glass.glass-panel` on the photograph, right column, three steps
 stacked inside with eyebrow labels: **Gæster** as a segmented glass control (1–8, one
 row), **Dato** as a horizontal strip of glass date tiles (weekday in .t-micro, day
-numeral in Newsreader 300 at 32px), **Tidspunkt** as a wrapped grid of `.glass-pill`s;
-unavailable pills are struck and 40%. A live summary line and a `.glass-btn.gold` CTA
+numeral in Newsreader 300 at **24px** — never 26–42px, the scale's hole), **Tidspunkt**
+as a wrapped grid of `.glass-pill`s; unavailable pills are struck and 40%. **Selected
+states are gold-tinted glass, never white** — nothing in the panel may be brighter than
+the lamp in the photograph. Inner controls carry no backdrop blur of their own (blur on
+blur is fog); the panel is the only blurred layer and, at 10px, lets the table edge,
+candles and glass stems read through it. Horizontal strips fade at their right edge as
+the scroll affordance. A live summary line and a `.glass-btn.gold` CTA
 "Reservér" at the bottom. Confirmation replaces the panel body with a gold seal and
 "Forespørgsel sendt — vi bekræfter på mail inden for to timer." Left column keeps the
 heading, lede and the short paragraph; nothing else there.
