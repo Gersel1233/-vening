@@ -13,10 +13,8 @@
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;
   transform:scale(1.06);
   animation:hero-settle 2.4s var(--ease) forwards;
-  opacity:0;z-index:1;
-  transition:opacity 1.2s var(--ease) 1.2s; /* the outgoing buffer waits until the incoming one is fully up */
+  z-index:1;
 }
-#hero .hero-video.is-front{opacity:1;z-index:2;transition-delay:0s}
 #hero .hero-shade{
   position:absolute;inset:0;z-index:3;
   background:linear-gradient(to bottom,rgba(6,9,8,.22) 0%,rgba(6,9,8,.38) 45%,rgba(6,9,8,.80) 100%);

@@ -108,7 +108,7 @@
   #reservation .tile{width:60px;height:78px;padding:10px 0 8px}
   #reservation .dates{gap:8px}
   #reservation{min-height:0;padding:96px var(--pad-x);display:block}
-  #reservation .res-photo{object-position:12% 50%}
+  #reservation .res-photo{object-position:58% 34%}
   #reservation .res-overlay{background:linear-gradient(180deg,rgba(14,21,18,.78) 0%,rgba(14,21,18,.80) 45%,rgba(14,21,18,.92) 70%,rgba(14,21,18,.94) 100%)}
   #reservation .res-grid{grid-template-columns:1fr;gap:56px}
   #reservation .book{padding:20px}
@@ -121,7 +121,7 @@
 /* Revision 2c: the candle cluster and glass stems run behind the panel's left third, the lamp above its rim */
 #reservation .res-photo{object-position:38% 50%}
 #reservation .book{--glass-rim:rgba(255,244,214,.9)}
-@media (max-width:900px){#reservation .res-photo{object-position:12% 50%}}
+@media (max-width:900px){#reservation .res-photo{object-position:58% 34%}}
 
 /* Revision 2d: lit by the lamp — the rim is brightest under it and fades toward the far corner; body shades top-left → bottom-right */
 /* a real pane takes light from the lamp and gives shadow to the cloth */
