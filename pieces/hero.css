@@ -167,6 +167,6 @@
 #hero .hero-cred-text{white-space:nowrap}
 #hero .hero-cred .hero-stars{display:inline-flex;gap:3px;color:var(--gold)}
 #hero .hero-cred .hero-stars svg{fill:currentColor;display:block}
-#hero .hero-lede{max-width:480px}
+#hero .hero-lede{max-width:400px;text-wrap:pretty}
 @media (max-width:900px){#hero .hero-cred{align-self:flex-start;margin-top:14px;font-size:12px}}
 #hero .hero-cred{opacity:.4;transform:translateY(24px);animation:hero-rise 1s var(--ease) 480ms forwards}
