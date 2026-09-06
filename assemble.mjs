@@ -12,7 +12,7 @@ const pieces = ['hero', 'intro', 'menu', 'reservation', 'menucard'];
 const head = `<title>Bullion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300&family=Manrope:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,200..300&family=Manrope:wght@500;700&display=swap">
 <style>
 ${read('pieces/base.css')}
 ${pieces.map(p => read(`pieces/${p}.css`)).filter(Boolean).join('\n')}

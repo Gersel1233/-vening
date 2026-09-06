@@ -5,16 +5,16 @@
 #menucard .mc-backdrop{position:absolute;inset:0;background:rgba(14,21,18,.62);opacity:0;transition:opacity 480ms var(--ease)}
 #menucard.open .mc-backdrop{opacity:1}
 #menucard .mc-panel{
-  position:relative;width:100%;max-width:660px;max-height:88vh;display:flex;flex-direction:column;gap:24px;
+  position:relative;width:100%;max-width:560px;min-height:min(78vh,760px);max-height:88vh;display:flex;flex-direction:column;gap:24px;
   padding:28px 32px 8px;overflow:hidden;
   opacity:0;transform:scale(.96);filter:blur(10px);
   transition:opacity 480ms var(--ease),transform 480ms var(--ease),filter 480ms var(--ease);
 }
 #menucard.open .mc-panel{opacity:1;transform:none;filter:none}
 /* the card wordmark must weigh the same as the hero's: force the lightest optical size */
-#menucard #menucard-title{font-variation-settings:"opsz" 72;font-weight:300;letter-spacing:-.03em}
+#menucard #menucard-title{font-variation-settings:"opsz" 72;font-weight:240;letter-spacing:-.03em}
 /* the card footprint reads milkier and lighter than the dimmed room around it */
-#menucard .mc-panel{--glass-fill:rgba(226,225,219,.13);--glass-rim:rgba(255,244,214,.9);-webkit-backdrop-filter:blur(14px) saturate(1.5) brightness(1.18);backdrop-filter:blur(14px) saturate(1.5) brightness(1.18)}
+#menucard .mc-panel{--glass-fill:rgba(226,225,219,.19);--glass-rim:rgba(255,246,220,.95);-webkit-backdrop-filter:blur(14px) saturate(1.5) brightness(1.28);backdrop-filter:blur(14px) saturate(1.5) brightness(1.28)}
 /* Glass never stacks more than twice: backdrop + panel. Pills inside keep fill and rim, not a third blur. */
 #menucard .mc-panel .glass-pill{-webkit-backdrop-filter:none;backdrop-filter:none}
 
@@ -47,3 +47,12 @@
   #menucard .mc-tabs::-webkit-scrollbar{display:none}
   #menucard .menu-row .desc{max-width:100%}
 }
+
+/* Revision 2c: tabs are printed on the card — bare small caps on one hairline, the active one gold over a gold rule */
+#menucard .mc-tabs{gap:22px;border-bottom:1px solid rgba(226,225,219,.22);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+#menucard .mc-tabs::-webkit-scrollbar{display:none}
+#menucard .mc-tabs .glass-pill{background:none!important;box-shadow:none!important;border-radius:0;padding:10px 0 12px;margin-bottom:-1px;font-size:12px;letter-spacing:.06em;color:rgba(226,225,219,.6);border-bottom:1px solid transparent;transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+#menucard .mc-tabs .glass-pill::before{display:none}
+#menucard .mc-tabs .glass-pill:hover{color:var(--stone)}
+#menucard .mc-tabs .glass-pill[aria-selected="true"]{color:var(--gold);border-bottom-color:var(--gold)}
+@media (max-width:900px){#menucard .mc-tabs{gap:18px;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 40px),transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 40px),transparent 100%)}}
