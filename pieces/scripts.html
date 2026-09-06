@@ -3,49 +3,29 @@
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Reveals: never below .35 at rest; add .in when 18% visible */
-  var els = document.querySelectorAll('.reveal');
-  if (reduce || !('IntersectionObserver' in window)) {
-    els.forEach(function (e) { e.classList.add('in'); });
-  } else {
+  /* Reveals. Threshold 0, because a .reveal-wipe element is clipped to nothing at rest and a
+     tall one can never report a ratio; entering the viewport at all is the whole signal.
+     Held until the overture has opened, so nothing plays out behind the curtain. */
+  var started = false;
+  var startReveals = function () {
+    if (started) { return; }
+    started = true;
+    var els = document.querySelectorAll('.reveal');
+    if (reduce || !('IntersectionObserver' in window)) {
+      Array.prototype.forEach.call(els, function (e) { e.classList.add('in'); });
+      return;
+    }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-    }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
-    els.forEach(function (e) { io.observe(e); });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    Array.prototype.forEach.call(els, function (e) { io.observe(e); });
+  };
+  if (document.body.classList.contains('ov-running')) {
+    document.addEventListener('bullion:open', startReveals);
+    setTimeout(startReveals, 7000); /* safety net if the overture never reports */
+  } else {
+    startReveals();
   }
-
-  /* Embedded clips: rebuild each as a Blob (a real seekable resource), with fallbacks.
-     data: video is unreliable across browsers; a blob URL is what the media pipeline wants. */
-  document.querySelectorAll('video[data-clip]').forEach(function (v) {
-    var holder = document.getElementById(v.dataset.clip);
-    var b64 = holder ? holder.textContent.trim() : '';
-    var host = v.closest('section, .photo') || v.parentNode;
-
-    var nudge = function () {
-      var pr = v.play();
-      if (pr && typeof pr.catch === 'function') { pr.catch(function () {}); }
-    };
-    var giveUp = function () { if (host) { host.classList.add('no-video'); } };
-    var attach = function (url, onFail) {
-      var failed = false;
-      var fail = function () { if (!failed) { failed = true; onFail(); } };
-      v.addEventListener('error', fail, { once: true });
-      v.src = url; v.load(); nudge();
-      setTimeout(function () { if (v.readyState === 0) { fail(); } }, 2500);
-    };
-    var tryData = function () { b64 ? attach('data:video/mp4;base64,' + b64, giveUp) : giveUp(); };
-
-    if (b64 && typeof Blob === 'function' && window.URL && URL.createObjectURL) {
-      try {
-        var bin = atob(b64), bytes = new Uint8Array(bin.length);
-        for (var i = 0; i < bin.length; i++) { bytes[i] = bin.charCodeAt(i); }
-        attach(URL.createObjectURL(new Blob([bytes], { type: 'video/mp4' })), tryData);
-      } catch (e) { tryData(); }
-    } else { tryData(); }
-
-    v.addEventListener('canplay', nudge);
-    document.addEventListener('visibilitychange', function () { if (!document.hidden && v.paused) { nudge(); } });
-  });
 
   /* Gold hairline tracking scroll depth */
   if (!reduce) {

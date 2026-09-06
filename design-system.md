@@ -287,3 +287,102 @@ white; text on the photo sits where it is dark.
 - No centred body paragraphs. No centred max-width page container.
 - No emoji, no icon fonts. Icons, if any, are 1px-stroke inline SVG.
 - No stock-looking "people laughing at dinner" imagery. Rooms, surfaces, plates, glass.
+
+---
+
+# Revision 3 — the moving picture, the overture, and the section with no photograph
+
+Three directives from the client, in his words: *"hero videoen virker ikke og er ikke loop
+de er bar statisk billed"*, *"kan vi ikke også lave en flot cinematisk before landing intro"*,
+and *"at der er mere end … end billeder"* — more than images after the header.
+
+## 1. Motion is delivered as an image, not as a player
+
+**The rule: on a page that has to work everywhere, a looping clip ships as an animated
+WebP in an `<img>`, never as a `<video>`.**
+
+Two rounds were lost to `<video>`. The markup was correct both times — `autoplay muted
+loop playsinline`, a valid source, a poster. It still showed a still frame. A `<video>`
+depends on three things a static page cannot control: the embedder's `allow="autoplay"`
+permission policy, the media CSP directive, and the browser's autoplay heuristics. Any one
+of them fails silently, and the failure looks exactly like a bug in the design.
+
+An `<img>` has none of that surface. It is fetched under `img-src`, which every embed
+already permits because the photographs need it; it animates without script; it loops
+forever by definition; and it cannot be paused by a policy. The cost is bytes, and the
+bytes turned out to be free:
+
+| | source clip | shipped loop |
+|---|---|---|
+| hero | 1280×720 H.264, 7.9 s, 24 fps — 813 KB | 1280×720 WebP, 15 fps — 683 KB |
+| bar | 720×1280 H.264, 7.9 s, 24 fps — 686 KB | 640×1138 WebP, 12 fps — 450 KB |
+
+Encoded with `-c:v libwebp_anim -q:v 46 -compression_level 4 -loop 0`, frame rate dropped
+to 12–15. These clips are slow room ambience — a candle moving, a curtain settling — and
+12 fps is invisible on that material. The whole page went from 3915 KB to 2372 KB while
+gaining a second moving panel.
+
+Verify it the only way that counts: load the data URI in a real browser, decode it, and
+screenshot twice two seconds apart. If the two PNGs are byte-identical, it is not animating.
+
+## 2. The overture
+
+One vault dial, drawn and turned, then an iris onto the hero. Rules that keep it from
+becoming a splash screen:
+
+- **Once per session.** `sessionStorage`, checked before anything is shown.
+- **Always skippable** — a button, Escape, and a click on the backdrop.
+- **Never under `prefers-reduced-motion`**, and never if `clip-path` is unsupported.
+- **Under four seconds** to the iris, with a safety net that removes the element
+  regardless of what fails.
+- **It announces itself.** The overture dispatches `bullion:open` on `document` the moment
+  the door starts to move.
+
+That last rule is the load-bearing one. The overture locks the page (`body.ov-running`
+sets `overflow:hidden`), so anything that watches scroll is dead while it runs, and
+anything already in the viewport burns its entrance animation behind the curtain. Every
+scroll-driven behaviour on the page waits for `bullion:open` before it starts observing.
+
+## 3. Reveals: threshold 0, always
+
+`IntersectionObserver` with `threshold: 0.18` cannot fire for two kinds of element, and the
+page had both:
+
+- one clipped to nothing at rest — `.reveal-wipe` sets `clip-path: inset(0 0 100% 0)`;
+- one taller than the viewport — its ratio is capped at `viewportHeight / elementHeight`
+  and can never reach 0.18.
+
+Entering the viewport at all is the entire signal. Use `threshold: 0` and put the timing in
+`rootMargin` (`0px 0px -8% 0px`), which is what that parameter is for.
+
+## 4. The section with no photograph
+
+*More than images* is not more images. The answer is one section that carries no
+photograph at all: **the Chronicle** — the building's history, 1897 to tonight, set as
+columns of a ledger that pan sideways while the visitor scrolls down past a sticky screen.
+
+Why it is allowed to break the no-parallax rule the reference site holds: the mechanism is
+the subject. Bullion is a bank; a ledger is read across, and the last column is tonight,
+with the table you can still book. The scroll does not decorate the content, it turns the
+page.
+
+Its own rules:
+- **The year floats at the head of the column; the caption sits on the baseline.** The
+  hairline between them is the full drop of the column. The empty middle is the design.
+- **Both edges dissolve.** The right fade is constant; the left fade opens only once the
+  rail has travelled, so the first column rests on a clean gutter.
+- **The travel is measured, not guessed** — `track.scrollWidth − (rail.clientWidth −
+  rail padding-left)`. The section is exactly one viewport tall plus that travel, so the
+  pan begins and ends flush with the sticky screen.
+- **No second scroll direction on a phone.** Under 900px the rail is not swipeable; it
+  becomes a vertical ruled ledger. A horizontal gesture inside a vertical page is a
+  failure, not a fallback.
+
+## Amendments to Do / Don't
+
+- **Do** ship looping motion as an animated WebP in an `<img>`. Reserve `<video>` for
+  clips with sound or with a control surface.
+- **Do** let one section pan horizontally, if the panning is the argument.
+- **Don't** use `<video>` for ambience. Don't rely on autoplay for anything the design needs.
+- **Don't** use an `IntersectionObserver` threshold above 0 for entrance animations.
+- **Don't** start a scroll-driven behaviour before the overture has announced `bullion:open`.

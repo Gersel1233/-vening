@@ -40,7 +40,5 @@
   #intro .fact:nth-child(n+3){padding-top:24px;border-top:1px solid var(--hairline)}
 }
 
-/* the bar panel is a living clip; the still underneath shows only if no source can play */
-#intro .split>.photo video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:1}
-#intro .split>.photo .photo-still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-#intro .split>.photo.no-video video{display:none}
+/* the bar panel is a living clip: an animated loop that needs no player and never stalls */
+#intro .split>.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none}

@@ -1,0 +1,115 @@
+<section id="chronicle" class="on-vault on-dark" aria-labelledby="chr-heading">
+  <div class="chr-sticky">
+    <div class="chr-head">
+      <p class="eyebrow on-dark reveal" data-d="0">Bygningen</p>
+      <h2 id="chr-heading" class="t-heading reveal reveal-wipe" data-d="1">Boksen husker</h2>
+      <p class="t-caption chr-hint reveal" data-d="2">Bredgade 33 · fra bankhal til spisesal</p>
+    </div>
+
+    <div class="chr-rail">
+      <ol class="chr-track">
+        <li class="chr-card">
+          <p class="chr-year num">1897</p>
+          <hr class="rule">
+          <h3 class="chr-title">Laanebanken åbner</h3>
+          <p class="chr-body">Kjøbenhavns private Laanebank tager huset i brug. Kassehallen får sit bladguldsloft, og dørene er af egetræ og messing.</p>
+        </li>
+        <li class="chr-card">
+          <p class="chr-year num">1923</p>
+          <hr class="rule">
+          <h3 class="chr-title">Døren kommer fra London</h3>
+          <p class="chr-body">Boksdøren monteres i kælderen. Fire komma to tons, otte boltere, ét håndsving. Den lukker stadig lydløst.</p>
+        </li>
+        <li class="chr-card">
+          <p class="chr-year num">1941</p>
+          <hr class="rule">
+          <h3 class="chr-title">Hallen lukkes</h3>
+          <p class="chr-body">Vinduerne mures til, og guldet males over i gråt. Det tager syv årtier at få det frem igen.</p>
+        </li>
+        <li class="chr-card">
+          <p class="chr-year num">1974</p>
+          <hr class="rule">
+          <h3 class="chr-title">Banken flytter</h3>
+          <p class="chr-body">Huset bliver arkiv. Papkasser i kassehallen, cykler i boksen, støv på alt det øvrige.</p>
+        </li>
+        <li class="chr-card">
+          <p class="chr-year num">2018</p>
+          <hr class="rule">
+          <h3 class="chr-title">Guldet dukker op</h3>
+          <p class="chr-body">Under fjorten lag maling ligger de originale blade i behold. Restaureringen tager fjorten måneder og bruger ingen erstatninger.</p>
+        </li>
+        <li class="chr-card">
+          <p class="chr-year num">2019</p>
+          <hr class="rule">
+          <h3 class="chr-title">Bullion åbner</h3>
+          <p class="chr-body">Første service den ellevte oktober. Seksogfirs kuverter, atten østers i timen, og en boksdør der står åben for første gang siden krigen.</p>
+        </li>
+        <li class="chr-card is-now">
+          <p class="chr-year num">I aften</p>
+          <hr class="rule">
+          <h3 class="chr-title">Køkkenet åbner 17.00</h3>
+          <p class="chr-body">Boksen er sat til to. Der er plads i hallen fra klokken atten, og baren tager ikke reservationer.</p>
+          <a class="glass glass-btn gold chr-cta" href="#reservation">Reservér bord</a>
+        </li>
+      </ol>
+    </div>
+
+    <div class="chr-progress" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<script>
+/* Chronicle: the rail pans sideways as the tall section passes the viewport.
+   Pure transform on one element, driven by scroll depth — no library, no layout thrash. */
+(function () {
+  var sec = document.getElementById('chronicle');
+  if (!sec) { return; }
+  var track = sec.querySelector('.chr-track');
+  var bar = sec.querySelector('.chr-progress span');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var narrow = window.matchMedia('(max-width: 900px)');
+  var ticking = false, span = 0;
+
+  var measure = function () {
+    var rail = sec.querySelector('.chr-rail');
+    /* the track starts inside the rail's left gutter, so the gutter is not travel */
+    var gutter = parseFloat(getComputedStyle(rail).paddingLeft) || 0;
+    span = Math.max(0, track.scrollWidth - (rail.clientWidth - gutter));
+    /* the section is exactly as tall as the pan is wide, plus one screen to hold */
+    sec.style.setProperty('--chr-run', span + 'px');
+  };
+
+  var draw = function () {
+    ticking = false;
+    var r = sec.getBoundingClientRect();
+    var run = sec.offsetHeight - window.innerHeight;
+    var p = run > 0 ? Math.min(1, Math.max(0, -r.top / run)) : 0;
+    track.style.transform = 'translate3d(' + (-p * span).toFixed(1) + 'px,0,0)';
+    sec.style.setProperty('--chr-fade', Math.min(128, p * span * 0.7).toFixed(0) + 'px');
+    if (bar) { bar.style.transform = 'scaleX(' + p.toFixed(4) + ')'; }
+  };
+
+  var enable = function () {
+    sec.classList.add('is-panning');
+    measure(); draw();
+  };
+  var disable = function () {
+    sec.classList.remove('is-panning');
+    sec.style.removeProperty('--chr-run');
+    sec.style.removeProperty('--chr-fade');
+    track.style.transform = '';
+    if (bar) { bar.style.transform = ''; }
+  };
+
+  var sync = function () { (reduce || narrow.matches) ? disable() : enable(); };
+
+  window.addEventListener('scroll', function () {
+    if (!sec.classList.contains('is-panning') || ticking) { return; }
+    ticking = true; requestAnimationFrame(draw);
+  }, { passive: true });
+  window.addEventListener('resize', sync, { passive: true });
+  if (narrow.addEventListener) { narrow.addEventListener('change', sync); }
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(sync); }
+  sync();
+})();
+</script>

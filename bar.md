@@ -133,6 +133,27 @@ for a single large accent panel — but two such panels is a fail.
 
 ---
 
+## Revision 3 — raised again
+
+- **M7 — motion ceiling**, raised a second time. The permitted set now also contains:
+  one full-screen overture that runs once per session, is skippable, and is gone in under
+  four seconds; **one** horizontal pan driven by scroll depth, in **one** section only;
+  and a scroll-depth hairline. **Fail if:** a second section pans, the overture repeats
+  within a session, the overture cannot be skipped, or any of it survives
+  `prefers-reduced-motion`.
+- New check, **M9 — motion that is claimed must actually run.** Every element the design
+  presents as moving has to move in a real browser: decode it, screenshot twice two
+  seconds apart, and compare the bytes. **Fail if:** any "video" or "loop" renders as a
+  still frame, or the check was never performed.
+- New check, **M10 — one scroll direction per screen.** Below 900px no section may ask
+  for a horizontal gesture inside the vertical page. **Fail if:** a rail is swipeable on
+  a phone instead of restacking.
+- New check, **M11 — no photograph is the only material.** At least one full section
+  below the header must carry its argument with type, rule and motion alone, no image.
+  **Fail if:** every section under the hero is a photograph with text beside it.
+
+---
+
 ## Not inherited from the reference
 
 `bar.md` governs **mechanism**, not brand. Amrit Palace's parchment-and-saffron palette

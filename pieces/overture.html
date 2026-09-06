@@ -32,10 +32,22 @@
   try { seen = sessionStorage.getItem('bullion-overture') === '1'; } catch (e) {}
   var supports = window.CSS && CSS.supports && CSS.supports('clip-path', 'circle(50% at 50% 50%)');
 
+  /* the rest of the page waits on this: reveals hold until the door starts to open */
+  var announced = false;
+  var announce = function () {
+    if (announced) { return; }
+    announced = true;
+    var ev;
+    try { ev = new CustomEvent('bullion:open'); }
+    catch (e) { ev = document.createEvent('CustomEvent'); ev.initCustomEvent('bullion:open', false, false, null); }
+    document.dispatchEvent(ev);
+  };
+
   var remove = function () {
     document.body.classList.remove('ov-running');
     if (ov.parentNode) { ov.parentNode.removeChild(ov); }
     document.removeEventListener('keydown', onKey);
+    announce();
   };
   var onKey = function (e) { if (e.key === 'Escape') { open(); } };
   var opening = false;
@@ -43,6 +55,8 @@
     if (opening) { return; }
     opening = true;
     ov.classList.add('is-open');
+    document.body.classList.remove('ov-running');
+    announce();
     setTimeout(remove, 1600);
   };
 

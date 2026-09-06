@@ -1,7 +1,6 @@
 <section id="hero" class="on-dark">
   <div class="hero-media" aria-hidden="true">
-    <video class="hero-video" data-clip="hero-clip" autoplay muted loop playsinline preload="auto" poster="__ASSET_HERO__"></video>
-    <script type="text/plain" id="hero-clip">__ASSET_HEROVIDEO_RAW__</script>
+    <img class="hero-video" src="__ASSET_HEROLOOP__" alt="" width="1280" height="720" fetchpriority="high" decoding="async">
     <div class="hero-shade"></div>
     <div class="hero-veil"></div>
   </div>
@@ -39,9 +38,4 @@
 <span class="hero-cred-text"><span class="num">4,8</span>&nbsp;/&nbsp;5&nbsp;·&nbsp;Fremragende&nbsp;·&nbsp;<span class="num">1&nbsp;216</span>&nbsp;anmeldelser</span></p>
   </div>
 
-  <script>
-  /* Hero: the clip runtime in scripts.html attaches the video; nothing else to run here. */
-  (function () {
-  })();
-  </script>
 </section>
