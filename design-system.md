@@ -225,7 +225,7 @@ The one-moment rule is replaced. Motion is now a signature, still restrained in 
 ### Menu card (new component)
 A full-screen glass overlay `#menucard` (a `<dialog>` or `role="dialog"`), opened by any
 element carrying `data-open-menucard` (nav "Menu", a hero button, the intro button, the
-menu-section button). Centered `.glass.glass-panel`, portrait: max-width 560px, min-height 78vh, max-height 88vh,
+menu-section button). Centered `.glass.glass-panel`, portrait: max-width 560px, cut to its type (min-height 56vh, max-height 88vh),
 internal scroll. Header row: wordmark "Bullion" in Newsreader 300 (.t-heading-sm), a
 close `.glass-pill` "Luk" at right. Glass-pill tabs: Hors d'œuvre · Plats · Desserts ·
 Bar · Vin. Each tab lists `.menu-row`s on the glass (hairlines `--stone` at 18%,

@@ -91,7 +91,7 @@ button,input,select{font:inherit;color:inherit;letter-spacing:inherit}
 /* glass inside glass never re-blurs (blur-on-blur is fog): a thin lit skin instead */
 .glass .glass{-webkit-backdrop-filter:none;backdrop-filter:none;background-color:#161e19;background-image:none;box-shadow:none}
 .on-light .glass .glass{background-color:#f3f2ee}
-.glass .glass::before{opacity:.5}
+.glass .glass::before{display:none}
 .glass::before{
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
   background:radial-gradient(120px 120px at var(--mx) var(--my),rgba(255,255,255,.25),rgba(255,255,255,0) 60%);
