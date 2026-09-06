@@ -244,7 +244,7 @@ states are gold-tinted glass, never white** — nothing in the panel may be brig
 the lamp in the photograph. Inner controls carry no backdrop blur of their own (blur on
 blur is fog); the panel is the only blurred layer and, at 10px, lets the table edge,
 candles and glass stems read through it. The material story is two-layered: the **card is glass** and refracts the room; the
-**controls are printed on the card** — near-opaque ink pills (`rgba(14,21,18,.78)`) with a
+**controls are printed on the card** — opaque ink pills (`#161e19`, never translucent — a control must look identical wherever it sits on the card) with a
 lit top edge, gold when selected — so nothing behind the panel can ever make an unselected
 control look selected. The panel sits where the room is richest (candles, glass stems, the
 table edge run behind it), never over blank wall. Horizontal strips fade at their right edge as
