@@ -248,7 +248,9 @@ candles and glass stems read through it. The material story is two-layered: the 
 lit top edge, gold when selected — so nothing behind the panel can ever make an unselected
 control look selected. The panel sits where the room is richest (candles, glass stems, the
 table edge run behind it), never over blank wall. **The panel is lit by the room, never
-self-luminous**: the lamp remains the brightest point in the frame (the overlay spares it);
+self-luminous — it takes light and gives shadow**: its backdrop filter darkens
+(`brightness(.82)`), so the tablecloth reads *darker* through the pane than beside it, and it
+casts a soft contact shadow onto the cloth beneath; the lamp remains the brightest point in the frame (the overlay spares it);
 the panel's rim is brightest directly under the lamp and fades toward the far corner; the
 body shades from lit top-left to dim bottom-right; ink controls are flat — no rims, no
 inset highlights — and the gold selected state is flat and opaque too (`#7a6535`, gold over ink) so it reads the same over a candle as over a wall. Horizontal strips fade at their right edge as
