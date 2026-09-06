@@ -1,71 +1,85 @@
 /* Chronicle — the house told sideways. A tall section holds a sticky screen; the rail pans
-   horizontally as you scroll past it. Type and hairlines only: no photographs in here. */
+   horizontally as you scroll past it. Type and hairlines only: no photographs in here.
+   Motion is the M7 rev-3 allowance: one horizontal pan, in one section, on the page. */
 #chronicle{position:relative;background:var(--vault);color:var(--stone);z-index:1}
 #chronicle.is-panning{height:calc(100vh + var(--chr-run,0px))}
+/* the head sits on the top margin, the rail on the bottom one — stated, not left over */
 #chronicle .chr-sticky{
-  display:flex;flex-direction:column;justify-content:space-between;gap:clamp(32px,5vh,56px);
-  padding:clamp(64px,9vh,104px) 0 clamp(40px,6vh,64px);overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding:clamp(96px,12vh,120px) 0;overflow:hidden;
 }
+#chronicle .chr-rail{margin-top:auto}
 #chronicle.is-panning .chr-sticky{position:sticky;top:0;height:100vh}
 
 #chronicle .chr-head{padding:0 var(--pad-x);display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 #chronicle .chr-head h2{margin:0}
-#chronicle .chr-hint{color:var(--ash)}
+#chronicle .chr-hint{color:rgba(226,225,219,.7)}
 
-#chronicle .chr-rail{position:relative;overflow:hidden;padding-left:var(--pad-x)}
+/* The gutter is short by the first card's own inset, so every column measures the same
+   404px and the first one still starts on the page's 64px line. `clip` also stops the
+   browser scrolling a hidden rail when focus lands on an off-screen control. */
+#chronicle .chr-rail{position:relative;overflow:hidden;overflow:clip;padding-left:calc(var(--pad-x) - 44px)}
 #chronicle .chr-rail::before,#chronicle .chr-rail::after{
   content:"";position:absolute;top:0;bottom:0;pointer-events:none;z-index:2;
 }
-/* the left fade opens only once the rail has started to travel, so the first card
-   sits on a clean gutter at rest and the ones leaving dissolve rather than get cut */
-#chronicle .chr-rail::before{left:0;width:var(--chr-fade,0px);background:linear-gradient(270deg,rgba(14,21,18,0),var(--vault))}
-#chronicle .chr-rail::after{right:0;width:120px;background:linear-gradient(90deg,rgba(14,21,18,0),var(--vault))}
+/* Both edges dissolve, and both are driven by the pan: the left mask opens only once the
+   rail has travelled, the right one closes at the end so nothing is implied past "i aften". */
+#chronicle .chr-rail::before{left:0;width:var(--chr-fade-l,0px);background:linear-gradient(270deg,rgba(14,21,18,0),var(--vault))}
+#chronicle .chr-rail::after{right:0;width:var(--chr-fade-r,120px);background:linear-gradient(90deg,rgba(14,21,18,0),var(--vault))}
 #chronicle .chr-track{display:flex;list-style:none;margin:0;padding:0;width:max-content;will-change:transform}
 #chronicle .chr-track::after{content:"";flex:none;width:var(--pad-x)}
 #chronicle .chr-card{
   flex:none;width:clamp(292px,29vw,404px);min-height:min(46vh,400px);
-  display:flex;flex-direction:column;align-items:flex-start;gap:14px;
+  display:flex;flex-direction:column;align-items:flex-start;
   padding:0 52px 0 44px;border-left:1px solid var(--vault-line);
 }
-#chronicle .chr-card:first-child{border-left:0;padding-left:0}
+#chronicle .chr-card:first-child{border-left:0}
 #chronicle .chr-year{
-  margin:0;font-family:var(--font-display);font-weight:300;
-  font-size:clamp(44px,4.2vw,62px);line-height:.85;letter-spacing:-.04em;
+  /* the negative margin is optical, not layout: it pulls the figure's ink onto the same
+     line as the rule and the caption beneath it */
+  margin:0 0 0 -.04em;font-family:var(--font-display);font-weight:300;
+  font-size:clamp(44px,4.2vw,62px);line-height:.85;letter-spacing:-.04em;text-transform:uppercase;
   font-variant-numeric:tabular-nums;color:var(--stone);
 }
-/* the year floats at the head of its column, the caption sits on the baseline —
-   the hairline between them is the full drop, like a ruled ledger page */
-#chronicle .chr-card .rule{width:100%;border-top-color:var(--vault-line);margin-top:auto}
-#chronicle .chr-title{margin:0;font-family:var(--font-text);font-weight:700;font-size:14px;line-height:1.3;letter-spacing:.06em;text-transform:uppercase}
-#chronicle .chr-body{font-size:14px;line-height:1.5;letter-spacing:-.01em;color:rgba(226,225,219,.62)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* The entry block is a fixed height pinned to the foot of the column, so the hairline above
+   it lands on the same line in every card — a ledger is ruled once, not seven times. */
+#chronicle .chr-entry{
+  margin-top:auto;width:100%;height:180px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+}
+#chronicle .chr-card .rule{width:100%;border-top-color:var(--vault-line);margin:0}
+#chronicle .chr-title{margin:0;font-family:var(--font-text);font-weight:500;font-size:13px;line-height:1.3;letter-spacing:-.011em;text-transform:uppercase;color:var(--stone)}
+#chronicle .chr-body{font-size:14px;line-height:1.4;letter-spacing:-.01em;color:rgba(226,225,219,.62)}
 
 /* tonight's card is the one lit in gold — the timeline lands on a table you can book */
+#chronicle .chr-card.is-now{border-left-color:rgba(185,149,82,.5)}
 #chronicle .chr-card.is-now .chr-year{color:var(--gold)}
 #chronicle .chr-card.is-now .rule{border-top-color:rgba(185,149,82,.5)}
-#chronicle .chr-cta{margin-top:6px}
-
-#chronicle .chr-progress{position:relative;height:1px;background:var(--vault-line);margin:0 var(--pad-x)}
-#chronicle .chr-progress span{position:absolute;inset:0;background:var(--gold);transform-origin:0 50%;transform:scaleX(0)}
+/* the section is built of hairlines, so its one control is a hairline too: the glass pill
+   belongs on the panels that sit on photography and has nothing to refract here */
+#chronicle .chr-cta{margin-top:4px;padding:12px 18px;color:var(--gold);border-color:rgba(185,149,82,.55)}
+#chronicle .chr-cta:hover{background:var(--gold);border-color:var(--gold);color:var(--vault)}
 
 /* Not panning (narrow, or reduced motion): the sideways rail becomes a ruled ledger,
    read top to bottom. No second scroll direction to fight the page. */
-#chronicle:not(.is-panning) .chr-progress{display:none}
 #chronicle:not(.is-panning) .chr-rail{overflow:visible;padding:0 var(--pad-x)}
 #chronicle:not(.is-panning) .chr-rail::before,#chronicle:not(.is-panning) .chr-rail::after{display:none}
 #chronicle:not(.is-panning) .chr-track{flex-direction:column;width:auto}
 #chronicle:not(.is-panning) .chr-track::after{display:none}
 #chronicle:not(.is-panning) .chr-card{
-  width:auto;min-height:0;gap:10px;
+  width:auto;min-height:0;
   padding:26px 0;border-left:0;border-top:1px solid var(--vault-line);
 }
 #chronicle:not(.is-panning) .chr-card:first-child{padding-top:0;border-top:0}
+#chronicle:not(.is-panning) .chr-card.is-now{border-top-color:rgba(185,149,82,.5)}
+/* the stacked ledger closes on a rule, the way the panning one closes on the right edge */
+#chronicle:not(.is-panning) .chr-card:last-child{border-bottom:1px solid var(--vault-line)}
+#chronicle:not(.is-panning) .chr-entry{margin-top:10px;height:auto}
 #chronicle:not(.is-panning) .chr-card .rule{display:none}
 #chronicle:not(.is-panning) .chr-year{font-size:clamp(44px,11vw,52px)}
 #chronicle:not(.is-panning) .chr-body{max-width:46ch}
 
 @media (max-width:900px){
-  #chronicle .chr-sticky{padding:64px 0 56px;gap:28px}
-}
-@media (prefers-reduced-motion:reduce){
-  #chronicle .chr-rail::after{display:none}
+  #chronicle .chr-sticky{padding:80px 0;gap:28px}
 }

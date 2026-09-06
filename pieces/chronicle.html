@@ -3,58 +3,70 @@
     <div class="chr-head">
       <p class="eyebrow on-dark reveal" data-d="0">Bygningen</p>
       <h2 id="chr-heading" class="t-heading reveal reveal-wipe" data-d="1">Boksen husker</h2>
-      <p class="t-caption chr-hint reveal" data-d="2">Bredgade 33 · fra bankhal til spisesal</p>
+      <p class="t-caption chr-hint reveal" data-d="2">Bredgade 33 · fra kassehal til spisesal</p>
     </div>
 
     <div class="chr-rail">
       <ol class="chr-track">
         <li class="chr-card">
           <p class="chr-year num">1897</p>
-          <hr class="rule">
-          <h3 class="chr-title">Laanebanken åbner</h3>
-          <p class="chr-body">Kjøbenhavns private Laanebank tager huset i brug. Kassehallen får sit bladguldsloft, og dørene er af egetræ og messing.</p>
+          <div class="chr-entry">
+            <hr class="rule">
+            <h3 class="chr-title"><span class="sr-only">1897 — </span>Banken flytter ind</h3>
+            <p class="chr-body">Kjøbenhavns private Laanebank tager huset i brug. Kassehallen får sit bladguldsloft, dørene er egetræ og messing.</p>
+          </div>
         </li>
         <li class="chr-card">
           <p class="chr-year num">1923</p>
-          <hr class="rule">
-          <h3 class="chr-title">Døren kommer fra London</h3>
-          <p class="chr-body">Boksdøren monteres i kælderen. Fire komma to tons, otte boltere, ét håndsving. Den lukker stadig lydløst.</p>
+          <div class="chr-entry">
+            <hr class="rule">
+            <h3 class="chr-title"><span class="sr-only">1923 — </span>Boksdøren monteres</h3>
+            <p class="chr-body">Fire tons stål, leveret fra London. Otte bolte, ét håndsving. Den lukker stadig lydløst.</p>
+          </div>
         </li>
         <li class="chr-card">
           <p class="chr-year num">1941</p>
-          <hr class="rule">
-          <h3 class="chr-title">Hallen lukkes</h3>
-          <p class="chr-body">Vinduerne mures til, og guldet males over i gråt. Det tager syv årtier at få det frem igen.</p>
+          <div class="chr-entry">
+            <hr class="rule">
+            <h3 class="chr-title"><span class="sr-only">1941 — </span>Vinduerne mures til</h3>
+            <p class="chr-body">Bladguldet males over i gråt, og kassehallen mister sit lys. Det bliver siddende under malingen i næsten otte årtier.</p>
+          </div>
         </li>
         <li class="chr-card">
           <p class="chr-year num">1974</p>
-          <hr class="rule">
-          <h3 class="chr-title">Banken flytter</h3>
-          <p class="chr-body">Huset bliver arkiv. Papkasser i kassehallen, cykler i boksen, støv på alt det øvrige.</p>
+          <div class="chr-entry">
+            <hr class="rule">
+            <h3 class="chr-title"><span class="sr-only">1974 — </span>Banken flytter ud</h3>
+            <p class="chr-body">Huset bliver arkiv. Papkasser i kassehallen, cykler i boksen, støv på alt det øvrige.</p>
+          </div>
         </li>
         <li class="chr-card">
           <p class="chr-year num">2018</p>
-          <hr class="rule">
-          <h3 class="chr-title">Guldet dukker op</h3>
-          <p class="chr-body">Under fjorten lag maling ligger de originale blade i behold. Restaureringen tager fjorten måneder og bruger ingen erstatninger.</p>
+          <div class="chr-entry">
+            <hr class="rule">
+            <h3 class="chr-title"><span class="sr-only">2018 — </span>Guldet dukker op</h3>
+            <p class="chr-body">Under fjorten lag maling er bladguldet i behold. Restaureringen tager elleve måneder, og intet blad bliver udskiftet.</p>
+          </div>
         </li>
         <li class="chr-card">
           <p class="chr-year num">2019</p>
-          <hr class="rule">
-          <h3 class="chr-title">Bullion åbner</h3>
-          <p class="chr-body">Første service den ellevte oktober. Seksogfirs kuverter, atten østers i timen, og en boksdør der står åben for første gang siden krigen.</p>
+          <div class="chr-entry">
+            <hr class="rule">
+            <h3 class="chr-title"><span class="sr-only">2019 — </span>Bullion åbner</h3>
+            <p class="chr-body">Første service den ellevte oktober. Seksogfirs kuverter, og en boksdør, der for første gang står åben for gæster.</p>
+          </div>
         </li>
         <li class="chr-card is-now">
           <p class="chr-year num">I aften</p>
-          <hr class="rule">
-          <h3 class="chr-title">Køkkenet åbner 17.00</h3>
-          <p class="chr-body">Boksen er sat til to. Der er plads i hallen fra klokken atten, og baren tager ikke reservationer.</p>
-          <a class="glass glass-btn gold chr-cta" href="#reservation">Reservér bord</a>
+          <div class="chr-entry">
+            <hr class="rule">
+            <h3 class="chr-title"><span class="sr-only">I aften — </span>Bordene er dækket</h3>
+            <p class="chr-body">Man–tor 17–24, fre–lør 12–01. Boksen tager tolv, og baren tager ikke reservationer.</p>
+            <a class="btn on-dark chr-cta" href="#reservation">Reservér bord</a>
+          </div>
         </li>
       </ol>
     </div>
-
-    <div class="chr-progress" aria-hidden="true"><span></span></div>
   </div>
 </section>
 
@@ -64,44 +76,50 @@
 (function () {
   var sec = document.getElementById('chronicle');
   if (!sec) { return; }
+  var rail = sec.querySelector('.chr-rail');
   var track = sec.querySelector('.chr-track');
-  var bar = sec.querySelector('.chr-progress span');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.chr-card'));
+  var reduceQ = window.matchMedia('(prefers-reduced-motion: reduce)');
   var narrow = window.matchMedia('(max-width: 900px)');
-  var ticking = false, span = 0;
+  var ticking = false, span = 0, cardW = 0, hold = 0;
 
   var measure = function () {
-    var rail = sec.querySelector('.chr-rail');
     /* the track starts inside the rail's left gutter, so the gutter is not travel */
     var gutter = parseFloat(getComputedStyle(rail).paddingLeft) || 0;
+    cardW = cards.length ? cards[0].offsetWidth : 0;
     span = Math.max(0, track.scrollWidth - (rail.clientWidth - gutter));
-    /* the section is exactly as tall as the pan is wide, plus one screen to hold */
-    sec.style.setProperty('--chr-run', span + 'px');
+    /* half a screen of dwell past the end, so the last column sits composed before the
+       section lets go instead of arriving on the final scroll pixel */
+    hold = Math.round(window.innerHeight * 0.5);
+    sec.style.setProperty('--chr-run', (span + hold) + 'px');
   };
 
   var draw = function () {
     ticking = false;
-    var r = sec.getBoundingClientRect();
-    var run = sec.offsetHeight - window.innerHeight;
-    var p = run > 0 ? Math.min(1, Math.max(0, -r.top / run)) : 0;
-    track.style.transform = 'translate3d(' + (-p * span).toFixed(1) + 'px,0,0)';
-    sec.style.setProperty('--chr-fade', Math.min(128, p * span * 0.7).toFixed(0) + 'px');
-    if (bar) { bar.style.transform = 'scaleX(' + p.toFixed(4) + ')'; }
+    var run = sec.offsetHeight - window.innerHeight - hold;
+    var p = run > 0 ? Math.min(1, Math.max(0, -sec.getBoundingClientRect().top / run)) : 0;
+    /* whole pixels only: a half-pixel transform splits every 1px hairline across two */
+    var x = -Math.round(p * span);
+    track.style.transform = 'translate3d(' + x + 'px,0,0)';
+    /* a leaving card dissolves by its own distance past the edge, so it is never cut
+       mid-word — and its neighbour, still fully in frame, is never dimmed with it */
+    for (var i = 0; i < cards.length; i++) {
+      var left = x + cards[i].offsetLeft;
+      cards[i].style.opacity = left >= 0 ? '' : Math.max(0, 1 + left / cardW).toFixed(3);
+    }
+    /* the trailing mask closes once there is nothing left to arrive */
+    sec.style.setProperty('--chr-fade-r', (120 * Math.min(1, (1 - p) * 12)).toFixed(0) + 'px');
   };
 
-  var enable = function () {
-    sec.classList.add('is-panning');
-    measure(); draw();
-  };
+  var enable = function () { sec.classList.add('is-panning'); measure(); draw(); };
   var disable = function () {
     sec.classList.remove('is-panning');
     sec.style.removeProperty('--chr-run');
-    sec.style.removeProperty('--chr-fade');
+    sec.style.removeProperty('--chr-fade-r');
     track.style.transform = '';
-    if (bar) { bar.style.transform = ''; }
+    for (var i = 0; i < cards.length; i++) { cards[i].style.opacity = ''; }
   };
-
-  var sync = function () { (reduce || narrow.matches) ? disable() : enable(); };
+  var sync = function () { (reduceQ.matches || narrow.matches) ? disable() : enable(); };
 
   window.addEventListener('scroll', function () {
     if (!sec.classList.contains('is-panning') || ticking) { return; }
@@ -109,6 +127,20 @@
   }, { passive: true });
   window.addEventListener('resize', sync, { passive: true });
   if (narrow.addEventListener) { narrow.addEventListener('change', sync); }
+  if (reduceQ.addEventListener) { reduceQ.addEventListener('change', sync); }
+
+  /* Tabbing into a card that has been panned off-screen would scroll the clipped rail and
+     desynchronise it for good. Undo that scroll and move the page instead. */
+  rail.addEventListener('focusin', function (e) {
+    if (!sec.classList.contains('is-panning')) { return; }
+    rail.scrollLeft = 0;
+    var card = e.target.closest ? e.target.closest('.chr-card') : null;
+    if (!card || !span) { return; }
+    var run = sec.offsetHeight - window.innerHeight - hold;
+    var want = sec.offsetTop + Math.min(1, card.offsetLeft / span) * run;
+    window.scrollTo({ top: Math.round(want), behavior: reduceQ.matches ? 'auto' : 'smooth' });
+  });
+
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(sync); }
   sync();
 })();

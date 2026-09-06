@@ -7,7 +7,7 @@
   background:var(--vault);color:var(--stone);
 }
 
-/* ---- photograph (double-buffered video pair) + darkening ---- */
+/* ---- the room, moving, + darkening ---- */
 #hero .hero-media{position:absolute;inset:0;z-index:0;overflow:hidden}
 #hero .hero-video{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;
@@ -114,7 +114,7 @@
 @keyframes hero-veil{from{opacity:.42}to{opacity:.12}}
 @keyframes hero-rise{from{opacity:.4;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-/* ---- reduced motion: video still plays (ambient); vault and sheen never run ---- */
+/* ---- reduced motion: the room clip stays (ambient); vault and sheen never run ---- */
 @media (prefers-reduced-motion:reduce){
   #hero .hero-vault{display:none}
   #hero .hero-title-sheen{display:none}
@@ -148,7 +148,6 @@
 @media (max-width:900px){#hero .hero-cred{align-self:flex-start;margin-top:14px;font-size:12px}}
 #hero .hero-cred{opacity:.4;transform:translateY(24px);animation:hero-rise 1s var(--ease) 480ms forwards}
 
-/* If no video source can play, the poster still drifts so the hero is never dead */
-#hero.no-video .hero-video{animation:hero-kenburns 26s ease-in-out infinite alternate}
-@keyframes hero-kenburns{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.12) translate3d(-1.5%,-1%,0)}}
-@media (prefers-reduced-motion:reduce){#hero.no-video .hero-video{animation:none}}
+/* Revision 3: the hero clip is an animated WebP in an <img> — no player, no autoplay
+   policy, no fallback state to design for. If the frames don't decode the browser shows
+   the first one, which is the poster we would have set anyway. */
