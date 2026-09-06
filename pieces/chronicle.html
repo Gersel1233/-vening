@@ -88,10 +88,11 @@
     var gutter = parseFloat(getComputedStyle(rail).paddingLeft) || 0;
     cardW = cards.length ? cards[0].offsetWidth : 0;
     span = Math.max(0, track.scrollWidth - (rail.clientWidth - gutter));
-    /* half a screen of dwell past the end, so the last column sits composed before the
-       section lets go instead of arriving on the final scroll pixel */
-    hold = Math.round(window.innerHeight * 0.5);
-    sec.style.setProperty('--chr-run', (span + hold) + 'px');
+    /* The pan runs faster than the page: 1516px of ledger crosses in 1213px of scroll, so
+       the section costs three screens instead of four. Then a third of a screen of dwell,
+       so the last column sits composed before the section lets go. */
+    hold = Math.round(window.innerHeight * 0.35);
+    sec.style.setProperty('--chr-run', (Math.round(span * 0.8) + hold) + 'px');
   };
 
   var draw = function () {

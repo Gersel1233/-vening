@@ -17,7 +17,7 @@
     }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -2% 0px' });
     Array.prototype.forEach.call(els, function (e) { io.observe(e); });
   };
   if (document.body.classList.contains('ov-running')) {

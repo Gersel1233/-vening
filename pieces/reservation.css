@@ -76,8 +76,13 @@
 #reservation .times .glass-pill:disabled{color:var(--stone)}
 
 #reservation .summary{margin:0;min-height:20px;color:rgba(226,225,219,.8)}
-#reservation .submit{width:100%;align-self:stretch;padding:18px 26px}
-#reservation .submit:disabled{opacity:.45;cursor:not-allowed}
+/* The controls are printed on the card, so the submit is opaque like the rest of them.
+   Translucent gold at .45 opacity took its brightness from the lamp behind it and read as
+   the brightest object in the panel — a disabled state has to be dimmer, not paler. */
+#reservation .submit{width:100%;align-self:stretch;padding:18px 26px;background-color:#7a6535;color:var(--stone);box-shadow:none}
+#reservation .submit:hover{background-color:#8d7540}
+#reservation .submit:disabled{opacity:1;background-color:#161e19;color:rgba(226,225,219,.42);cursor:not-allowed}
+#reservation .submit:disabled:hover{background-color:#161e19}
 #reservation .submit:disabled:active{transform:none}
 
 /* confirmation — gold seal stamps in */
@@ -102,6 +107,15 @@
 #footer .colophon a{border-bottom:1px solid transparent;transition:border-color var(--dur) var(--ease)}
 #footer .colophon a:hover{border-bottom-color:var(--gold)}
 #footer .colophon .legal{color:rgba(226,225,219,.45)}
+/* a phone number and a CVR must never break across lines */
+#footer .colophon>span{white-space:nowrap}
+/* on a phone the one line becomes a short stack: a wrapped colophon orphans its numbers
+   and lands the gold dots at the start of lines */
+@media (max-width:600px){
+  #footer .colophon{display:flex;flex-direction:column;gap:6px;line-height:1.4}
+  #footer .colophon .dot{display:none}
+  #footer .colophon>span{white-space:normal}
+}
 
 @media (max-width:900px){
   /* narrower tiles so the fifth day peeks past the panel edge as the scroll hint */

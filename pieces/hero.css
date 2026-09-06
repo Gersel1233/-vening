@@ -17,7 +17,8 @@
 }
 #hero .hero-shade{
   position:absolute;inset:0;z-index:3;
-  background:linear-gradient(to bottom,rgba(6,9,8,.22) 0%,rgba(6,9,8,.38) 45%,rgba(6,9,8,.80) 100%);
+  /* the top stop is deep because the meta line sits across the lit gold ceiling */
+  background:linear-gradient(to bottom,rgba(6,9,8,.52) 0%,rgba(6,9,8,.30) 26%,rgba(6,9,8,.38) 45%,rgba(6,9,8,.80) 100%);
   mix-blend-mode:multiply;
 }
 #hero .hero-veil{
@@ -124,15 +125,19 @@
 /* ---- responsive ---- */
 @media (max-width:900px){
   #hero{padding-top:20px;padding-bottom:40px}
-  #hero .hero-links{display:none}
-  #hero .hero-meta{margin-top:32px}
+  /* the nav does not disappear on a phone — it drops under the wordmark as a line of
+     micro type with gold separators, which is the page's own vocabulary, not a hamburger */
+  #hero .hero-nav{flex-wrap:wrap;row-gap:14px}
+  #hero .hero-links{order:3;flex:1 0 100%;margin:0;gap:0;font-size:12px;letter-spacing:-.012em;flex-wrap:wrap}
+  #hero .hero-links li+li::before{content:"·";color:var(--gold);padding:0 10px}
+  #hero .hero-links li{display:inline-flex;align-items:center}
+  #hero .hero-meta{margin-top:26px}
   #hero .hero-foot{flex-direction:column;align-items:flex-start;gap:32px}
   #hero .hero-copy{margin-top:24px}
   #hero .hero-card{width:100%;max-width:320px}
 }
 @media (max-width:600px){
-  #hero .hero-nav-menu{display:none} /* the hero body still carries "Åbn menukortet" */
-  #hero .hero-nav .glass-btn{padding:12px 18px}
+  #hero .hero-nav .glass-btn{padding:12px 18px;font-size:13px}
 }
 @media (max-width:480px){
   #hero .hero-meta{flex-direction:column;gap:6px}

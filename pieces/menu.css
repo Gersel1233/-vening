@@ -15,14 +15,23 @@
 #menu .split>.panel.on-stone{background:var(--stone);color:var(--ink);justify-content:flex-start}
 #menu .split>.panel.on-stone .groups{display:flex;flex-direction:column;gap:48px}
 #menu .split>.photo{min-height:720px;aspect-ratio:3/4}
-#menu .menu-foot{padding:40px var(--pad-x) 92px;display:flex;flex-direction:column;align-items:flex-start;gap:32px}
-#menu .menu-foot .t-lede{color:var(--ink);max-width:52ch}
+/* The closing row is two columns on one hairline: the dessert list on the left, the wine
+   line and the booking on the right. Stacked, the desserts ruled to a third of the frame
+   and left the rest of the screen empty. */
+#menu .menu-foot{
+  padding:56px var(--pad-x) 92px;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  column-gap:clamp(48px,7vw,120px);align-items:start;border-top:1px solid var(--hairline);
+}
+#menu .menu-foot .foot-aside{display:flex;flex-direction:column;align-items:flex-start;gap:28px;padding-top:6px}
+#menu .menu-foot .t-lede{color:var(--ink);max-width:34ch}
 #menu .menu-foot .glass-btn{color:var(--ink)}
 #menu .menu-head .glass-btn{margin-top:8px;color:var(--ink)}
 #menu .t-heading,#menu .t-heading-sm{margin:0}
 @media (max-width:900px){
   #menu .split>.photo{min-height:320px;aspect-ratio:auto}
+  #menu .menu-foot{grid-template-columns:1fr;row-gap:40px;padding-top:40px}
+  #menu .menu-foot .t-lede{max-width:46ch}
 }
-/* Desserts moved out of the stone panel (M6) into the closing row: one narrow column, then the wine line */
-#menu .menu-foot .foot-group{max-width:52ch;margin:0 0 48px}
+/* Desserts moved out of the stone panel (M6) into the closing row */
+#menu .menu-foot .foot-group{margin:0}
 #menu .menu-foot .foot-group h3{margin:6px 0 4px}

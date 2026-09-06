@@ -3,12 +3,12 @@
    Motion is the M7 rev-3 allowance: one horizontal pan, in one section, on the page. */
 #chronicle{position:relative;background:var(--vault);color:var(--stone);z-index:1}
 #chronicle.is-panning{height:calc(100vh + var(--chr-run,0px))}
-/* the head sits on the top margin, the rail on the bottom one — stated, not left over */
+/* head and rail are one block on the screen's centre line, separated by a stated gap —
+   not pushed to opposite margins with whatever is left over between them */
 #chronicle .chr-sticky{
-  display:flex;flex-direction:column;justify-content:flex-start;
-  padding:clamp(96px,12vh,120px) 0;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;gap:clamp(48px,8vh,88px);
+  padding:clamp(72px,9vh,96px) 0;overflow:hidden;
 }
-#chronicle .chr-rail{margin-top:auto}
 #chronicle.is-panning .chr-sticky{position:sticky;top:0;height:100vh}
 
 #chronicle .chr-head{padding:0 var(--pad-x);display:flex;flex-direction:column;align-items:flex-start;gap:14px}
@@ -58,7 +58,7 @@
 #chronicle .chr-card.is-now .rule{border-top-color:rgba(185,149,82,.5)}
 /* the section is built of hairlines, so its one control is a hairline too: the glass pill
    belongs on the panels that sit on photography and has nothing to refract here */
-#chronicle .chr-cta{margin-top:4px;padding:12px 18px;color:var(--gold);border-color:rgba(185,149,82,.55)}
+#chronicle .chr-cta{margin-top:4px;padding:12px 20px;border-radius:999px;color:var(--gold);border-color:rgba(185,149,82,.55)}
 #chronicle .chr-cta:hover{background:var(--gold);border-color:var(--gold);color:var(--vault)}
 
 /* Not panning (narrow, or reduced motion): the sideways rail becomes a ruled ledger,
