@@ -243,9 +243,11 @@ as a wrapped grid of `.glass-pill`s; unavailable pills are struck and 40%. **Sel
 states are gold-tinted glass, never white** — nothing in the panel may be brighter than
 the lamp in the photograph. Inner controls carry no backdrop blur of their own (blur on
 blur is fog); the panel is the only blurred layer and, at 10px, lets the table edge,
-candles and glass stems read through it. Inner controls wear a denser neutral
-skin (`rgba(14,21,18,.55)`) so a bright fixture behind the panel can never make an
-unselected control look selected — state must always beat what is behind it. Horizontal strips fade at their right edge as
+candles and glass stems read through it. The material story is two-layered: the **card is glass** and refracts the room; the
+**controls are printed on the card** — near-opaque ink pills (`rgba(14,21,18,.78)`) with a
+lit top edge, gold when selected — so nothing behind the panel can ever make an unselected
+control look selected. The panel sits where the room is richest (candles, glass stems, the
+table edge run behind it), never over blank wall. Horizontal strips fade at their right edge as
 the scroll affordance. A live summary line and a `.glass-btn.gold` CTA
 "Reservér" at the bottom. Confirmation replaces the panel body with a gold seal and
 "Forespørgsel sendt — vi bekræfter på mail inden for to timer." Left column keeps the
