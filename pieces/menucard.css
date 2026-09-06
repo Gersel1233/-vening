@@ -11,6 +11,8 @@
   transition:opacity 480ms var(--ease),transform 480ms var(--ease),filter 480ms var(--ease);
 }
 #menucard.open .mc-panel{opacity:1;transform:none;filter:none}
+/* the card wordmark must weigh the same as the hero's: force the lightest optical size */
+#menucard #menucard-title{font-variation-settings:"opsz" 72;letter-spacing:-.03em}
 /* Glass never stacks more than twice: backdrop + panel. Pills inside keep fill and rim, not a third blur. */
 #menucard .mc-panel .glass-pill{-webkit-backdrop-filter:none;backdrop-filter:none}
 

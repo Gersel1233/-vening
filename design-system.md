@@ -117,10 +117,11 @@ price (Manrope 500 15px, tabular). Row 2: description (Manrope 500 14px, `--slat
 max 80% width). Padding 16px 0. Bottom border 1px `--hairline` (or `rgba(14,21,18,.18)`
 on a gold flood). No fill, no hover fill.
 
-### Credential card
-`--limestone` background, 0px radius, padding 20px 24px, no border, no shadow. Row of
-five `--gold` stars (13px). A large numeral in Manrope 700 42px. A caption line in
-Manrope 500 13px `--slate`. Floats bottom-right over the hero.
+### Credential line (revision 2b — replaces the card)
+No card. One line of Manrope 500 13px in `--stone` sitting directly on the hero photo,
+bottom-right: five 12px `--gold` stars, then "4,8 / 5 · Fremragende · 1 216 anmeldelser"
+with tabular numerals. The hero's left column is four tiers at most: meta, wordmark,
+lede (one sentence, max 44ch, carrying the food), buttons. No paragraph beneath.
 
 ### Marquee
 One continuous horizontal loop of dish names in Newsreader 300 50px uppercase, `--ink`
@@ -242,7 +243,9 @@ as a wrapped grid of `.glass-pill`s; unavailable pills are struck and 40%. **Sel
 states are gold-tinted glass, never white** — nothing in the panel may be brighter than
 the lamp in the photograph. Inner controls carry no backdrop blur of their own (blur on
 blur is fog); the panel is the only blurred layer and, at 10px, lets the table edge,
-candles and glass stems read through it. Horizontal strips fade at their right edge as
+candles and glass stems read through it. Inner controls wear a slightly denser neutral
+skin (`rgba(14,21,18,.30)`) so a bright fixture behind the panel can never make an
+unselected control look selected — state must always beat what is behind it. Horizontal strips fade at their right edge as
 the scroll affordance. A live summary line and a `.glass-btn.gold` CTA
 "Reservér" at the bottom. Confirmation replaces the panel body with a gold seal and
 "Forespørgsel sendt — vi bekræfter på mail inden for to timer." Left column keeps the

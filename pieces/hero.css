@@ -162,3 +162,10 @@
   #hero .hero-lede{margin-top:16px}
   #hero .hero-actions{margin-top:24px}
 }
+/* Revision 2b: the credential is a single line of type on the photograph, not a card */
+#hero .hero-cred{display:flex;align-items:center;gap:10px;margin:0;color:var(--stone);opacity:.9;white-space:nowrap;align-self:flex-end;font-variant-numeric:tabular-nums}
+#hero .hero-cred .hero-stars{display:inline-flex;gap:3px;color:var(--gold)}
+#hero .hero-cred .hero-stars svg{fill:currentColor;display:block}
+#hero .hero-lede{max-width:44ch}
+@media (max-width:900px){#hero .hero-cred{align-self:flex-start;white-space:normal;margin-top:14px}}
+#hero .hero-cred{opacity:.4;transform:translateY(24px);animation:hero-rise 1s var(--ease) 480ms forwards}
