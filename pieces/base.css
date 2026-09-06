@@ -79,13 +79,13 @@ button,input,select{font:inherit;color:inherit;letter-spacing:inherit}
 .on-vault{background:var(--vault);color:var(--stone)}
 
 /* ---- Revision 2: liquid glass primitives (shared by every piece) ---- */
-:root{--mx:50%;--my:50%;--glass-fill:rgba(226,225,219,.10);--glass-rim:rgba(255,255,255,.38);--glass-gold:rgba(185,149,82,.16);--glass-lift:0 14px 40px rgba(0,0,0,.28)}
-.on-light,.on-stone{--glass-fill:rgba(14,21,18,.05);--glass-rim:rgba(255,255,255,.55);--glass-lift:0 8px 24px rgba(14,21,18,.10)}
+:root{--mx:50%;--my:50%;--glass-fill:rgba(226,225,219,.07);--glass-rim:rgba(255,255,255,.62);--glass-gold:rgba(185,149,82,.22);--glass-lift:0 16px 44px rgba(0,0,0,.34);--glass-sheen:linear-gradient(180deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.04) 48%,rgba(255,255,255,0) 52%,rgba(0,0,0,.10) 100%)}
+.on-light,.on-stone{--glass-fill:rgba(255,255,255,.28);--glass-rim:rgba(255,255,255,.95);--glass-gold:rgba(185,149,82,.20);--glass-lift:0 10px 28px rgba(14,21,18,.12);--glass-sheen:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.12) 48%,rgba(255,255,255,0) 52%,rgba(14,21,18,.05) 100%)}
 .glass{
   position:relative;isolation:isolate;
-  background:var(--glass-fill);
-  -webkit-backdrop-filter:blur(18px) saturate(1.35);backdrop-filter:blur(18px) saturate(1.35);
-  box-shadow:inset 0 1px 0 var(--glass-rim),inset 0 0 0 1px var(--glass-gold),var(--glass-lift);
+  background-color:var(--glass-fill);background-image:var(--glass-sheen);
+  -webkit-backdrop-filter:blur(22px) saturate(1.7) brightness(1.06);backdrop-filter:blur(22px) saturate(1.7) brightness(1.06);
+  box-shadow:inset 0 1px 0 var(--glass-rim),inset 0 -1px 0 rgba(0,0,0,.18),inset 0 0 0 1px var(--glass-gold),var(--glass-lift);
   border:0;color:inherit;
 }
 .glass::before{
@@ -101,8 +101,8 @@ button,input,select{font:inherit;color:inherit;letter-spacing:inherit}
 }
 .glass-btn:hover{box-shadow:inset 0 1px 0 var(--glass-rim),inset 0 0 0 1px rgba(185,149,82,.32),var(--glass-lift)}
 .glass-btn:active{transform:scale(.97)}
-.glass-btn.gold{background:rgba(185,149,82,.22);color:var(--stone)}
-.glass-btn.gold:hover{background:rgba(185,149,82,.30)}
+.glass-btn.gold{background-color:rgba(185,149,82,.36);color:var(--stone);box-shadow:inset 0 1px 0 rgba(255,236,190,.75),inset 0 -1px 0 rgba(0,0,0,.18),inset 0 0 0 1px rgba(185,149,82,.45),var(--glass-lift)}
+.glass-btn.gold:hover{background-color:rgba(185,149,82,.46)}
 .glass-pill{padding:10px 16px;border-radius:999px;font-size:13px;line-height:1;letter-spacing:-.011em;text-transform:uppercase;font-variant-numeric:tabular-nums;cursor:pointer;transition:transform 160ms var(--ease),background var(--dur) var(--ease),color var(--dur) var(--ease)}
 .glass-pill[aria-pressed="true"],.glass-pill[aria-selected="true"]{background:rgba(226,225,219,.92);color:var(--vault)}
 .on-light .glass-pill[aria-pressed="true"],.on-light .glass-pill[aria-selected="true"]{background:rgba(14,21,18,.88);color:var(--stone)}
