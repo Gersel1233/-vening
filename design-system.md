@@ -369,8 +369,9 @@ page.
 Its own rules:
 - **The year floats at the head of the column; the caption sits on the baseline.** The
   hairline between them is the full drop of the column. The empty middle is the design.
-- **Both edges dissolve.** The right fade is constant; the left fade opens only once the
-  rail has travelled, so the first column rests on a clean gutter.
+- **Both edges dissolve, and both are driven by the pan.** The leading veil opens once the
+  rail has travelled, so the first column rests on a clean gutter; the trailing veil closes
+  at the end, so the last frame says plainly that nothing comes after tonight.
 - **The travel is measured, not guessed** — `track.scrollWidth − (rail.clientWidth −
   rail padding-left)`. The section is exactly one viewport tall plus that travel, so the
   pan begins and ends flush with the sticky screen.
@@ -415,3 +416,12 @@ And two mechanics worth keeping for any scroll-driven pan:
 - **Give the end a dwell.** Make the section one half-screen taller than the travel and
   clamp progress against the shorter run, so the last frame sits composed instead of
   arriving on the final scroll pixel.
+
+### One finding declined, on purpose
+
+A critic asked for the Chronicle's panning year to move from 62px to 65px so it lands on a
+declared Newsreader step. It stays at 62. At 1440 the section heading computes 64.8px, so
+65 would make every row's year exactly the size of the heading that governs them — the
+hierarchy inversion an earlier pass had already asked to fix at the other end of the scale.
+The rule that wins here is **a role never renders at the size of the role above it**; the
+step table is the servant of that, not the other way round.

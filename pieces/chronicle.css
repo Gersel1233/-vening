@@ -37,7 +37,7 @@
 #chronicle .chr-year{
   /* the negative margin is optical, not layout: it pulls the figure's ink onto the same
      line as the rule and the caption beneath it */
-  margin:0 0 0 -.04em;font-family:var(--font-display);font-weight:300;
+  margin:0 0 0 -.062em;font-family:var(--font-display);font-weight:300;
   font-size:clamp(44px,4.2vw,62px);line-height:.85;letter-spacing:-.04em;text-transform:uppercase;
   font-variant-numeric:tabular-nums;color:var(--stone);
 }
@@ -45,7 +45,7 @@
 /* The entry block is a fixed height pinned to the foot of the column, so the hairline above
    it lands on the same line in every card — a ledger is ruled once, not seven times. */
 #chronicle .chr-entry{
-  margin-top:auto;width:100%;height:180px;
+  margin-top:auto;width:100%;height:156px;
   display:flex;flex-direction:column;align-items:flex-start;gap:12px;
 }
 #chronicle .chr-card .rule{width:100%;border-top-color:var(--vault-line);margin:0}
@@ -54,11 +54,13 @@
 
 /* tonight's card is the one lit in gold — the timeline lands on a table you can book */
 #chronicle .chr-card.is-now{border-left-color:rgba(185,149,82,.5)}
-#chronicle .chr-card.is-now .chr-year{color:var(--gold)}
+/* a lining figure and a serif "I" have different left sidebearings; the pull is per-glyph */
+#chronicle .chr-card.is-now .chr-year{color:var(--gold);margin-left:-.008em}
 #chronicle .chr-card.is-now .rule{border-top-color:rgba(185,149,82,.5)}
 /* the section is built of hairlines, so its one control is a hairline too: the glass pill
    belongs on the panels that sit on photography and has nothing to refract here */
-#chronicle .chr-cta{margin-top:4px;padding:12px 20px;border-radius:999px;color:var(--gold);border-color:rgba(185,149,82,.55)}
+/* 44px tall so it is a real touch target, and the border lifted to clear 3:1 on the vault */
+#chronicle .chr-cta{margin-top:auto;padding:15px 22px;border-radius:999px;color:var(--gold);border-color:rgba(185,149,82,.72)}
 #chronicle .chr-cta:hover{background:var(--gold);border-color:var(--gold);color:var(--vault)}
 
 /* Not panning (narrow, or reduced motion): the sideways rail becomes a ruled ledger,
@@ -77,7 +79,7 @@
 #chronicle:not(.is-panning) .chr-card:last-child{border-bottom:1px solid var(--vault-line)}
 #chronicle:not(.is-panning) .chr-entry{margin-top:10px;height:auto}
 #chronicle:not(.is-panning) .chr-card .rule{display:none}
-#chronicle:not(.is-panning) .chr-year{font-size:clamp(44px,11vw,52px)}
+#chronicle:not(.is-panning) .chr-year{font-size:clamp(44px,11vw,50px)}
 #chronicle:not(.is-panning) .chr-body{max-width:46ch}
 
 @media (max-width:900px){

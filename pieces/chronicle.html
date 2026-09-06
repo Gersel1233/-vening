@@ -9,7 +9,7 @@
     <div class="chr-rail">
       <ol class="chr-track">
         <li class="chr-card">
-          <p class="chr-year num">1897</p>
+          <p class="chr-year num" aria-hidden="true">1897</p>
           <div class="chr-entry">
             <hr class="rule">
             <h3 class="chr-title"><span class="sr-only">1897 — </span>Banken flytter ind</h3>
@@ -17,7 +17,7 @@
           </div>
         </li>
         <li class="chr-card">
-          <p class="chr-year num">1923</p>
+          <p class="chr-year num" aria-hidden="true">1923</p>
           <div class="chr-entry">
             <hr class="rule">
             <h3 class="chr-title"><span class="sr-only">1923 — </span>Boksdøren monteres</h3>
@@ -25,7 +25,7 @@
           </div>
         </li>
         <li class="chr-card">
-          <p class="chr-year num">1941</p>
+          <p class="chr-year num" aria-hidden="true">1941</p>
           <div class="chr-entry">
             <hr class="rule">
             <h3 class="chr-title"><span class="sr-only">1941 — </span>Vinduerne mures til</h3>
@@ -33,7 +33,7 @@
           </div>
         </li>
         <li class="chr-card">
-          <p class="chr-year num">1974</p>
+          <p class="chr-year num" aria-hidden="true">1974</p>
           <div class="chr-entry">
             <hr class="rule">
             <h3 class="chr-title"><span class="sr-only">1974 — </span>Banken flytter ud</h3>
@@ -41,7 +41,7 @@
           </div>
         </li>
         <li class="chr-card">
-          <p class="chr-year num">2018</p>
+          <p class="chr-year num" aria-hidden="true">2018</p>
           <div class="chr-entry">
             <hr class="rule">
             <h3 class="chr-title"><span class="sr-only">2018 — </span>Guldet dukker op</h3>
@@ -49,7 +49,7 @@
           </div>
         </li>
         <li class="chr-card">
-          <p class="chr-year num">2019</p>
+          <p class="chr-year num" aria-hidden="true">2019</p>
           <div class="chr-entry">
             <hr class="rule">
             <h3 class="chr-title"><span class="sr-only">2019 — </span>Bullion åbner</h3>
@@ -57,7 +57,7 @@
           </div>
         </li>
         <li class="chr-card is-now">
-          <p class="chr-year num">I aften</p>
+          <p class="chr-year num" aria-hidden="true">I aften</p>
           <div class="chr-entry">
             <hr class="rule">
             <h3 class="chr-title"><span class="sr-only">I aften — </span>Bordene er dækket</h3>
@@ -81,11 +81,11 @@
   var cards = Array.prototype.slice.call(track.querySelectorAll('.chr-card'));
   var reduceQ = window.matchMedia('(prefers-reduced-motion: reduce)');
   var narrow = window.matchMedia('(max-width: 900px)');
-  var ticking = false, span = 0, cardW = 0, hold = 0;
+  var ticking = false, span = 0, cardW = 0, hold = 0, gutter = 0;
 
   var measure = function () {
     /* the track starts inside the rail's left gutter, so the gutter is not travel */
-    var gutter = parseFloat(getComputedStyle(rail).paddingLeft) || 0;
+    gutter = parseFloat(getComputedStyle(rail).paddingLeft) || 0;
     cardW = cards.length ? cards[0].offsetWidth : 0;
     span = Math.max(0, track.scrollWidth - (rail.clientWidth - gutter));
     /* The pan runs faster than the page: 1516px of ledger crosses in 1213px of scroll, so
@@ -102,13 +102,17 @@
     /* whole pixels only: a half-pixel transform splits every 1px hairline across two */
     var x = -Math.round(p * span);
     track.style.transform = 'translate3d(' + x + 'px,0,0)';
-    /* a leaving card dissolves by its own distance past the edge, so it is never cut
-       mid-word — and its neighbour, still fully in frame, is never dimmed with it */
+    /* A leaving card dissolves by its own distance past the edge — measured from the rail's
+       visible left edge, gutter included, so a column starts fading exactly as it crosses
+       and its neighbour, still fully in frame, is never dimmed with it. */
     for (var i = 0; i < cards.length; i++) {
-      var left = x + cards[i].offsetLeft;
+      var left = x + gutter + cards[i].offsetLeft;
       cards[i].style.opacity = left >= 0 ? '' : Math.max(0, 1 + left / cardW).toFixed(3);
     }
-    /* the trailing mask closes once there is nothing left to arrive */
+    /* Both veils are driven by the pan: the leading one opens once the rail has travelled,
+       so the first column rests on a clean gutter and nothing is ever cut at a hard edge. */
+    sec.style.setProperty('--chr-fade-l', Math.min(120, -x / 2).toFixed(0) + 'px');
+    /* and the trailing one closes once there is nothing left to arrive */
     sec.style.setProperty('--chr-fade-r', (120 * Math.min(1, (1 - p) * 12)).toFixed(0) + 'px');
   };
 
@@ -116,6 +120,7 @@
   var disable = function () {
     sec.classList.remove('is-panning');
     sec.style.removeProperty('--chr-run');
+    sec.style.removeProperty('--chr-fade-l');
     sec.style.removeProperty('--chr-fade-r');
     track.style.transform = '';
     for (var i = 0; i < cards.length; i++) { cards[i].style.opacity = ''; }
@@ -143,6 +148,13 @@
   });
 
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(sync); }
+  /* Measuring while the overture holds body{overflow:hidden} reads a viewport wider than
+     the real one wherever scrollbars take space, and the pan comes up short by exactly
+     that much. Wait for the door, like everything else that watches scroll. */
+  if (document.body.classList.contains('ov-running')) {
+    document.addEventListener('bullion:open', sync);
+    setTimeout(sync, 7000);
+  }
   sync();
 })();
 </script>

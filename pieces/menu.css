@@ -14,7 +14,9 @@
 #menu .split>.panel.on-gold .menu-row .price{color:var(--gold-ink)}
 #menu .split>.panel.on-stone{background:var(--stone);color:var(--ink);justify-content:flex-start}
 #menu .split>.panel.on-stone .groups{display:flex;flex-direction:column;gap:48px}
-#menu .split>.photo{min-height:720px;aspect-ratio:3/4}
+/* min-height only: with aspect-ratio as well, the photo computed 540px wide inside a 495px
+   track between 901 and 990px and scrolled the whole document sideways */
+#menu .split>.photo{min-height:720px}
 /* The closing row is two columns on one hairline: the dessert list on the left, the wine
    line and the booking on the right. Stacked, the desserts ruled to a third of the frame
    and left the rest of the screen empty. */

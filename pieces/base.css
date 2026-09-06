@@ -59,8 +59,11 @@ button,input,select{font:inherit;color:inherit;letter-spacing:inherit}
 
 /* Split section: 45/55, no gap, photo bleeds to its edge */
 .split{display:grid;grid-template-columns:45fr 55fr;min-height:720px}
-.split>.panel{padding:92px var(--pad-x);display:flex;flex-direction:column;gap:16px;align-items:flex-start}
-.split>.photo{position:relative;overflow:hidden}
+/* min-width:0 on both: a grid item defaults to min-width:auto, so a photo with an
+   aspect-ratio and a min-height can compute wider than its track and push the document
+   into a horizontal scroll at the widths where the two constraints disagree */
+.split>.panel{padding:92px var(--pad-x);display:flex;flex-direction:column;gap:16px;align-items:flex-start;min-width:0}
+.split>.photo{position:relative;overflow:hidden;min-width:0}
 .split>.photo img{width:100%;height:100%;object-fit:cover}
 .split.flip{grid-template-columns:55fr 45fr}
 .split.flip>.photo{order:-1}
