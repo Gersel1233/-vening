@@ -225,7 +225,7 @@ The one-moment rule is replaced. Motion is now a signature, still restrained in 
 ### Menu card (new component)
 A full-screen glass overlay `#menucard` (a `<dialog>` or `role="dialog"`), opened by any
 element carrying `data-open-menucard` (nav "Menu", a hero button, the intro button, the
-menu-section button). Centered `.glass.glass-panel`, max-width 880px, max-height 86vh,
+menu-section button). Centered `.glass.glass-panel`, portrait: max-width 560px, min-height 78vh, max-height 88vh,
 internal scroll. Header row: wordmark "Bullion" in Newsreader 300 (.t-heading-sm), a
 close `.glass-pill` "Luk" at right. Glass-pill tabs: Hors d'œuvre · Plats · Desserts ·
 Bar · Vin. Each tab lists `.menu-row`s on the glass (hairlines `--stone` at 18%,
@@ -251,7 +251,7 @@ table edge run behind it), never over blank wall. **The panel is lit by the room
 self-luminous**: the lamp remains the brightest point in the frame (the overlay spares it);
 the panel's rim is brightest directly under the lamp and fades toward the far corner; the
 body shades from lit top-left to dim bottom-right; ink controls are flat — no rims, no
-inset highlights — and the gold selected state is flat too. Horizontal strips fade at their right edge as
+inset highlights — and the gold selected state is flat and opaque too (`#7a6535`, gold over ink) so it reads the same over a candle as over a wall. Horizontal strips fade at their right edge as
 the scroll affordance. A live summary line and a `.glass-btn.gold` CTA
 "Reservér" at the bottom. Confirmation replaces the panel body with a gold seal and
 "Forespørgsel sendt — vi bekræfter på mail inden for to timer." Left column keeps the
