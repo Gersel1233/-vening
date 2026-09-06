@@ -14,6 +14,57 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
+  /* Embedded clips: rebuild each as a Blob (a real seekable resource), with fallbacks.
+     data: video is unreliable across browsers; a blob URL is what the media pipeline wants. */
+  document.querySelectorAll('video[data-clip]').forEach(function (v) {
+    var holder = document.getElementById(v.dataset.clip);
+    var b64 = holder ? holder.textContent.trim() : '';
+    var host = v.closest('section, .photo') || v.parentNode;
+
+    var nudge = function () {
+      var pr = v.play();
+      if (pr && typeof pr.catch === 'function') { pr.catch(function () {}); }
+    };
+    var giveUp = function () { if (host) { host.classList.add('no-video'); } };
+    var attach = function (url, onFail) {
+      var failed = false;
+      var fail = function () { if (!failed) { failed = true; onFail(); } };
+      v.addEventListener('error', fail, { once: true });
+      v.src = url; v.load(); nudge();
+      setTimeout(function () { if (v.readyState === 0) { fail(); } }, 2500);
+    };
+    var tryData = function () { b64 ? attach('data:video/mp4;base64,' + b64, giveUp) : giveUp(); };
+
+    if (b64 && typeof Blob === 'function' && window.URL && URL.createObjectURL) {
+      try {
+        var bin = atob(b64), bytes = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) { bytes[i] = bin.charCodeAt(i); }
+        attach(URL.createObjectURL(new Blob([bytes], { type: 'video/mp4' })), tryData);
+      } catch (e) { tryData(); }
+    } else { tryData(); }
+
+    v.addEventListener('canplay', nudge);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden && v.paused) { nudge(); } });
+  });
+
+  /* Gold hairline tracking scroll depth */
+  if (!reduce) {
+    var line = document.createElement('div');
+    line.id = 'scrollline';
+    document.body.appendChild(line);
+    var ticking = false;
+    var draw = function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? Math.min(1, window.scrollY / h) : 0;
+      line.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+      ticking = false;
+    };
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(draw); }
+    }, { passive: true });
+    draw();
+  }
+
   /* Glass specular follows the pointer within each glass element */
   if (!reduce && window.matchMedia('(hover: hover)').matches) {
     document.addEventListener('pointermove', function (ev) {

@@ -7,7 +7,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 const root = dirname(fileURLToPath(import.meta.url));
 const read = f => existsSync(join(root, f)) ? readFileSync(join(root, f), 'utf8') : '';
-const pieces = ['hero', 'intro', 'menu', 'reservation', 'menucard'];
+const pieces = ['overture', 'hero', 'intro', 'menu', 'reservation', 'menucard'];
 
 const head = `<title>Bullion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +24,12 @@ const placeholder = (w, h, label) => 'data:image/svg+xml;utf8,' + encodeURICompo
   `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="100%" height="100%" fill="#1a231e"/><text x="50%" y="50%" fill="#8A8981" font-family="sans-serif" font-size="28" text-anchor="middle">${label}</text></svg>`);
 const dims = { hero: [1920, 823, 'hero'], bar: [1400, 1867, 'bar'], sole: [1400, 1867, 'sole'], tarte: [1400, 1867, 'tarte'], room: [1920, 823, 'room'], herovideo: null };
 const missing = [];
+html = html.replace(/__ASSET_([A-Z]+)_RAW__/g, (m, n) => {
+  const f = join(root, 'assets/bullion', n.toLowerCase() + '.txt');
+  if (!existsSync(f)) { missing.push(n.toLowerCase()); return ''; }
+  const uri = readFileSync(f, 'utf8').trim();
+  return uri.slice(uri.indexOf(',') + 1);
+});
 html = html.replace(/__ASSET_([A-Z]+)__/g, (m, n) => {
   const name = n.toLowerCase();
   const f = join(root, 'assets/bullion', name + '.txt');

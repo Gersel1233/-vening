@@ -1,0 +1,76 @@
+/* Overture — the cinematic opening: a vault dial draws itself, turns, unlocks, and irises open
+   onto the hero. Once per session, skippable, never under reduced motion. */
+#overture{
+  position:fixed;inset:0;z-index:200;background:var(--vault);color:var(--stone);
+  display:flex;align-items:center;justify-content:center;
+  clip-path:circle(150% at 50% 50%);
+}
+#overture[hidden]{display:none}
+#overture .ov-inner{display:flex;flex-direction:column;align-items:center;gap:0;position:relative}
+
+/* the dial: ring draws in, the whole plate turns and settles */
+#overture .ov-dial{
+  width:min(54vmin,280px);height:min(54vmin,280px);overflow:visible;
+  transform:rotate(-32deg);
+  animation:ov-turn 2600ms cubic-bezier(.16,.84,.3,1) 240ms forwards;
+}
+#overture .ov-ring,#overture .ov-ring-inner{
+  stroke-dasharray:660;stroke-dashoffset:660;
+  animation:ov-draw 1500ms cubic-bezier(.25,.46,.45,.94) 120ms forwards;
+}
+#overture .ov-ring-inner{stroke-dasharray:545;stroke-dashoffset:545;animation-delay:340ms}
+#overture .ov-ticks{opacity:0;animation:ov-fade 900ms var(--ease) 900ms forwards}
+/* the dial's interior recedes as the name arrives, so the word reads clean on top */
+#overture .ov-spokes{opacity:0;animation:ov-fade 700ms var(--ease) 900ms forwards,ov-recede 800ms var(--ease) 1600ms forwards}
+#overture .ov-hub{opacity:0;animation:ov-fade 500ms var(--ease) 1150ms forwards,ov-recede 600ms var(--ease) 1500ms forwards}
+#overture .ov-ring-inner{animation:ov-draw 1500ms cubic-bezier(.25,.46,.45,.94) 340ms forwards,ov-recede 800ms var(--ease) 1600ms forwards}
+
+/* the name arrives after the lock turns */
+#overture .ov-word{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.94);
+  margin:0;font-family:var(--font-display);font-weight:240;font-variation-settings:"opsz" 72;
+  font-size:clamp(34px,7.5vmin,58px);line-height:1;letter-spacing:.02em;text-transform:uppercase;
+  color:var(--stone);opacity:0;white-space:nowrap;
+  animation:ov-word 1100ms cubic-bezier(.16,.84,.3,1) 1500ms forwards;
+}
+#overture .ov-sub{
+  position:absolute;left:50%;top:calc(50% + min(34vmin,172px));transform:translateX(-50%);
+  margin:0;font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(226,225,219,.55);opacity:0;white-space:nowrap;
+  animation:ov-fade 900ms var(--ease) 2000ms forwards;
+}
+
+#overture .ov-skip{
+  position:absolute;right:28px;bottom:26px;padding:10px 4px;border:0;background:none;cursor:pointer;
+  font-family:var(--font-text);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(226,225,219,.45);opacity:0;
+  animation:ov-fade 600ms var(--ease) 1400ms forwards;
+  transition:color var(--dur) var(--ease);
+}
+#overture .ov-skip:hover{color:var(--stone)}
+
+/* the door opens: the whole plate lifts away as an aperture */
+#overture.is-open{animation:ov-open 1500ms cubic-bezier(.5,0,.2,1) forwards}
+#overture.is-open .ov-inner{animation:ov-lift 1100ms cubic-bezier(.5,0,.2,1) forwards}
+
+@keyframes ov-draw{to{stroke-dashoffset:0}}
+@keyframes ov-fade{to{opacity:1}}
+@keyframes ov-recede{to{opacity:.12}}
+@keyframes ov-turn{
+  0%{transform:rotate(-32deg)}
+  62%{transform:rotate(112deg)}
+  78%{transform:rotate(104deg)}
+  100%{transform:rotate(106deg)}
+}
+@keyframes ov-word{from{opacity:0;transform:translate(-50%,-50%) scale(.94)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes ov-lift{to{opacity:0;transform:scale(1.5)}}
+@keyframes ov-open{
+  0%{clip-path:circle(150% at 50% 50%)}
+  28%{clip-path:circle(11% at 50% 50%)}
+  100%{clip-path:circle(0% at 50% 50%)}
+}
+
+/* while the overture runs the page beneath holds still */
+body.ov-running{overflow:hidden}
+
+@media (prefers-reduced-motion:reduce){#overture{display:none!important}}

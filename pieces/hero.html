@@ -1,8 +1,7 @@
 <section id="hero" class="on-dark">
   <div class="hero-media" aria-hidden="true">
-    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="__ASSET_HERO__">
-      <source src="__ASSET_HEROVIDEO__" type="video/mp4">
-    </video>
+    <video class="hero-video" data-clip="hero-clip" autoplay muted loop playsinline preload="auto" poster="__ASSET_HERO__"></video>
+    <script type="text/plain" id="hero-clip">__ASSET_HEROVIDEO_RAW__</script>
     <div class="hero-shade"></div>
     <div class="hero-veil"></div>
   </div>
@@ -40,51 +39,9 @@
 <span class="hero-cred-text"><span class="num">4,8</span>&nbsp;/&nbsp;5&nbsp;·&nbsp;Fremragende&nbsp;·&nbsp;<span class="num">1&nbsp;216</span>&nbsp;anmeldelser</span></p>
   </div>
 
-  <div id="vault" class="hero-vault" aria-hidden="true" hidden></div>
-
   <script>
-  /* Hero runtime: once-per-session vault opening; the video loops natively. */
+  /* Hero: the clip runtime in scripts.html attaches the video; nothing else to run here. */
   (function () {
-    var hero = document.getElementById('hero');
-    if (!hero) { return; }
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    /* ---- vault opening: once per session, never under reduced-motion ---- */
-    var vault = document.getElementById('vault');
-    if (vault) {
-      var seen = false;
-      try { seen = sessionStorage.getItem('bullion-vault') === '1'; } catch (e) { seen = false; }
-      var supportsClip = window.CSS && CSS.supports && CSS.supports('clip-path', 'circle(22% at 50% 50%)');
-      if (reduce || seen || !supportsClip) {
-        vault.parentNode.removeChild(vault);
-      } else {
-        try { sessionStorage.setItem('bullion-vault', '1'); } catch (e) {}
-        vault.hidden = false;
-        var done = false;
-        var finish = function () {
-          if (done) { return; }
-          done = true;
-          if (vault.parentNode) { vault.parentNode.removeChild(vault); }
-        };
-        vault.addEventListener('animationend', finish);
-        setTimeout(function () { vault.classList.add('is-open'); }, 150);
-        setTimeout(finish, 150 + 1600 + 400); /* safety net if animationend never fires */
-      }
-    }
-
-    /* ---- the clip's first and last frames match, so native loop is seamless ---- */
-    var v = hero.querySelector('.hero-video');
-    if (v) {
-      var nudge = function () {
-        var p = v.play();
-        if (p && typeof p.catch === 'function') { p.catch(function () {}); }
-      };
-      nudge();
-      v.addEventListener('canplay', nudge, { once: true });
-      document.addEventListener('visibilitychange', function () {
-        if (!document.hidden && v.paused) { nudge(); }
-      });
-    }
   })();
   </script>
 </section>
